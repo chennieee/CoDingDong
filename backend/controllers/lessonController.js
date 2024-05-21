@@ -27,6 +27,7 @@ const getLessonById = async (req, res) => {
     res.status(200).json(lesson); //else return the found lesson
 };
 
+//**Complete lesson? GET timestamps of completion?
 //**any more API requests?
 
 // Export lessonController functions

@@ -19,6 +19,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// routes
+app.use('/api/userRoutes', userRoutes);
+app.use('/api/questionRoutes', questionRoutes);
+app.use('/api/lessonRoutes', lessonRoutes);
+app.use('/api/missionRoutes', missionRoutes);
+
 //connect to database and listen for requests
 mongoose.connect(process.env.MONG_URI)
     .then(() => {
