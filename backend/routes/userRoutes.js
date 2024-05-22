@@ -1,19 +1,20 @@
 const express = require('express');
 
 const { 
-    //function names
+    signupUser,
+    loginUser
 } = require('../controllers/userController');
 
 const router = express.Router();
 
-// GET User Profile
+// GET User Profile **(not sure if need)
 
 
-// Register User --> Create new User
-
+// Signup User
+router.post('/signup', signupUser);
 
 // Login User
-
+router.post('/login', loginUser);
 
 // UPDATE User Profile (username, password)
 
@@ -22,6 +23,7 @@ const router = express.Router();
 
 
 // Add friend? (**needed if we have friends as User attribute)
+
 
 // Export router
 module.exports = router;
