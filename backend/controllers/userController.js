@@ -9,7 +9,6 @@ const createToken = (_id) => {
     return jwt.sign({_id: _id}, process.env.SECRET, { expiresIn: '3d' });
 }
 
-
 // Signup User
 const signupUser = async (req, res) => {
     const {email, password} = req.body;
@@ -49,13 +48,23 @@ const loginUser = async (req, res) => {
     }
 }
 
-// UPDATE User Profile (username, password)
+
+// UPDATE XP and streak after completing lesson
+
+
+// UPDATE XP after completing mission
+
+
+// UPDATE username -- done by user
+
+
+// UPDATE password -- done by user
 
 
 // DELETE User Profile
 
 
-// Add friend? (**needed if we have friends as User attribute)
+// Add friend? (**not sure, needed if we have friends as User attribute)
 
 
 // Export userController functions
