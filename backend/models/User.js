@@ -18,8 +18,10 @@ const userSchema = new mongoose.Schema({
     xp: {
         type: Number,
         default: 0
+    },
+    lastLessonDate: {
+        type: Date
     }
-    //profilePic: { type: String, default: '' }
     //friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 });
 

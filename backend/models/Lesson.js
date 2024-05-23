@@ -6,10 +6,6 @@ const lessonSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    title: { // **do we need this attribute?
-        type: String,
-        required: true
-    },
     questions: [{ //array of 5 Questions
         type: mongoose.Schema.Types.ObjectID,
         ref: 'Questions'

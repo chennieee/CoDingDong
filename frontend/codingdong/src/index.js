@@ -1,13 +1,20 @@
+// need to change workout stuff
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+// import { WorkoutsContextProvider } from './context/WorkoutContext'
+import { AuthContextProvider } from './context/AuthContext'
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <AuthContextProvider>
+      <WorkoutsContextProvider>
+        <App />
+      </WorkoutsContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>
 );
 

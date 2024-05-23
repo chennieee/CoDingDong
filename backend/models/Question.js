@@ -1,5 +1,5 @@
 // Questions collection
-// **should we put this in lessonSchema instead? (n remove the Questions.js file)
+
 const mongoose = require('mongoose');
 
 const questionSchema = new mongoose.Schema({
