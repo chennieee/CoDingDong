@@ -8,9 +8,6 @@ const cors = require('cors');
 
 // import routes/model
 const userRoutes = require('./routes/userRoutes');
-const questionRoutes = require('./routes/questionRoutes');
-const lessonRoutes = require('./routes/lessonRoutes');
-const missionRoutes = require('./routes/missionRoutes');
 
 // express app
 const app = express();
@@ -21,9 +18,6 @@ app.use(express.json());
 
 // routes
 app.use('/api/userRoutes', userRoutes);
-app.use('/api/questionRoutes', questionRoutes);
-app.use('/api/lessonRoutes', lessonRoutes);
-app.use('/api/missionRoutes', missionRoutes);
 
 //connect to database and listen for requests
 mongoose.connect(process.env.MONG_URI)
