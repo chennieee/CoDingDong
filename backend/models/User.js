@@ -20,31 +20,31 @@ const userSchema = new mongoose.Schema({
         default: 0
     },
     lastLessonDate: {
-        type: Date
+        type: Date,
+        default: null // NOT SURE IF THIS IS ALLOWED 
+        // but we need it to be null bc when user signs up it doesnt mean he completes a lesson
     }
     //friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 });
 
 
 // static signup method
-userSchema.statics.signup = async function(email, password) {
+userSchema.statics.signup = async function(username, password) {
 
     //validation
-    if (!email || !password) { //check if email and password are filled
+    if (!username || !password) { //check if email and password are filled
         throw Error('All fields must be filled');
     }
-    if (!validator.isEmail(email)) { //check if email is valid
-        throw Error('Email is not valid');
-    }
+
     if (!validator.isStrongPassword(password)) {
         throw Error('Password is not strong enough');
     }
 
-    //check if user already has an account (using email)
-    const exists = await this.findOne({ email }); //this refers to UserModel
+    // check if username is alr taken
+    const exists = await this.findOne({ username }); //this refers to UserModel
 
     if (exists) {
-        throw Error('Email already in use');
+        throw Error('Username already in use');
     }
 
     //hash password
@@ -52,24 +52,25 @@ userSchema.statics.signup = async function(email, password) {
     const hash = await bcrypt.hash(password, salt);
 
     //create new user account
-    const user = await this.create({ email, password: hash });
+    const user = await this.create({ username, password: hash });
+    // IM ASSUMING STREAK, XP, DATE ARE AUTOFILLED WITH DEFAULT VALUES
     return user;
 }
 
 // static login method
-userSchema.statics.login = async function(email, password) {
+userSchema.statics.login = async function(username, password) {
 
     //validation
-    if (!email || !password) {
+    if (!username || !password) {
         throw Error('All fields must be filled');
     }
 
     //find user
-    const user = await this.findOne({ email });
+    const user = await this.findOne({ username });
 
-    //check if user has a registered account (using email)
+    //check if user has a registered account (using username)
     if (!user) {
-        throw Error('Email is not registered with an account');
+        throw Error('Username is not registered with an account');
     }
 
     //match hashed password
