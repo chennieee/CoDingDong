@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    username: { 
+    username: {
         type: String,
         required: true,
         unique: true
@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
 
 
 // static signup method
-userSchema.statics.signup = async function(email, password) {
+userSchema.statics.signup = async function (email, password) {
 
     //validation
     if (!email || !password) { //check if email and password are filled
@@ -51,13 +51,13 @@ userSchema.statics.signup = async function(email, password) {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
-    //create new user account
+    //create new user account AND SAVES IT TO DATABASE 
     const user = await this.create({ email, password: hash });
     return user;
 }
 
 // static login method
-userSchema.statics.login = async function(email, password) {
+userSchema.statics.login = async function (email, password) {
 
     //validation
     if (!email || !password) {
