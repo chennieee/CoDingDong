@@ -13,13 +13,13 @@ const app = express();
 app.use(express.json());
 
 // Enable CORS for all origins 
-app.use(cors({origin: '*'}));
+app.use(cors({ origin: '*' }));
 
 // import routes/model
 const userRoutes = require('./routes/userRoutes');
 
 // routes
-app.use('/routes/userRoutes', userRoutes);
+app.use('/api/users', userRoutes);
 
 //connect to database and listen for requests
 mongoose.connect(process.env.MONG_URI)

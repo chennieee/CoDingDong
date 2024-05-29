@@ -23,11 +23,8 @@ const signupUser = async (req, res) => {
 
         //send response
         res.status(200).json({ username, token });
-<<<<<<< Updated upstream
 
-=======
     
->>>>>>> Stashed changes
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -39,28 +36,18 @@ const loginUser = async (req, res) => {
     const { username, password } = req.body;
 
     try {
-<<<<<<< Updated upstream
         //login user + checks user against database
         //throws error if wrong
         const user = await User.login(username, password);
-=======
-        //login user
-        const user = await User.login(username, password);
 
-        //check user against database
->>>>>>> Stashed changes
+        //check user against database --> still need?
 
         //create a token
         const token = createToken(user._id);
 
         //send response
-<<<<<<< Updated upstream
-        res.status(200).json({ email, token });
-
-=======
         res.status(200).json({ username, token });
     
->>>>>>> Stashed changes
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

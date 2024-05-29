@@ -1,7 +1,7 @@
 import React from 'react';
-import Login from './Login';
-import Signup from './Signup';
-import './App.css';
+import '../App.css';
+//import Login from './Login';
+//import Signup from './Signup';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {

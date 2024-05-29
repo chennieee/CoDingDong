@@ -10,13 +10,13 @@ export const useLogin = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch('http://localhost:5000/login', {
+    const response = await fetch('http://localhost:5000/api/users/login', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ username, password })
-    })
+    });
     const json = await response.json();
-    console.log("test")
+    console.log("test"); //print statement for debugging
 
     if (!response.ok) {
       setIsLoading(false);
@@ -27,12 +27,12 @@ export const useLogin = () => {
       localStorage.setItem('user', JSON.stringify(json));
 
       // update the auth context
-      dispatch({type: 'LOGIN', payload: json});
+      dispatch({ type: 'LOGIN', payload: json });
 
       // update loading state
       setIsLoading(false);
     }
-  }
+  };
 
-  return { login, isLoading, error }
+  return { login, isLoading, error };
 }
