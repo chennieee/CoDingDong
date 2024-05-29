@@ -1,3 +1,36 @@
+/* This is the CSS for the authentication buttons: login and signup in Home.js*/
+.auth-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Styling for the buttons */
+.auth-links button {
+  background-color: green;
+  /* Set the background color to green */
+  color: white;
+  /* Set the text color to white */
+  border: none;
+  /* Remove the default border */
+  padding: 10px;
+  /* Add some padding to the button */
+  margin-bottom: 10px;
+  /* Add some space between the buttons */
+  cursor: pointer;
+  /* Change the cursor to a pointer on hover */
+  width: 100px;
+  /* Set a fixed width for the buttons */
+  font-family: "Poppins";
+  /* Set font to Poppins */
+
+}
+
+/* Change the background color when hovering over the button */
+.auth-links button:hover {
+  background-color: darkgreen;
+}
+
 .App {
   text-align: center;
 }
@@ -32,6 +65,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
