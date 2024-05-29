@@ -33,7 +33,6 @@ userSchema.statics.signup = async function(username, password) {
 
     //validation
     if (!username || !password) { //check if username and password are filled
-    if (!username || !password) { //check if email and password are filled
         throw Error('All fields must be filled');
     }
 
