@@ -17,6 +17,8 @@ const signupUser = async (req, res) => {
         //signup user
         const user = await User.signup(email, password);
 
+        //update database
+
         //create a token
         const token = createToken(user._id);
 
@@ -24,7 +26,7 @@ const signupUser = async (req, res) => {
         res.status(200).json({email, token});
     
     } catch (error) {
-        res.status(400).json({error: error.message});
+        res.status(500).json({error: error.message});
     }
 }
 
@@ -36,6 +38,8 @@ const loginUser = async (req, res) => {
     try {
         //login user
         const user = await User.login(email, password);
+
+        //check user against database
 
         //create a token
         const token = createToken(user._id);

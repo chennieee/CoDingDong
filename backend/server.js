@@ -6,18 +6,20 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-// import routes/model
-const userRoutes = require('./routes/userRoutes');
-
 // express app
 const app = express();
 
 // middleware --> executes at the start of every request, before callback function
-app.use(cors());
 app.use(express.json());
 
+// Enable CORS for all origins 
+app.use(cors({origin: '*'}));
+
+// import routes/model
+const userRoutes = require('./routes/userRoutes');
+
 // routes
-app.use('/api/userRoutes', userRoutes);
+app.use('/routes/userRoutes', userRoutes);
 
 //connect to database and listen for requests
 mongoose.connect(process.env.MONG_URI)

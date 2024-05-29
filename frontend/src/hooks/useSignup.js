@@ -10,12 +10,13 @@ export const useSignup = () => {
     setIsLoading(true)
     setError(null)
 
-    const response = await fetch('/api/user/signup', {
+    const response = await fetch('http://localhost:5000/routes/userRoutes/signup', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ username, password })
     })
     const json = await response.json()
+    console.log("test")
 
     if (!response.ok) {
       setIsLoading(false)

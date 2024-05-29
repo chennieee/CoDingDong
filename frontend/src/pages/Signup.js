@@ -11,6 +11,8 @@ const Signup = () => {
 
     await signup(username, password)
   }
+  console.log(username);
+  console.log(password);
 
   return (
     <form className="signup" onSubmit={handleSubmit}>

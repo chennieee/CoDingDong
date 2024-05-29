@@ -1,15 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { useLogout } from '../hooks/useLogout'
-import { useAuthContext } from '../hooks/useAuthContext'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const Navbar = () => {
-  const { logout } = useLogout();
   const { user } = useAuthContext();
-
-  const handleClick = () => {
-    logout();
-  };
 
   return (
     <header>
@@ -21,12 +15,8 @@ const Navbar = () => {
           {user ? (
             <div>
               <span>{user.username}</span>
-              <button onClick={handleClick}>Log out</button>
               <ul>
                 <li><Link to="/">Home</Link></li>
-                <li><Link to="/lesson">Lesson</Link></li>
-                <li><Link to="/leaderboards">Leaderboards</Link></li>
-                <li><Link to="/profile">Profile</Link></li>
               </ul>
             </div>
           ) : (
