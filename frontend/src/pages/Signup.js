@@ -1,23 +1,17 @@
 import { useState } from "react"
 import { useSignup } from "../hooks/useSignup"
-import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const { signup, error, isLoading } = useSignup()
-  const navigate = useNavigate();
+  const { signup, error, isLoading } = useSignup();
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    await signup(username, password)
-
-    navigate('/dashboard');
-    // NOT SURE IF THIS WORKS EH but if line 14 throws error this line wldnt run so i think it wld work (?)
-  }
-  console.log(username); // do we need these console.logs? or r they j for debugging?
-  console.log(password);
+    await signup(username, password);
+  };
+  console.log(username); // debugging
+  console.log(password); // debugging
 
   return (
     <form className="signup" onSubmit={handleSubmit}>
@@ -39,7 +33,7 @@ const Signup = () => {
       <button disabled={isLoading}>Sign up</button>
       {error && <div className="error">{error}</div>}
     </form>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;

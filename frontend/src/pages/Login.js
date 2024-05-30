@@ -32,6 +32,6 @@ const Login = () => {
       {error && <div className="error">{error}</div>}
     </form>
   );
-}
+};
 
 export default Login;

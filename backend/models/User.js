@@ -39,7 +39,13 @@ userSchema.statics.signup = async function(username, password) {
     }
 
     if (!validator.isStrongPassword(password)) {
-        throw Error('Password must be at least 8 characters long and contain at least 1 lowercase letter, 1 uppercase letter, 1 number, and 1 special character.');
+        //bro how to print this nicely in multiple lines??
+        throw Error(`
+        Password must meet the following criteria:
+        - At least 8 characters long
+        - At least 1 lowercase and 1 uppercase letter
+        - At least 1 number and 1 special character
+        `);
     }
 
     // check if username is alr taken
