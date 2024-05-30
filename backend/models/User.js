@@ -39,7 +39,7 @@ userSchema.statics.signup = async function(username, password) {
     }
 
     if (!validator.isStrongPassword(password)) {
-        throw Error('Password is not strong enough');
+        throw Error('Password must be at least 8 characters long and contain at least 1 lowercase letter, 1 uppercase letter, 1 number, and 1 special character.');
     }
 
     // check if username is alr taken

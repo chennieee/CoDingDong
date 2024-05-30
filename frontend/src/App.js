@@ -1,5 +1,4 @@
-import { BrowserRouter, Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useAuthContext } from './hooks/useAuthContext';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 
 // pages & components

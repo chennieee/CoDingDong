@@ -1,3 +1,4 @@
+//AuthContext checks if users are successfully logged in
 import { createContext, useReducer, useEffect } from 'react';
 
 export const AuthContext = createContext();

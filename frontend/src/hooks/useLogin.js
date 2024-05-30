@@ -1,10 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuthContext } from './useAuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const { dispatch } = useAuthContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Navigate to dashboard only if login is successful
+    if (!isLoading && !error) {
+      navigate('/dashboard');
+    }
+  }, [isLoading, error, navigate]);
 
   const login = async (username, password) => {
     setIsLoading(true);

@@ -1,10 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuthContext } from './useAuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export const useSignup = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const { dispatch } = useAuthContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Navigate to dashboard only if signup is successful
+    if (!isLoading && !error) {
+      navigate('/dashboard');
+    }
+  }, [isLoading, error, navigate]);
 
   const signup = async (username, password) => {
     setIsLoading(true);
@@ -16,7 +25,7 @@ export const useSignup = () => {
       body: JSON.stringify({ username, password })
     });
     const json = await response.json();
-    console.log("test");
+    console.log("test"); //print statement for debugging
 
     if (!response.ok) {
       setIsLoading(false);

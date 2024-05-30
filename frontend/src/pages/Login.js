@@ -1,21 +1,15 @@
-import { useState } from "react"
-import { useLogin } from "../hooks/useLogin"
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useLogin } from "../hooks/useLogin";
 
 const Login = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const { login, error, isLoading } = useLogin()
-  const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const { login, error, isLoading } = useLogin();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    await login(username, password)
-
-    navigate('/dashboard');
-    // NOT SURE IF THIS WORKS EH but if line 14 throws error this line wldnt run so i think it wld work (?)
-  }
+    e.preventDefault();
+    await login(username, password);
+  };
 
   return (
     <form className="login" onSubmit={handleSubmit}>
@@ -37,7 +31,7 @@ const Login = () => {
       <button disabled={isLoading}>Log in</button>
       {error && <div className="error">{error}</div>}
     </form>
-  )
+  );
 }
 
 export default Login;
