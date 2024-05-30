@@ -18,7 +18,6 @@ const Home = () => {
 
     return (
         <div className="home">
-            <h1>CoDingDong</h1>
             <p>The free, fun, and effective way to learn Python</p>
             <div className="auth-links">
                 <button onClick={() => navigateToLogin()}>Log in</button>

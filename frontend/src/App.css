@@ -1,13 +1,30 @@
+/* Ensure the body and html take up full height */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Center the home container */
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; /* Full viewport height */
+  text-align: center;
+}
+
 /* This is the CSS for the authentication buttons: login and signup in Home.js*/
 .auth-links {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
 /* Styling for the buttons */
 .auth-links button {
-  background-color: green;
+  background-color: lightseagreen;
   /* Set the background color to green */
   color: white;
   /* Set the text color to white */
@@ -21,11 +38,23 @@
   /* Change the cursor to a pointer on hover */
   width: 100px;
   /* Set a fixed width for the buttons */
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Change the background color when hovering over the button */
 .auth-links button:hover {
   background-color: darkgreen;
+}
+
+/* Adjust the home heading and paragraph margins */
+.home h1 {
+  margin-top: 0px; 
+  margin-bottom: 5px; /* Adjust as needed */
+}
+
+.home p {
+  margin-top: 0px; /* Adjust as needed to reduce space above the text */
+  margin-bottom: 20px; /* Adjust as needed */
 }
 
 .App {
