@@ -15,9 +15,6 @@ const Navbar = () => {
           {user ? (
             <div>
               <span>{user.username}</span>
-              <ul>
-                <li><Link to="/">Home</Link></li>
-              </ul>
             </div>
           ) : (
             <div>
