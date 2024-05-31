@@ -15,6 +15,7 @@ nav {
     align-items: center;
     justify-content: space-between;
     /* Ensures username and logout button are spaced apart */
+    width: 100%;
 }
 
 .user-info span {
