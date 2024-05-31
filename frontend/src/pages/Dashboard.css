@@ -55,10 +55,3 @@ see if it works else lmk i'll change it back again */
 .lesson-item.locked {
     background-color: grey;
 }
-
-.logout-button {
-    border: 1px solid #000;
-    background: white;
-    padding: 10px 20px;
-    cursor: pointer;
-}

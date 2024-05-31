@@ -20,7 +20,6 @@ const Dashboard = () => {
                     <button className="lesson-item locked">Lesson 5 - Locked</button>
                 </div>
             </div>
-            <button className="logout-button">Log out</button>
         </div>
     );
 };
