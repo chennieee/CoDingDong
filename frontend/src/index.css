@@ -33,22 +33,15 @@ header a {
 }
 
 /* homepage */
-.workout-details {
-  background: #fff;
-  border-radius: 4px;
-  margin: 20px auto;
-  padding: 20px;
-  position: relative;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-}
 span {
-  position: absolute;
+  /*position: absolute;
   top: 20px;
   right: 20px;
   cursor: pointer;
+   */
   background: #f1f1f1;
   padding: 6px;
-  border-radius: 50%;
+  /*border-radius: 50%;*/
   color: #333;
 }
 
@@ -103,6 +96,9 @@ nav button {
   font-family: "Poppins";
   cursor: pointer;
   font-size: 1em;
+}
+nav button:hover {
+  background-color: lightgrey;
 }
 
 /* auth forms */
