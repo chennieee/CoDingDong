@@ -1,9 +1,11 @@
+/* in App.css i changed the font for EVERYTHING on the web app to Poppins alr, 
+see if it works else lmk i'll change it back again */
+
 .lessons-container {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     padding: 20px;
-    font-family: 'Poppins', sans-serif;
 }
 
 .sidebar {
@@ -38,23 +40,25 @@
     background-color: #fff;
     cursor: pointer;
     text-align: left;
+    font-size: 18px;
+    /* CHANGE IF TOO BIG/SMALL */
 }
 
 .lesson-item.completed {
-    background-color: green;
+    background-color: lightseagreen;
 }
 
 .lesson-item.start {
-    background-color: green;
+    background-color: lightseagreen;
 }
 
 .lesson-item.locked {
-    background-color: #bfc2c5;
+    background-color: grey;
 }
 
 .logout-button {
     border: 1px solid #000;
-    background: green;
+    background: white;
     padding: 10px 20px;
     cursor: pointer;
 }

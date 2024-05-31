@@ -5,7 +5,7 @@ import './Dashboard.css'; // Make sure to create and import the CSS file
 
 const Dashboard = () => {
     return (
-        <div className="lessons-container">
+        <div className="dashboard-container">
             <div className="sidebar">
                 <button className="sidebar-button">Profile</button>
                 <button className="sidebar-button">Leaderboard</button>
