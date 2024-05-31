@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
 
 
 // static signup method
-userSchema.statics.signup = async function(username, password) {
+userSchema.statics.signup = async function (username, password) {
 
     //validation
     if (!username || !password) { //check if username and password are filled
@@ -45,7 +45,7 @@ userSchema.statics.signup = async function(username, password) {
         - At least 8 characters long
         - At least 1 lowercase and 1 uppercase letter
         - At least 1 number and 1 special character
-        `);
+        `.trim());
     }
 
     // check if username is alr taken
@@ -66,7 +66,7 @@ userSchema.statics.signup = async function(username, password) {
 }
 
 // static login method
-userSchema.statics.login = async function(username, password) {
+userSchema.statics.login = async function (username, password) {
 
     //validation
     if (!username || !password) {

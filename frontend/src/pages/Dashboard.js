@@ -1,5 +1,5 @@
 import React from 'react';
-import './Dashboard.css'; // Make sure to create and import the CSS file
+import './Dashboard.css';
 
 // im just putting buttons that lead to nothing lol we will continue after we film the video 
 

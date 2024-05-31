@@ -13,10 +13,13 @@ nav {
 .user-info {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    /* Ensures username and logout button are spaced apart */
 }
 
 .user-info span {
     margin-right: 10px;
+    /* create space between username and logout button */
 }
 
 .logout-button {

@@ -1,7 +1,7 @@
 /* in App.css i changed the font for EVERYTHING on the web app to Poppins alr, 
 see if it works else lmk i'll change it back again */
 
-.lessons-container {
+.dashboard-container {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -11,6 +11,10 @@ see if it works else lmk i'll change it back again */
 .sidebar {
     display: flex;
     flex-direction: column;
+    margin-right: 20px;
+    /* Add some space between sidebar and main content */
+    align-items: flex-start;
+    /* Align buttons to the left */
 }
 
 .sidebar-button {
@@ -19,6 +23,8 @@ see if it works else lmk i'll change it back again */
     padding: 10px 20px;
     margin-bottom: 10px;
     cursor: pointer;
+    width: 200px;
+    /* Ensure buttons are consistently sized MIGHT BE TOO BIG */
 }
 
 .main-content {
@@ -36,10 +42,10 @@ see if it works else lmk i'll change it back again */
     border: 1px solid #000;
     padding: 10px 20px;
     margin-bottom: 10px;
-    width: 200px;
-    background-color: #fff;
+    width: 400px;
+    /* NOT SURE IF TOO BIG */
     cursor: pointer;
-    text-align: left;
+    text-align: center;
     font-size: 18px;
     /* CHANGE IF TOO BIG/SMALL */
 }
