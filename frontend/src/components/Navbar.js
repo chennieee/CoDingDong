@@ -1,9 +1,11 @@
+// NAVBAR APPEARS ON ALL PAGES OF THE APP 
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 
 const Navbar = () => {
-  const { user } = useAuthContext();
+  const { user, logout } = useAuthContext();
 
   return (
     <header>
@@ -13,11 +15,12 @@ const Navbar = () => {
         </Link>
         <nav>
           {user ? (
-            <div>
+            <div className="user-info">
               <span>{user.username}</span>
+              <button onClick={logout} className="logout-button">Logout</button>
             </div>
           ) : (
-            <div>
+            <div className="auth-links">
               <Link to="/login">Login</Link>
               <Link to="/signup">Signup</Link>
             </div>
