@@ -1,8 +1,21 @@
 /* Ensure the body and html take up full height */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+/* for error msgs during login/signup */
+.error {
+  color: red;
+  background-color: #ffe6e6;
+  border: 1px solid red;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  white-space: pre-line;
+  /* Ensures line breaks are preserved */
 }
 
 /* Center the home container */
@@ -11,7 +24,8 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80vh; /* Full viewport height */
+  height: 80vh;
+  /* Full viewport height */
   text-align: center;
 }
 
@@ -48,13 +62,16 @@ html, body {
 
 /* Adjust the home heading and paragraph margins */
 .home h1 {
-  margin-top: 0px; 
-  margin-bottom: 5px; /* Adjust as needed */
+  margin-top: 0px;
+  margin-bottom: 5px;
+  /* Adjust as needed */
 }
 
 .home p {
-  margin-top: 0px; /* Adjust as needed to reduce space above the text */
-  margin-bottom: 20px; /* Adjust as needed */
+  margin-top: 0px;
+  /* Adjust as needed to reduce space above the text */
+  margin-bottom: 20px;
+  /* Adjust as needed */
 }
 
 .App {
