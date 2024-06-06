@@ -7,6 +7,9 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
+import Profile from './pages/Profile';
+import Lesson from './pages/Lesson';
+import Friends from './pages/Friends';
 
 function App() {
   return (
@@ -15,22 +18,13 @@ function App() {
         <Navbar />
         <div className="pages">
           <Routes>
-            <Route
-              path="/"
-              element={<Home />}
-            />
-            <Route
-              path="/login"
-              element={<Login />}
-            />
-            <Route
-              path="/signup"
-              element={<Signup />}
-            />
-            <Route
-              path="/dashboard"
-              element={<Dashboard />}
-            />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/lesson/:id" element={<Lesson />} />
+            <Route path="/friends" element={<Friends />} />
           </Routes>
         </div>
       </BrowserRouter>
