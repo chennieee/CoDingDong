@@ -17,17 +17,17 @@ see if it works else lmk i'll change it back again */
     /* Align buttons to the left */
 }
 
-.sidebar-button {
+.sidebar-buttons {
     border: 1px solid #000;
     background: #fff;
     padding: 10px 20px;
     margin-bottom: 10px;
     cursor: pointer;
-    width: 200px;
+    width: 150px;
     /* Ensure buttons are consistently sized MIGHT BE TOO BIG */
 }
 
-.main-content {
+.lessons {
     flex-grow: 1;
     text-align: center;
 }
@@ -48,10 +48,6 @@ see if it works else lmk i'll change it back again */
     text-align: center;
     font-size: 18px;
     /* CHANGE IF TOO BIG/SMALL */
-}
-
-.lesson-item.completed {
-    background-color: lightseagreen;
 }
 
 .lesson-item.start {
