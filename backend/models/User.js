@@ -25,8 +25,8 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: null // NOT SURE IF THIS IS ALLOWED 
         // but we need it to be null bc when user signs up it doesnt mean he completes a lesson
-    }
-    //friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+    },
+    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 });
 
 

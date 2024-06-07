@@ -34,4 +34,4 @@ const getLessonById = async (req, res) => {
 module.exports = {
     getLessons,
     getLessonById
-}
+};

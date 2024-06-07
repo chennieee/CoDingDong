@@ -2,28 +2,36 @@ const express = require('express');
 
 const { 
     signupUser,
-    loginUser
+    loginUser,
+    getUserProfile,
+    completeLesson,
+    resetStreakDaily,
+    addFriend
 } = require('../controllers/userController');
 
 const router = express.Router();
 
-// GET User Profile **(not sure if need)
-
-
+//API requests
 // Signup User
 router.post('/signup', signupUser);
 
 // Login User
 router.post('/login', loginUser);
 
-// UPDATE User Profile (username, password)
+// GET User Profile **(not sure if need)
+router.get('/profile/:id', getUserProfile);
+
+// UPDATE XP, streak and lastLessonDate after completing lesson
+router.patch('/completeLesson/:id', completeLesson);
+
+// Reset streak if missed
+router.patch('/resetStreak/:id', resetStreakDaily);
+
+// DELETE User Profile **(not sure if need)
 
 
-// DELETE User Profile
-
-
-// Add friend? (**needed if we have friends as User attribute)
-
+// Add friend?
+router.post('/friend/:id', addFriend);
 
 // Export router
 module.exports = router;
