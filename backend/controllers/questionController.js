@@ -27,7 +27,7 @@ const getQuestionById = async (req, res) => {
     res.status(200).json(question); //else return the found question
 }
 
-//**Flag question? --> may need to introduce flag boolean attribute in question
+//**Flag question? --> may need to introduce flag boolean attribute in question (not sure if need)
 
 //**any more API requests?
 

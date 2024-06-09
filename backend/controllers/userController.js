@@ -17,6 +17,30 @@ const isSameDay = (d1, d2) => {
 
 
 //API requests
+// GET User Profile (**not sure if need)
+const getUserProfile = async (req, res) => {
+    const { id } = req.params; //user ID
+
+    //check if id is valid
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'User not found'});
+    }
+
+    //find user
+    const user = await User.findById(req.params.id).populate('friends'); //what is the populate for
+
+    //send response
+    if (!user) {
+        //return error if no user is found
+        return res.status(404).json({ error: 'User not found'});
+    }
+    res.status(200).json(user); //else return the found user profile
+};
+
+
+// GET all lessonscores (**not sure if need)
+
+
 // Signup User
 const signupUser = async (req, res) => {
     const { username, password } = req.body;
@@ -60,40 +84,14 @@ const loginUser = async (req, res) => {
 };
 
 
-// GET User Profile (**not sure if need)
-const getUserProfile = async (req, res) => {
-    //grab id from req parameter
-    const { id } = req.params;
-
-    //check if id is valid
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'User not found'});
-    }
-
-    //find user
-    const user = await User.findById(req.params.id).populate('friends'); //what is the populate for
-
-    //send response
-    if (!user) {
-        //return error if no user is found
-        return res.status(404).json({ error: 'User not found'});
-    }
-    res.status(200).json(user); //else return the found user profile
-};
-
-
 // UPDATE XP, streak and lastLessonDate after completing lesson
 // --> called after a lesson is completed
 const completeLesson = async (req, res) => {
-    // get userId from req parameter
-    const { userId } = req.params;
-
-    // xp awarded for completing a lesson
-    const xpEarned = 5;
+    const { id } = req.params; //user ID
+    const xpEarned = 5; //xp awarded for completing lesson
 
     try {
-        // find user by id
-        const user = await User.findById(userId);
+        const user = await User.findById(id);
 
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
@@ -145,12 +143,10 @@ const completeLesson = async (req, res) => {
 // Reset streak if missed
 // --> called at the start of every day
 const resetStreakDaily = async (req, res) => {
-    // get userId from req parameters
-    const { userId } = req.params;
+    const { id } = req.params; //user ID
 
     try {
-        // find user by id
-        const user = await User.findById(userId);
+        const user = await User.findById(id);
 
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
