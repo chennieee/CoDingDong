@@ -7,39 +7,51 @@ const Lesson = ({ match }) => {
     const [submitted, setSubmitted] = useState(false);
     const [results, setResults] = useState(null);
 
+    // Fetch questions for the lesson
     useEffect(() => {
         const fetchQuestions = async () => {
-            const response = await axios.get(`/lessons/${match.params.id}/questions`);
-            setQuestions(response.data);
+            try {
+                const response = await axios.get(`/api/lessons/${match.params.id}`); // Updated endpoint
+                setQuestions(response.data.questions); // Assume response.data contains the lesson details with questions
+            } catch (error) {
+                console.error('Error fetching questions:', error);
+            }
         };
 
         fetchQuestions();
     }, [match.params.id]);
 
+    // Handle answer submission
     const handleSubmit = async () => {
-        const response = await axios.post('/questions/submit', {
-            userId: match.params.userId,
-            lessonId: match.params.id,
-            answers
-        });
-        setResults(response.data);
-        setSubmitted(true);
+        try {
+            const response = await axios.post(`/api/lessons/${match.params.id}/submit`, {
+                userId: match.params.userId, // Ensure userId is passed correctly
+                answers
+            });
+            setResults(response.data); // Assume response.data contains the score and wrong answers details
+            setSubmitted(true);
+        } catch (error) {
+            console.error('Error submitting answers:', error);
+        }
     };
 
     if (submitted) {
         return (
             <div>
                 <h2>Your score: {results.score}</h2>
-                {results.results.map((question, index) => (
-                    <div key={index}>
-                        <p>{question.questionBody}</p>
-                        {question.options.map((option, i) => (
-                            <p key={i}>{option}</p>
+                {results.wrongAnswers && results.wrongAnswers.length > 0 && (
+                    <>
+                        <h3>Incorrect Answers:</h3>
+                        {results.wrongAnswers.map((question, index) => (
+                            <div key={index}>
+                                <p>Question: {question.question}</p>
+                                <p>Your answer: {question.userAnswer}</p>
+                                <p>Correct answer: {question.correctAnswer}</p>
+                                <p>Explanation: {question.explanation}</p>
+                            </div>
                         ))}
-                        <p>Your answer: {question.userAnswer}</p>
-                        <p>Correct answer: {question.correctAnswer}</p>
-                    </div>
-                ))}
+                    </>
+                )}
             </div>
         );
     }
@@ -48,14 +60,14 @@ const Lesson = ({ match }) => {
         <div>
             {questions.map((question, index) => (
                 <div key={index}>
-                    <p>{question.questionBody}</p>
+                    <p>{question.question}</p> {/* Use question.questionBody if that's the key */}
                     {question.options.map((option, i) => (
                         <label key={i}>
                             <input
                                 type="radio"
                                 name={`question-${index}`}
                                 value={option}
-                                onChange={(e) => setAnswers({ ...answers, [index]: e.target.value })}
+                                onChange={(e) => setAnswers({ ...answers, [question.questionNo]: e.target.value })}
                             />
                             {option}
                         </label>
