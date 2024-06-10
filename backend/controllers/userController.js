@@ -199,5 +199,7 @@ module.exports = {
     signupUser,
     loginUser,
     getUserProfile,
-    addFriend
+    addFriend,
+    completeLesson,
+    resetStreakDaily
 };

@@ -1,27 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Dashboard.css';
 
 const Dashboard = ({ userId }) => {
     const [lessons, setLessons] = useState([]);
     const [numLessonsCompleted, setNumLessonsCompleted] = useState(0);
-    const history = useHistory();
+    const navigate = useNavigate();
+
+    const apiUrl = process.env.REACT_APP_API_URL;
+
+    function navigateToProfile() {
+        navigate('/profile');
+    }
+
+    function navigateToLesson(id) {
+        navigate(`/lesson/${id}`);
+    }
 
     useEffect(() => {
         const fetchUserData = async () => {
-            const userResponse = await axios.get(`/users/${userId}`);
+            const userResponse = await axios.get(`${apiUrl}/users/${userId}`);
             setNumLessonsCompleted(userResponse.data.numLessonsCompleted);
         };
 
         const fetchLessons = async () => {
-            const lessonsResponse = await axios.get(`/lessons?userId=${userId}`);
+            const lessonsResponse = await axios.get(`${apiUrl}/lessons?userId=${userId}`);
             setLessons(lessonsResponse.data);
         };
 
         fetchUserData();
         fetchLessons();
-    }, [userId]);
+    }, [userId, apiUrl]);
 
     const startLessonIndex = numLessonsCompleted;
     const displayLessons = lessons.slice(startLessonIndex, startLessonIndex + 5);
@@ -31,7 +41,7 @@ const Dashboard = ({ userId }) => {
         <div className="dashboard-container">
             <div className="sidebar">
                 <div className="sidebar-buttons">
-                    <button onClick={() => history.push('/profile')}>Profile</button>
+                    <button onClick={() => navigateToProfile()}>Profile</button>
                     <button>Leaderboard</button>
                 </div>
             </div>
@@ -43,7 +53,7 @@ const Dashboard = ({ userId }) => {
                             key={index}
                             className={`lesson-item ${index === 0 ? 'start' : 'locked'}`}
                             disabled={index > 0}
-                            onClick={() => history.push(`/lesson/${lesson._id}`)}
+                            onClick={() => navigateToLesson(lesson._id)}
                         >
                             {lesson.title} - {index === 0 ? 'Start' : 'Locked'}
                         </button>

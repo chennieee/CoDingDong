@@ -7,11 +7,13 @@ const Lesson = ({ match }) => {
     const [submitted, setSubmitted] = useState(false);
     const [results, setResults] = useState(null);
 
+    const apiUrl = process.env.REACT_APP_API_URL;
+
     // Fetch questions for the lesson
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
-                const response = await axios.get(`/api/lessons/${match.params.id}`); // Updated endpoint
+                const response = await axios.get(`${apiUrl}/lessons/${match.params.id}`); // Updated endpoint
                 setQuestions(response.data.questions); // Assume response.data contains the lesson details with questions
             } catch (error) {
                 console.error('Error fetching questions:', error);
@@ -19,12 +21,12 @@ const Lesson = ({ match }) => {
         };
 
         fetchQuestions();
-    }, [match.params.id]);
+    }, [match.params.id, apiUrl]);
 
     // Handle answer submission
     const handleSubmit = async () => {
         try {
-            const response = await axios.post(`/api/lessons/${match.params.id}/submit`, {
+            const response = await axios.post(`${apiUrl}/lessons/${match.params.id}/submit`, {
                 userId: match.params.userId, // Ensure userId is passed correctly
                 answers
             });

@@ -1,30 +1,39 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Profile = ({ userId }) => {
     const [user, setUser] = useState({});
-    const history = useHistory();
+    const navigate = useNavigate();
+
+    const apiUrl = process.env.REACT_APP_API_URL;
+
+    function navigateToDashboard() {
+        navigate('/dashboard');
+    }
+
+    function navigateToFriends() {
+        navigate('/friends');
+    }
 
     useEffect(() => {
         const fetchUserData = async () => {
-            const response = await axios.get(`/users/${userId}`);
+            const response = await axios.get(`${apiUrl}/users/${userId}`);
             setUser(response.data);
         };
 
         fetchUserData();
-    }, [userId]);
+    }, [userId, apiUrl]);
 
     return (
         <div className="profile">
-            <button onClick={() => history.push('/')}>Home</button>
+            <button onClick={() => navigateToDashboard()}>Home</button>
             <div>
-                <button onClick={() => history.push('/friends')}>My Friends</button>
+                <button onClick={() => navigateToFriends()}>My Friends</button>
             </div>
             <div>
-                <p>Username: {user.username}</p>
-                <p>Streak: {user.streak} days</p>
-                <p>XP: {user.xp}</p>
+                <p>Streak: {user.streak || 0} days</p>
+                <p>XP: {user.xp || 0}</p>
                 <p>Friends: {user.friends?.length || 0}</p>
             </div>
         </div>
