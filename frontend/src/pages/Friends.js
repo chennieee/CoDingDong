@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Friends = ({ userId }) => {
     const [friends, setFriends] = useState([]);
-    const history = useHistory();
+    const navigate = useNavigate();
+
+    function navigateToProfile() {
+        navigate('/profile'); // not sure if this will call user's profile or smth else 
+    }
 
     useEffect(() => {
         const fetchFriends = async () => {
@@ -17,7 +21,7 @@ const Friends = ({ userId }) => {
 
     return (
         <div className="friends">
-            <button onClick={() => history.push('/profile')}>Back to Profile</button>
+            <button onClick={() => navigateToProfile()}>Back to Profile</button>
             <h1>My Friends</h1>
             <ul>
                 {friends.map((friend, index) => (
