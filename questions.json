@@ -1,1 +1,7 @@
-
+{
+    "questionNo": 1,
+    "question": "Which of the following is a basic Python comment?",
+    "options": ["A. /* */", "B. //", "C. #"],
+    "answer": "C",
+    "explanation": "In Python, comments are created using the hash symbol (#)."
+}
