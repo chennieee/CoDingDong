@@ -9,6 +9,8 @@ export const useSignup = () => {
   const { dispatch } = useAuthContext();
   const navigate = useNavigate();
 
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     // Navigate to dashboard only if signup is successful
     if (isSuccess) {
@@ -21,7 +23,7 @@ export const useSignup = () => {
     setError(null);
     setIsSuccess(false);
 
-    const response = await fetch('http://localhost:5000/api/users/signup', {
+    const response = await fetch(`${apiUrl}/users/signup`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ username, password })

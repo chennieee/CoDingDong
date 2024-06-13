@@ -1,41 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { useLesson } from '../hooks/useLesson';
 
 const Lesson = ({ match }) => {
-    const [questions, setQuestions] = useState([]);
-    const [answers, setAnswers] = useState({});
-    const [submitted, setSubmitted] = useState(false);
-    const [results, setResults] = useState(null);
+    const { questions, answers, setAnswers, submitted, results, handleSubmit } = useLesson(
+        match.params.id,
+        match.params.userId
+    );
 
-    const apiUrl = process.env.REACT_APP_API_URL;
-
-    // Fetch questions for the lesson
-    useEffect(() => {
-        const fetchQuestions = async () => {
-            try {
-                const response = await axios.get(`${apiUrl}/lessons/${match.params.id}`); // Updated endpoint
-                setQuestions(response.data.questions); // Assume response.data contains the lesson details with questions
-            } catch (error) {
-                console.error('Error fetching questions:', error);
-            }
-        };
-
-        fetchQuestions();
-    }, [match.params.id, apiUrl]);
-
-    // Handle answer submission
-    const handleSubmit = async () => {
-        try {
-            const response = await axios.post(`${apiUrl}/lessons/${match.params.id}/submit`, {
-                userId: match.params.userId, // Ensure userId is passed correctly
-                answers
-            });
-            setResults(response.data); // Assume response.data contains the score and wrong answers details
-            setSubmitted(true);
-        } catch (error) {
-            console.error('Error submitting answers:', error);
-        }
-    };
 
     if (submitted) {
         return (

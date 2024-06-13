@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useProfile } from '../hooks/useProfile';
 
 const Profile = ({ userId }) => {
-    const [user, setUser] = useState({});
+    const { user } = useProfile(userId);
     const navigate = useNavigate();
-
-    const apiUrl = process.env.REACT_APP_API_URL;
 
     function navigateToDashboard() {
         navigate('/dashboard');
@@ -16,14 +14,6 @@ const Profile = ({ userId }) => {
         navigate('/friends');
     }
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            const response = await axios.get(`${apiUrl}/users/${userId}`);
-            setUser(response.data);
-        };
-
-        fetchUserData();
-    }, [userId, apiUrl]);
 
     return (
         <div className="profile">

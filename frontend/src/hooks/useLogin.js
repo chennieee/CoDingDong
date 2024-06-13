@@ -8,6 +8,8 @@ export const useLogin = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const { dispatch } = useAuthContext();
   const navigate = useNavigate();
+  
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     // Navigate to dashboard only if login is successful
@@ -21,7 +23,7 @@ export const useLogin = () => {
     setError(null);
     setIsSuccess(false);
 
-    const response = await fetch('http://localhost:5000/api/users/login', {
+    const response = await fetch(`${apiUrl}/users/login`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ username, password })

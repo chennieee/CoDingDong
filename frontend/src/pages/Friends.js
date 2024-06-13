@@ -1,25 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useFriends } from '../hooks/useFriends';
 
 const Friends = ({ userId }) => {
-    const [friends, setFriends] = useState([]);
+    const { friends } = useFriends(userId);
     const navigate = useNavigate();
 
-    const apiUrl = process.env.REACT_APP_API_URL;
-
     function navigateToProfile() {
-        navigate('/profile'); // not sure if this will call user's profile or smth else 
+        navigate('/profile');
     }
-
-    useEffect(() => {
-        const fetchFriends = async () => {
-            const response = await axios.get(`${apiUrl}/users/${userId}/friends`);
-            setFriends(response.data);
-        };
-
-        fetchFriends();
-    }, [userId, apiUrl]);
 
     return (
         <div className="friends">
