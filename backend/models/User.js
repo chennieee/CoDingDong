@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const validator = require('validator');
 
+const Lesson = require('./Lesson');
+
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -26,25 +28,33 @@ const userSchema = new mongoose.Schema({
         default: null // NOT SURE IF THIS IS ALLOWED 
         // but we need it to be null bc when user signs up it doesnt mean he completes a lesson
     },
-    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], //array to store friends
-
-    lessonScores: [{
+    friends: [{ //array to store friends
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User' 
+    }],
+    completedLessons: [{ //array to keep track of completed lessons
+        lessonId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Lesson'
+        },
+        completionDate: Date
+    }],
+    lessonScores: [{ //array to store scores for completed lessons
         lessonId: { type: mongoose.Schema.Types.ObjectId, ref: 'Lesson'},
         score: { type: Number }
-    }] //array to store scores for each completed lesson
+    }]
 });
 
 
 // static signup method
 userSchema.statics.signup = async function (username, password) {
-
-    //validation
-    if (!username || !password) { //check if username and password are filled
+    // check if username and password are filled
+    if (!username || !password) {
         throw Error('All fields must be filled');
     }
 
+    // check if password is strong enough
     if (!validator.isStrongPassword(password)) {
-        //bro how to print this nicely in multiple lines??
         throw Error(`
         Password must meet the following criteria:
         - At least 8 characters long
@@ -72,13 +82,11 @@ userSchema.statics.signup = async function (username, password) {
 
 // static login method
 userSchema.statics.login = async function (username, password) {
-
-    //validation
+    // check if username and password are filled
     if (!username || !password) {
         throw Error('All fields must be filled');
     }
 
-    //find user
     const user = await this.findOne({ username });
 
     //check if user has a registered account (using username)
@@ -88,7 +96,6 @@ userSchema.statics.login = async function (username, password) {
 
     //match hashed password
     const match = await bcrypt.compare(password, user.password);
-
     if (!match) {
         throw Error('Incorrect password');
     }
@@ -96,6 +103,43 @@ userSchema.statics.login = async function (username, password) {
     //login user
     return user;
 }
+
+
+// static method to get lesson progress for a specific user
+userSchema.statics.getLessonProgress = async function(userId) {
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+        throw new Error('Invalid user ID');
+    }
+
+    const user = await this.findById(userId).populate('completedLessons.lessonId');
+    if (!user) {
+        throw new Error('User not found');
+    }
+
+    // Fetch all lessons and sort by lessonNo
+    const lessons = await Lesson.find().sort({ lessonNo: 1 });
+
+    // Get completedLessons
+    const completedLessonIds = user.completedLessons
+                                    .map(lesson => lesson.lessonId._id.toString());
+    const completedLessons = user.completedLessons.map(lesson => lesson.lessonId);
+
+    // Get nextLesson and lockedLessons
+    let nextLesson = null;
+    let lockedLessons = [];
+
+    for (const lesson of lessons) {
+        if (!completedLessonIds.includes(lesson._id.toString())) {
+            if (!nextLesson) {
+                nextLesson = lesson; //1st uncompleted lesson is nextLesson
+            } else {
+                lockedLessons.push(lesson); //remaining uncompleted lessons are locked
+            }
+        }
+    }
+
+    return { completedLessons, nextLesson, lockedLessons };
+};
 
 
 // Create & Export userModel

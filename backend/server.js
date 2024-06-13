@@ -17,9 +17,13 @@ app.use(cors({ origin: '*' }));
 
 // import routes/model
 const userRoutes = require('./routes/userRoutes');
+const questionRoutes = require('./routes/questionRoutes');
+const lessonRoutes = require('./routes/lessonRoutes');
 
 // routes
 app.use('/api/users', userRoutes);
+app.use('/api/questions', questionRoutes);
+app.use('/api/lessons', lessonRoutes);
 
 //connect to database and listen for requests
 mongoose.connect(process.env.MONG_URI)

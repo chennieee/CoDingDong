@@ -7,8 +7,12 @@ export const useFriends = (userId) => {
 
     useEffect(() => {
         const fetchFriends = async () => {
-            const response = await axios.get(`${apiUrl}/users/${userId}/friends`);
-            setFriends(response.data);
+            try {
+                const response = await axios.get(`${apiUrl}/users/friends/${userId}`);
+                setFriends(response.data);
+            } catch (error) {
+                console.error('Error fetching friends:', error);
+            }
         };
 
         fetchFriends();

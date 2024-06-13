@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 
 //helper function to generate tokens during user authentication
@@ -17,30 +18,6 @@ const isSameDay = (d1, d2) => {
 
 
 //API requests
-// GET User Profile (**not sure if need)
-const getUserProfile = async (req, res) => {
-    const { id } = req.params; //user ID
-
-    //check if id is valid
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'User not found'});
-    }
-
-    //find user
-    const user = await User.findById(req.params.id).populate('friends'); //what is the populate for
-
-    //send response
-    if (!user) {
-        //return error if no user is found
-        return res.status(404).json({ error: 'User not found'});
-    }
-    res.status(200).json(user); //else return the found user profile
-};
-
-
-// GET all lessonscores (**not sure if need)
-
-
 // Signup User
 const signupUser = async (req, res) => {
     const { username, password } = req.body;
@@ -84,7 +61,63 @@ const loginUser = async (req, res) => {
 };
 
 
-// UPDATE XP, streak and lastLessonDate after completing lesson
+// GET User Profile
+const getUserProfile = async (req, res) => {
+    const { id } = req.params; //user ID
+
+    //check if id is valid
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'User not found'});
+    }
+
+    //find user
+    const user = await User.findById(id).populate('friends');
+
+    //send response
+    if (!user) {
+        //return error if no user is found
+        return res.status(404).json({ error: 'User not found'});
+    }
+    res.status(200).json(user); //else return the found user profile
+};
+
+
+// GET user friends
+const getUserFriends = async (req, res) => {
+    const { id } = req.params; //userId
+
+    //check if id is valid
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'User not found'});
+    }
+
+    //find user
+    const user = await User.findById(id).populate('friends', 'username');
+
+    //send response
+    if (!user) {
+        //return error if no user is found
+        return res.status(404).json({ error: 'User not found'});
+    }
+    res.status(200).json(user.friends); //else return the found user profile
+};
+
+
+// GET user lesson progress
+const getUserLessonProgress = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const { completedLessons, nextLesson, lockedLessons } = await User.getLessonProgress(id);
+        res.status(200).json({ completedLessons, nextLesson, lockedLessons });
+    } catch (error) {
+        console.error('Error fetching user lesson progress:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+
+// UPDATE XP, streak, lastLessonDate and completedLessons after completing lesson
 // --> called after a lesson is completed
 const completeLesson = async (req, res) => {
     const { id } = req.params; //user ID
@@ -92,7 +125,6 @@ const completeLesson = async (req, res) => {
 
     try {
         const user = await User.findById(id);
-
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
@@ -110,11 +142,9 @@ const completeLesson = async (req, res) => {
 
             if (isSameDay(now, lastLessonDate)) {
                 // lastLessonDate is today --> no change to streak
-
             } else if (isSameDay(yesterday, lastLessonDate)) {
                 // lastLessonDate is yesterday --> increment streak
                 user.streak += 1;
-
             } else {
                 // lastLessonDate is more than 1 day ago --> begin streak
                 user.streak = 1;
@@ -127,6 +157,9 @@ const completeLesson = async (req, res) => {
 
         // update lastLessonDate to now
         user.lastLessonDate = now;
+
+        // update completedLessons
+        user.completedLessons.push({ lessonId, completionDate: now });
 
         // save the updated user document
         await user.save();
@@ -199,6 +232,8 @@ module.exports = {
     signupUser,
     loginUser,
     getUserProfile,
+    getUserFriends,
+    getUserLessonProgress,
     addFriend,
     completeLesson,
     resetStreakDaily

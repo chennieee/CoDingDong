@@ -2,14 +2,14 @@ const Lesson = require('../models/Lesson');
 const User = require('../models/User');
 const mongoose = require('mongoose');
 
-// GET all lessons
+// GET all lessons (**not used)
 const getLessons = async (req, res) => {
         const lessons = await Lesson.find(); //find lessons
         res.status(200).json(lessons); //send response
 };
     
 
-// GET a single lesson by ID
+// GET a single lesson by ID (**not used)
 const getLessonById = async (req, res) => {
     //grab id from req parameter
     const { id } = req.params;
@@ -30,7 +30,9 @@ const getLessonById = async (req, res) => {
     res.status(200).json(lesson); //else return the found lesson
 };
 
-// POST - submit answers for lesson & calculate score
+
+// POST - submit answers for lesson & calculate score (specific user)
+//** should this be implemented in the user backend instead of lesson?? since it is specific to a user */
 const submitLesson = async (req, res) => {
     const { lessonId } = req.params; // lesson ID
     const { answers, userId } = req.body; // user's answers (eg. {'A', 'B', 'C', 'D', 'A'})

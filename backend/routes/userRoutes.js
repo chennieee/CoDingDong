@@ -4,9 +4,11 @@ const {
     signupUser,
     loginUser,
     getUserProfile,
+    getUserFriends,
+    getUserLessonProgress,
     completeLesson,
     resetStreakDaily,
-    addFriend
+    addFriend,
 } = require('../controllers/userController');
 
 const router = express.Router();
@@ -18,8 +20,14 @@ router.post('/signup', signupUser);
 // Login User
 router.post('/login', loginUser);
 
-// GET User Profile **(not sure if need)
+// GET User Profile
 router.get('/profile/:id', getUserProfile);
+
+// GET User Friends
+router.get('/friends/:id', getUserFriends);
+
+// GET User lesson progress
+router.get('/lessons/:id', getUserLessonProgress);
 
 // UPDATE XP, streak and lastLessonDate after completing lesson
 router.patch('/completeLesson/:id', completeLesson);
