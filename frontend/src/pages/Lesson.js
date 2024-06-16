@@ -3,8 +3,8 @@ import { useLesson } from '../hooks/useLesson';
 
 const Lesson = ({ match }) => {
     const { questions, answers, setAnswers, submitted, results, handleSubmit } = useLesson(
-        match.params.id,
-        match.params.userId
+        match.params.id, //lessonId
+        match.params.userId //userId
     );
 
 

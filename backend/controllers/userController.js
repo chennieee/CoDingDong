@@ -105,14 +105,14 @@ const getUserFriends = async (req, res) => {
 
 // GET user lesson progress
 const getUserLessonProgress = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.params; //userId
 
     try {
         const { completedLessons, nextLesson, lockedLessons } = await User.getLessonProgress(id);
         res.status(200).json({ completedLessons, nextLesson, lockedLessons });
     } catch (error) {
         console.error('Error fetching user lesson progress:', error);
-        res.status(500).json({ error: error.message });
+        res.status(400).json({ error: error.message });
     }
 };
 

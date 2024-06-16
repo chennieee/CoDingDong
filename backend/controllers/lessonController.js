@@ -52,11 +52,30 @@ const submitLesson = async (req, res) => {
         const result = await Lesson.submitAnswers(lessonId, answers);
 
         // Store the score in user's database
-        const user = await UserActivation.findById(userId);
+        const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({ error: 'No such user' });
         }
-        user.lessonScores.push({ lessonId, score: result.score });
+
+        // Check if lesson is already completed
+        const completedLessonIndex = user.completedLessons.findIndex(lesson =>
+            lesson.lessonId.toString() === lessonId
+        );
+
+        if (completedLessonIndex !== -1) {
+            // Update already completed lessons with new score and completion date
+            user.completedLessons[completedLessonIndex].score = result.score;
+            user.completedLessons[completedLessonIndex].completionDate = new Date();
+        
+        } else {
+            // Add new completed lesson entry
+            user.completedLessons.push({
+                lessonId,
+                completionDate: new Date(),
+                score: result.score
+            });
+        }
+
         await user.save();
 
         // Send response (Score & Explanation for wrong answers)

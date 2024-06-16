@@ -37,10 +37,7 @@ const userSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Lesson'
         },
-        completionDate: Date
-    }],
-    lessonScores: [{ //array to store scores for completed lessons
-        lessonId: { type: mongoose.Schema.Types.ObjectId, ref: 'Lesson'},
+        completionDate: Date,
         score: { type: Number }
     }]
 });

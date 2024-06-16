@@ -25,18 +25,24 @@ export const useLesson = (lessonId, userId) => {
     }, [lessonId, apiUrl]);
 
 
-    // Handle answer submission
+    // Handle lesson completion (submit answers + update user stats)
     const handleSubmit = async () => {
         try {
+            // Submit lesson answers
             const response = await axios.post(`${apiUrl}/lessons/${lessonId}/submit`, {
                 userId,
                 answers,
             });
             setResults(response.data);
             setSubmitted(true);
+
+            // Update user stats
+            await axios.patch(`${apiUrl}/users/completeLesson/${userId}`, {
+                lessonId
+            });
             
         } catch (error) {
-            console.error('Error submitting answers:', error);
+            console.error('Error submitting answers or completing lesson:', error);
         }
     };
 
