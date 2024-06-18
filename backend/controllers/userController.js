@@ -9,7 +9,7 @@ const createToken = (_id) => {
 };
 
 //helper function to check if 2 timings are on the same date
-// -->
+// --> completeLesson, resetStreakDaily
 const isSameDay = (d1, d2) => {
     return d1.getFullYear() === d2.getFullYear() &&
            d1.getMonth() === d2.getMonth() &&

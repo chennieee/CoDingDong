@@ -6,7 +6,7 @@ const questionSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    question: {
+    questionBody: {
         type: String,
         required: true
     },
@@ -20,6 +20,11 @@ const questionSchema = new mongoose.Schema({
     },
     explanation: {
         type: String,
+        required: true
+    },
+    lessonId: { //Reference to the lesson this question belongs to
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Lesson',
         required: true
     }
 });

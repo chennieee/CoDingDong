@@ -14,22 +14,22 @@ const {
 const router = express.Router();
 
 //API requests
-// Signup User
+// Signup User (useSignup.js)
 router.post('/signup', signupUser);
 
-// Login User
+// Login User (useLogin.js)
 router.post('/login', loginUser);
 
-// GET User Profile
+// GET User Profile (useProfile.js)
 router.get('/profile/:id', getUserProfile);
 
-// GET User Friends
+// GET User Friends (useFriends.js)
 router.get('/friends/:id', getUserFriends);
 
-// GET User lesson progress
+// GET User lesson progress (useDashboard.js)
 router.get('/lessons/:id', getUserLessonProgress);
 
-// UPDATE XP, streak and lastLessonDate after completing lesson
+// UPDATE XP, streak and lastLessonDate after completing lesson (useLesson.js)
 router.patch('/completeLesson/:id', completeLesson);
 
 // Reset streak if missed

@@ -2,10 +2,15 @@ import React from 'react';
 import { useLesson } from '../hooks/useLesson';
 
 const Lesson = ({ match }) => {
-    const { questions, answers, setAnswers, submitted, results, handleSubmit } = useLesson(
+    const { lesson, questions, answers, handleAnswerChange, submitted, results, handleSubmit } = useLesson(
         match.params.id, //lessonId
         match.params.userId //userId
     );
+
+
+    if (!lesson) {
+        return <div>Loading...</div>;
+    }
 
 
     if (submitted) {
@@ -17,9 +22,9 @@ const Lesson = ({ match }) => {
                         <h3>Incorrect Answers:</h3>
                         {results.wrongAnswers.map((question, index) => (
                             <div key={index}>
-                                <p>Question: {question.question}</p>
-                                <p>Your answer: {question.userAnswer}</p>
-                                <p>Correct answer: {question.correctAnswer}</p>
+                                <p>Question {question.questionNo}: {question.questionBody}</p>
+                                <p>Your answer: {answers[question.questionNo]}</p>
+                                <p>Correct answer: {question.answer}</p>
                                 <p>Explanation: {question.explanation}</p>
                             </div>
                         ))}
@@ -31,16 +36,19 @@ const Lesson = ({ match }) => {
 
     return (
         <div>
+            <h1>Lesson {lesson.lessonNo}</h1>
             {questions.map((question, index) => (
                 <div key={index}>
-                    <p>{question.question}</p> {/* Use question.questionBody if that's the key */}
+                    <p>Question {question.questionNo}:</p>
+                    <p>{question.questionBody}</p>
                     {question.options.map((option, i) => (
                         <label key={i}>
                             <input
                                 type="radio"
                                 name={`question-${index}`}
                                 value={option}
-                                onChange={(e) => setAnswers({ ...answers, [question.questionNo]: e.target.value })}
+                                checked={answers[question.questionNo] === option}
+                                onChange={(e) => handleAnswerChange(question.questionNo, e.target.value)}
                             />
                             {option}
                         </label>

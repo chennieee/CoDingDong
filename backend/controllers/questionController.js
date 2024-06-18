@@ -1,11 +1,5 @@
 const Question = require('../models/Question');
 
-// GET all Questions
-const getQuestions = async (req, res) => {
-    const questions = await Question.find(); //find questions
-    res.status(200).json(questions); //send response
-};
-
 // GET a single question by ID
 const getQuestionById = async (req, res) => {
     //grab id from req parameter
@@ -33,6 +27,5 @@ const getQuestionById = async (req, res) => {
 
 // Export questionController functions
 module.exports = {
-    getQuestions,
     getQuestionById
 };

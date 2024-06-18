@@ -7,10 +7,8 @@ const lessonSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    questions: [{ //array of 5 Questions
-        type: mongoose.Schema.Types.ObjectID,
-        ref: 'Question'
-    }]
+    // removed questions array as it is now redundant
+    // each question is has a lessonId attribute assigning it to a lesson
 });
 
 

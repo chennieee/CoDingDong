@@ -2,27 +2,45 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export const useLesson = (lessonId, userId) => {
+    const [lesson, setLesson] = useState(null);
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState({});
     const [submitted, setSubmitted] = useState(false);
     const [results, setResults] = useState(null);
     const apiUrl = process.env.REACT_APP_API_URL;
 
-    // Fetch questions for the lesson
+    // Fetch lesson with questions
     useEffect(() => {
-        const fetchQuestions = async () => {
+        const fetchLessonQuestions = async () => {
             try {
-                const response = await axios.get(`${apiUrl}/lessons/${lessonId}`); // Updated endpoint
-                setQuestions(response.data.questions); // Assume response.data contains the lesson details with questions
+                const response = await axios.get(`${apiUrl}/lessons/${lessonId}`);
+                setLesson(response.data);
+                setQuestions(response.data.questions);
+
+                // Initialise each answer to an empty string
+                const initialAnswers = {};
+                response.data.questions.forEach((question) => {
+                    initialAnswers[question.questionNo] = '';
+                });
+                setAnswers(initialAnswers);
             
             } catch (error) {
-                console.error('Error fetching questions:', error);
+                console.error('Error fetching lesson with questions:', error);
             }
         };
 
-        fetchQuestions();
+        fetchLessonQuestions();
 
     }, [lessonId, apiUrl]);
+
+
+    // Handle user response to questions
+    const handleAnswerChange = (questionNo, userAnswer) => {
+        setAnswers((prevAnswers) => ({
+            ...prevAnswers,
+            [questionNo]: userAnswer
+        }));
+    };
 
 
     // Handle lesson completion (submit answers + update user stats)
@@ -47,9 +65,10 @@ export const useLesson = (lessonId, userId) => {
     };
 
     return {
+        lesson,
         questions,
         answers,
-        setAnswers,
+        handleAnswerChange,
         submitted,
         results,
         handleSubmit,

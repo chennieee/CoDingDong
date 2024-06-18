@@ -1,5 +1,4 @@
 // NAVBAR APPEARS ON ALL PAGES OF THE APP 
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';

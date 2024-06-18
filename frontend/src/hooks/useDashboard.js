@@ -51,7 +51,6 @@ export const useDashboard = (userId) => {
             }
         };
 
-        //fetchUserData();
         fetchLessons();
 
     }, [userId, apiUrl, nextLesson, lockedLessons]);
