@@ -2,20 +2,20 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export const useDashboard = (userId) => {
-    const [nextLesson, setNextLesson] = useState(null);
-    const [lockedLessons, setLockedLessons] = useState([]);
     const [displayLessons, setDisplayLessons] = useState([]);
     const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         const fetchLessons = async () => {
+            if (!userId) {
+                console.error('No userId provided to fetch lessons'); // Log error if userId is missing
+            }
+
             try {
                 const response = await axios.get(`${apiUrl}/users/lessons/${userId}`);
                 console.log('Fetched lessons response:', response.data); // Debug log
 
                 const { nextLesson, lockedLessons } = response.data;
-                setNextLesson(nextLesson);
-                setLockedLessons(lockedLessons);
 
                 // Display 5 lessons, 1 start and 4 locked
                 const lessonsToDisplay = [];

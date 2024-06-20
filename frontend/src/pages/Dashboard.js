@@ -1,16 +1,22 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDashboard } from '../hooks/useDashboard';
+import { useAuthContext } from '../hooks/useAuthContext';
 import './Dashboard.css';
 
-const Dashboard = ({ userId }) => {
+const Dashboard = () => {
+    const { user } = useAuthContext();
+    const userId = user ? user._id : null;
+    console.log('Dashboard userId:', userId); // Log to check userId
+
+
     const { displayLessons } = useDashboard(userId);
     const navigate = useNavigate();
 
     console.log('Rendering displayLessons:', displayLessons); // Debug log
 
-    function navigateToProfile() {
-        navigate('/profile');
+    function navigateToProfile(id) {
+        navigate(`/profile/${id}`);
     }
 
     function navigateToLesson(id) {
@@ -21,7 +27,7 @@ const Dashboard = ({ userId }) => {
         <div className="dashboard-container">
             <div className="sidebar">
                 <div className="sidebar-buttons">
-                    <button onClick={() => navigateToProfile()}>Profile</button>
+                    <button onClick={() => navigateToProfile(userId)}>Profile</button>
                     <button>Leaderboard</button>
                 </div>
             </div>
