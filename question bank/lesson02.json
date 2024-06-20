@@ -1,0 +1,62 @@
+[
+    {
+        "questionNo": 1,
+        "question": "What is the data type of variable x after this assignment: x = 3.5",
+        "options": [
+            "A. int",
+            "B. float",
+            "C. str"
+        ],
+        "answer": "B",
+        "explanation": "x is dynamically typed as float when 3.5 is assigned to it.",
+        "lessonId": "6672ebc8b1e5bf8c86de6cef"
+    },
+    {
+        "questionNo": 2,
+        "question": "Which of these is an immutable data type?",
+        "options": [
+            "A. tuple",
+            "B. list",
+            "C. dictionary"
+        ],
+        "answer": "A",
+        "explanation": "Once a tuple is created, its contents cannot be changed.",
+        "lessonId": "6672ebc8b1e5bf8c86de6cef"
+    },
+    {
+        "questionNo": 3,
+        "question": "Which function is used to display data as output?",
+        "options": [
+            "A. output()",
+            "B. display()",
+            "C. print()"
+        ],
+        "answer": "C",
+        "explanation": "The print() function prints the specified message to the screen.",
+        "lessonId": "6672ebc8b1e5bf8c86de6cef"
+    },
+    {
+        "questionNo": 4,
+        "question": "What is the error: x = (1,2,3); x[1] = 4; print(x)",
+        "options": [
+            "A. x[1] should be x[2]",
+            "B. Cannot print tuples",
+            "C. Tuples are immutable"
+        ],
+        "answer": "C",
+        "explanation": "Attempting to change an element of a tuple results in an error.",
+        "lessonId": "6672ebc8b1e5bf8c86de6cef"
+    },
+    {
+        "questionNo": 5,
+        "question": "Which function is used to read input from the console?",
+        "options": [
+            "A. input()",
+            "B. read()",
+            "C. scan()"
+        ],
+        "answer": "A",
+        "explanation": "E.g. x = input('Enter your name:'); print('Hello, ' + x); Output: Hello [name]",
+        "lessonId": "6672ebc8b1e5bf8c86de6cef"
+    }
+]
