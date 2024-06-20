@@ -1,4 +1,3 @@
-//lesson 1
 [
     {
         "questionNo": 1,
@@ -6,7 +5,7 @@
         "options": ["A. /* */", "B. //", "C. #"],
         "answer": "C",
         "explanation": "In Python, comments are created using the hash symbol (#).",
-        "lessonId": ObjectId("6672ebc8b1e5bf8c86de6cee")
+        "lessonId": "6672ebc8b1e5bf8c86de6cee"
     },
     {
         "questionNo": 2,
@@ -14,7 +13,7 @@
         "options": ["A. func", "B. def", "C. function"],
         "answer": "B",
         "explanation": "In Python, functions are defined using the 'def' keyword.",
-        "lessonId": ObjectId("6672ebc8b1e5bf8c86de6cee")
+        "lessonId": "6672ebc8b1e5bf8c86de6cee"
     },
     {
         "questionNo": 3,
@@ -22,7 +21,7 @@
         "options": ["A. x = 2.8", "B. x == 2.8", "C. float(x) = 2.8"],
         "answer": "A",
         "explanation": "In Python, you create a variable by using the assignment operator '='.",
-        "lessonId": ObjectId("6672ebc8b1e5bf8c86de6cee")
+        "lessonId": "6672ebc8b1e5bf8c86de6cee"
     },
     {
         "questionNo": 4,
@@ -30,7 +29,7 @@
         "options": ["A. Boolean", "B. Integer", "C. String"],
         "answer": "A",
         "explanation": "In Python, the Boolean data type is used to store true or false values.",
-        "lessonId": ObjectId("6672ebc8b1e5bf8c86de6cee")
+        "lessonId": "6672ebc8b1e5bf8c86de6cee"
     },
     {
         "questionNo": 5,
@@ -38,6 +37,6 @@
         "options": ["A. <class 'str'>", "B. <class 'int'>", "C. <class 'bool'>"],
         "answer": "A",
         "explanation": "The type() function reveals that 'Hello, World!' is a string (str).",
-        "lessonId": ObjectId("6672ebc8b1e5bf8c86de6cee")
+        "lessonId": "6672ebc8b1e5bf8c86de6cee"
     }
 ]
