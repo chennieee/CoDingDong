@@ -108,7 +108,7 @@ userSchema.statics.getLessonProgress = async function(userId) {
         throw new Error('Invalid user ID');
     }
 
-    const user = await this.findById(userId).populate('completedLessons.lessonId');
+    const user = await this.findById(userId);
     if (!user) {
         throw new Error('User not found');
     }
@@ -116,14 +116,13 @@ userSchema.statics.getLessonProgress = async function(userId) {
     // Fetch all lessons and sort by lessonNo
     const lessons = await Lesson.find().sort({ lessonNo: 1 });
 
-    // Get completedLessons
+    // Get completedLessons IDs
     const completedLessonIds = user.completedLessons
-                                    .map(lesson => lesson.lessonId._id.toString());
-    const completedLessons = user.completedLessons.map(lesson => lesson.lessonId);
+                                    .map(lesson => lesson.lessonId.toString());
 
     // Get nextLesson and lockedLessons
-    let nextLesson = null;
-    let lockedLessons = [];
+    let nextLesson = null; //initialise nextLesson
+    let lockedLessons = []; //initialise lockecLessons
 
     for (const lesson of lessons) {
         if (!completedLessonIds.includes(lesson._id.toString())) {
@@ -135,7 +134,7 @@ userSchema.statics.getLessonProgress = async function(userId) {
         }
     }
 
-    return { completedLessons, nextLesson, lockedLessons };
+    return { nextLesson, lockedLessons };
 };
 
 

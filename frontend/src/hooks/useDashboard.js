@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export const useDashboard = (userId) => {
-    //const [completedLessons, setCompletedLessons] = useState([]);
     const [nextLesson, setNextLesson] = useState(null);
     const [lockedLessons, setLockedLessons] = useState([]);
     const [displayLessons, setDisplayLessons] = useState([]);
@@ -11,10 +10,12 @@ export const useDashboard = (userId) => {
     useEffect(() => {
         const fetchLessons = async () => {
             try {
-                const lessonsResponse = await axios.get(`${apiUrl}/users/lessons/${userId}`);
-                //setCompletedLessons(lessonsResponse.data.completedLessons);
-                setNextLesson(lessonsResponse.data.nextLesson);
-                setLockedLessons(lessonsResponse.data.lockedLessons);
+                const response = await axios.get(`${apiUrl}/users/lessons/${userId}`);
+                console.log('Fetched lessons response:', response.data); // Debug log
+
+                const { nextLesson, lockedLessons } = response.data;
+                setNextLesson(nextLesson);
+                setLockedLessons(lockedLessons);
 
                 // Display 5 lessons, 1 start and 4 locked
                 const lessonsToDisplay = [];
@@ -22,28 +23,28 @@ export const useDashboard = (userId) => {
                 //add nextLesson (if available)
                 if (nextLesson) {
                     lessonsToDisplay.push({
-                        ...lessonsResponse.data.nextLesson,
+                        ...nextLesson,
                         accessible: true
                     });
                 }
 
-                //add lockedLessons
-                const lockedLessonCount = 5 - lessonsToDisplay.length;
-                const lockedLessonsToDisplay = lockedLessons.slice(0, lockedLessonCount)
+                //add up to 4 lockedLessons
+                const lockedLessonsToDisplay = lockedLessons.slice(0, 4)
                                                        .map(lesson => ({
                                                             ...lesson,
                                                             accessible: false
                                                         }));
                 lessonsToDisplay.push(...lockedLessonsToDisplay);
 
+                //if less than 5 lessons, fill with 1 more lesson
                 while (lessonsToDisplay.length < 5) {
                     lessonsToDisplay.push({ 
                         title: 'More lessons to come...',
-                        locked: true,
                         accessible: false
                     });
                 }
 
+                console.log('Display lessons:', lessonsToDisplay); // Log display lessons
                 setDisplayLessons(lessonsToDisplay);
 
             } catch (error) {
@@ -53,7 +54,7 @@ export const useDashboard = (userId) => {
 
         fetchLessons();
 
-    }, [userId, apiUrl, nextLesson, lockedLessons]);
+    }, [userId, apiUrl]);
 
     return { displayLessons };
 };

@@ -7,6 +7,8 @@ const Dashboard = ({ userId }) => {
     const { displayLessons } = useDashboard(userId);
     const navigate = useNavigate();
 
+    console.log('Rendering displayLessons:', displayLessons); // Debug log
+
     function navigateToProfile() {
         navigate('/profile');
     }
