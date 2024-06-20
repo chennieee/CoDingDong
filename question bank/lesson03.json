@@ -1,0 +1,62 @@
+[
+    {
+        "questionNo": 1,
+        "question": "What will be the output of print('Python', 'Yay', sep='-')",
+        "options": [
+            "A. Python-Yay",
+            "B. Python Yay",
+            "C. PythonYay"
+        ],
+        "answer": "A",
+        "explanation": "The sep='-' parameter will separate the words 'Python' and 'Yay' with a hyphen.",
+        "lessonId": "6672ebc8b1e5bf8c86de6cf0"
+    },
+    {
+        "questionNo": 2,
+        "question": "What is the purpose of an if else block?",
+        "options": [
+            "A. to loop through a block",
+            "B. to execute a block conditionally",
+            "C. to handle exceptions"
+        ],
+        "answer": "B",
+        "explanation": "E.g. if x < 5: print(x), the value of x is only printed if it is less than 5.",
+        "lessonId": "6672ebc8b1e5bf8c86de6cf0"
+    },
+    {
+        "questionNo": 3,
+        "question": "which keyword is used to check additional conditions if the previous conditions fail?",
+        "options": [
+            "A. else if",
+            "B. elif",
+            "C. or"
+        ],
+        "answer": "B",
+        "explanation": "The elif block is used to check additional conditions after an if statement or other elif statements fail.",
+        "lessonId": "6672ebc8b1e5bf8c86de6cf0"
+    },
+    {
+        "questionNo": 4,
+        "question": "What will happen if the condition in an if statement evaluates to False?",
+        "options": [
+            "A. else block will be executed (if it exists)",
+            "B. the program will stop",
+            "C. an error will be raised"
+        ],
+        "answer": "A",
+        "explanation": "Assuming code block is 'if…else…', else block will execute if 'if' condition is False",
+        "lessonId": "6672ebc8b1e5bf8c86de6cf0"
+    },
+    {
+        "questionNo": 5,
+        "question": "Which of the following is a valid conditional statement?",
+        "options": [
+            "A. if a = 5:",
+            "B. if a == 5:",
+            "C. if (a = 5):"
+        ],
+        "answer": "B",
+        "explanation": "'=' is used for assignment while '==' evaluates an equality.",
+        "lessonId": "6672ebc8b1e5bf8c86de6cf0"
+    }
+]
