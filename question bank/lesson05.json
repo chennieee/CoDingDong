@@ -1,0 +1,62 @@
+[
+    {
+        "questionNo": 1,
+        "question": "How do you access the last element of a list named myList?",
+        "options": [
+            "A. myList[0]",
+            "B. myList[-1]",
+            "C. myList[len(myList)]"
+        ],
+        "answer": "B",
+        "explanation": "last element's index is -1, second last element is -2 etc.",
+        "lessonId": "6672ebc8b1e5bf8c86de6cf2"
+    },
+    {
+        "questionNo": 2,
+        "question": "How to combine the elements of 2 lists (list1 and list2) into list1?",
+        "options": [
+            "A. list1.extend(list2)",
+            "B. list1.append(list2)",
+            "C. list1.add(list2)"
+        ],
+        "answer": "A",
+        "explanation": "E.g. list1 = [1,2,3], list2 = [4,5,6] \nlist1.extend(list2) will give [1,2,3,4,5,6] when list1 is printed; \nlist1.append(list2) will give [1,2,3,[4,5,6]] when list1 is printed;\nLastly, list objects have no 'add' function.",
+        "lessonId": "6672ebc8b1e5bf8c86de6cf2"
+    },
+    {
+        "questionNo": 3,
+        "question": "What does myList[::-1] do?",
+        "options": [
+            "A. copies myList",
+            "B. reverses myList",
+            "C. removes last element from myList"
+        ],
+        "answer": "B",
+        "explanation": "Slicing myList[::-1] reverses the list.",
+        "lessonId": "6672ebc8b1e5bf8c86de6cf2"
+    },
+    {
+        "questionNo": 4,
+        "question": "What is the result of the following code? \nmyList = [1, 2, 3] \nmyList[1] = 4 \nprint(myList)",
+        "options": [
+            "A. [1,4,3]",
+            "B. [1,2,3]",
+            "C. [1,1,3]"
+        ],
+        "answer": "A",
+        "explanation": "Lists are mutable, so changing the element at index 1 to 4 will result in the list [1, 4, 3].",
+        "lessonId": "6672ebc8b1e5bf8c86de6cf2"
+    },
+    {
+        "questionNo": 5,
+        "question": "What will be the output of the following code? \nmyTuple = (1, 2, 3) \nprint(myTuple[1])",
+        "options": [
+            "A. 1",
+            "B. 2",
+            "C. 3"
+        ],
+        "answer": "B",
+        "explanation": "Indexing in tuples starts from 0, so myTuple[1] will output 2.",
+        "lessonId": "6672ebc8b1e5bf8c86de6cf2"
+    }
+]
