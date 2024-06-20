@@ -9,6 +9,7 @@ export const useDashboard = (userId) => {
         const fetchLessons = async () => {
             if (!userId) {
                 console.error('No userId provided to fetch lessons'); // Log error if userId is missing
+                return;
             }
 
             try {
@@ -29,11 +30,11 @@ export const useDashboard = (userId) => {
                 }
 
                 //add up to 4 lockedLessons
-                const lockedLessonsToDisplay = lockedLessons.slice(0, 4)
-                                                       .map(lesson => ({
-                                                            ...lesson,
-                                                            accessible: false
-                                                        }));
+                const lockedLessonsToDisplay = lockedLessons.slice(0, 4).map(lesson => ({
+                    ...lesson,
+                    accessible: false
+                }));
+                
                 lessonsToDisplay.push(...lockedLessonsToDisplay);
 
                 //if less than 5 lessons, fill with 1 more lesson

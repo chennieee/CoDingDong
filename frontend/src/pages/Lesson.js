@@ -1,17 +1,20 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { useLesson } from '../hooks/useLesson';
+import { useAuthContext } from '../hooks/useAuthContext';
 
-const Lesson = ({ match }) => {
-    const { lesson, questions, answers, handleAnswerChange, submitted, results, handleSubmit } = useLesson(
-        match.params.id, //lessonId
-        match.params.userId //userId
-    );
+const Lesson = () => {
+    const { id: lessonId } = useParams(); //get lessonId from URL parameters
+    
+    const { user } = useAuthContext(); //access user from AuthContext
+    const userId = user ? user._id : null; //extract userId
 
+    const { lesson, questions, answers, handleAnswerChange, submitted, results, handleSubmit } 
+        = useLesson(lessonId, userId);
 
     if (!lesson) {
         return <div>Loading...</div>;
     }
-
 
     if (submitted) {
         return (

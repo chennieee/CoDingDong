@@ -23,7 +23,7 @@ export const AuthContextProvider = ({ children }) => {
     const user = JSON.parse(localStorage.getItem('user'));
     console.log('Loaded user from local storage:', user); // Debug log
 
-    if (user) {
+    if (user && user._id) {
       dispatch({ type: 'LOGIN', payload: user }); 
     }
   }, []);

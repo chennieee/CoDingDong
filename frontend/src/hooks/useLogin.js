@@ -23,33 +23,33 @@ export const useLogin = () => {
     setError(null);
     setIsSuccess(false);
 
-    const response = await fetch(`${apiUrl}/users/login`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ username, password })
-    });
-    const json = await response.json();
-    console.log("test"); //print statement for debugging
+    try {
+      const response = await fetch(`${apiUrl}/users/login`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ username, password })
+      });
+      const json = await response.json();
 
-    // unsuccessful login
-    if (!response.ok) {
-      setIsLoading(false);
-      setError(json.error);
-    }
+      // unsuccessful login
+      if (!response.ok) {
+        throw new Error(json.error);
+      }
 
-    // successful login
-    if (response.ok) {
-      // save the user to local storage
-      localStorage.setItem('user', JSON.stringify(json));
+      // Log the response for debugging
+      console.log('Login response:', json);
 
-      // update the auth context
-      dispatch({ type: 'LOGIN', payload: json });
-
-      // update loading state and success state
+      // successful login
+      localStorage.setItem('user', JSON.stringify(json)); //save user to localStorage
+      dispatch({ type: 'LOGIN', payload: json }); //update AuthContext
       setIsLoading(false);
       setIsSuccess(true);
+    
+    } catch (error) {
+      setIsLoading(false);
+      setIsSuccess(error.message);
     }
   };
 
   return { login, isLoading, error };
-}
+};

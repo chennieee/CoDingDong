@@ -7,27 +7,31 @@ import './Dashboard.css';
 const Dashboard = () => {
     const { user } = useAuthContext();
     const userId = user ? user._id : null;
+    console.log('AuthContext state:', user); // Log to check the user object
     console.log('Dashboard userId:', userId); // Log to check userId
 
-
-    const { displayLessons } = useDashboard(userId);
     const navigate = useNavigate();
-
+    const { displayLessons } = useDashboard(userId);
     console.log('Rendering displayLessons:', displayLessons); // Debug log
 
-    function navigateToProfile(id) {
-        navigate(`/profile/${id}`);
+    function navigateToProfile() {
+        navigate('/profile');
     }
 
     function navigateToLesson(id) {
         navigate(`/lesson/${id}`);
     }
 
+    // Testing: Handle unauthorised user state
+    if (!userId) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div className="dashboard-container">
             <div className="sidebar">
                 <div className="sidebar-buttons">
-                    <button onClick={() => navigateToProfile(userId)}>Profile</button>
+                    <button onClick={() => navigateToProfile()}>Profile</button>
                     <button>Leaderboard</button>
                 </div>
             </div>
