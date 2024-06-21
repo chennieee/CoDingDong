@@ -6,7 +6,7 @@ const questionSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    questionBody: {
+    question: {
         type: String,
         required: true
     },

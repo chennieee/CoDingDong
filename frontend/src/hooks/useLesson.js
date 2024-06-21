@@ -52,6 +52,7 @@ export const useLesson = (lessonId, userId) => {
     const handleSubmit = async () => {
         try {
             // Submit lesson answers
+            console.log({userId, answers});
             const response = await axios.post(`${apiUrl}/lessons/${lessonId}/submit`, {
                 userId,
                 answers,

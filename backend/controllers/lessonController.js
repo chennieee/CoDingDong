@@ -28,11 +28,11 @@ const getLessonById = async (req, res) => {
 // POST - submit answers for lesson & calculate score (specific user)
 //** should this be implemented in the user backend instead of lesson?? since it is specific to a user */
 const submitLesson = async (req, res) => {
-    const { lessonId } = req.params; // lesson ID
+    const { id } = req.params; // lesson ID
     const { answers, userId } = req.body; // user's answers (eg. {'A', 'B', 'C', 'D', 'A'})
 
     // Check if lesson ID is valid
-    if (!mongoose.Types.ObjectId.isValid(lessonId)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'No such lesson' });
     }
 
@@ -43,7 +43,7 @@ const submitLesson = async (req, res) => {
 
     try {
         // Calculate user's score using static method
-        const result = await Lesson.submitAnswers(lessonId, answers);
+        const result = await Lesson.submitAnswers(id, answers);
 
         // Store the score in user's database
         const user = await User.findById(userId);
@@ -53,7 +53,7 @@ const submitLesson = async (req, res) => {
 
         // Check if lesson is already completed
         const completedLessonIndex = user.completedLessons.findIndex(lesson =>
-            lesson.lessonId.toString() === lessonId
+            lesson.lessonId.toString() === id
         );
 
         if (completedLessonIndex !== -1) {
@@ -64,7 +64,7 @@ const submitLesson = async (req, res) => {
         } else {
             // Add new completed lesson entry
             user.completedLessons.push({
-                lessonId,
+                id,
                 completionDate: new Date(),
                 score: result.score
             });
@@ -76,6 +76,7 @@ const submitLesson = async (req, res) => {
         res.status(200).json(result);
     
     } catch (error) {
+        console.log(error);
         res.status(400).json({ error: error.message });
     }
 };

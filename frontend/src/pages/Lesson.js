@@ -43,7 +43,7 @@ const Lesson = () => {
             {questions.map((question, index) => (
                 <div key={index}>
                     <p>Question {question.questionNo}:</p>
-                    <p>{question.questionBody}</p>
+                    <p>{question.question}</p>
                     {question.options.map((option, i) => (
                         <label key={i}>
                             <input
