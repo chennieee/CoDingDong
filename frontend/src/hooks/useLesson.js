@@ -13,13 +13,15 @@ export const useLesson = (lessonId, userId) => {
     useEffect(() => {
         const fetchLessonQuestions = async () => {
             try {
-                const response = await axios.get(`${apiUrl}/lessons/${lessonId}`);
-                setLesson(response.data);
-                setQuestions(response.data.questions);
+                const lessonResponse = await axios.get(`${apiUrl}/lessons/${lessonId}`);
+                setLesson(lessonResponse.data);
+
+                const questionResponse = await axios.get(`${apiUrl}/questions/lesson/${lessonId}`);
+                setQuestions(questionResponse.data);
 
                 // Initialise each answer to an empty string
                 const initialAnswers = {};
-                response.data.questions.forEach((question) => {
+                questionResponse.forEach((question) => {
                     initialAnswers[question.questionNo] = '';
                 });
                 setAnswers(initialAnswers);

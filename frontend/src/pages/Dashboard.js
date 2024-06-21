@@ -47,7 +47,7 @@ const Dashboard = () => {
                             disabled={index > 0}
                             onClick={() => navigateToLesson(lesson._id)}
                         >
-                            {lesson.title} - {index === 0 ? 'Start' : 'Locked'}
+                            Lesson {lesson.lessonNo} - {index === 0 ? 'Start' : 'Locked'}
                         </button>
                     ))}
                 </div>
