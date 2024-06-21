@@ -1,0 +1,40 @@
+.lesson-container {
+    font-family: 'Poppins', sans-serif;
+}
+
+.lesson-container h1,
+.lesson-container p,
+.lesson-container label,
+.lesson-container button {
+    font-family: 'Poppins', sans-serif;
+}
+
+.lesson-container h1 {
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.lesson-container p {
+    font-weight: 400;
+    margin: 10px 0;
+}
+
+.lesson-container label {
+    display: block;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.lesson-container button {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+/* styling for radio buttons */
+.lesson-container input[type="radio"] {
+    margin-right: 10px;
+    /* spacing between radio button and text */
+}
