@@ -1,17 +1,13 @@
 const express = require('express');
 
 const {
-    getQuestionById,
     getQuestionsByLessonId
 } = require('../controllers/questionController');
 
 const router = express.Router();
 
-// GET a single question by ID (**not used)
-router.get('/:id', getQuestionById);
-
-// GET questions array by lessonID
-router.get('/lesson/:lessonId', getQuestionsByLessonId);
+// GET questions array by lessonID (useLesson)
+router.get('/lesson/:id', getQuestionsByLessonId); //id is lessonId
 
 // Export router
 module.exports = router;

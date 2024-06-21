@@ -20,11 +20,8 @@ const getLessonById = async (req, res) => {
         return res.status(404).json({error: 'No such lesson'});
     }
 
-    //fetch questions associated with this lesson
-    const questions = await Question.find({ lessonId: id });
-
     //send response -- lesson with its questions
-    res.status(200).json({ lesson, questions });
+    res.status(200).json({ lesson });
 };
 
 
