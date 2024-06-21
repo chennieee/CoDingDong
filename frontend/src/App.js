@@ -10,25 +10,28 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Lesson from './pages/Lesson';
 import Friends from './pages/Friends';
+import { AuthContextProvider } from './context/AuthContext';
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Navbar />
-        <div className="pages">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/lesson/:id" element={<Lesson />} />
-            <Route path="/friends" element={<Friends />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </div>
+    <AuthContextProvider> {/* Wrap with AuthContextProvider */}
+      <div className="App">
+        <BrowserRouter>
+          <Navbar />
+          <div className="pages">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/lesson/:id" element={<Lesson />} />
+              <Route path="/friends" element={<Friends />} />
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </div>
+    </AuthContextProvider>
   );
 }
 

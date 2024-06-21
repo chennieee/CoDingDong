@@ -8,7 +8,7 @@
             "C. to repeat a block a fixed number of times"
         ],
         "answer": "C",
-        "explanation": "for loops are used to iterate over a sequence or other iterable objects, repeating a block of code a fixed number of times.",
+        "explanation": "For loops are used to iterate over a sequence or other iterable objects, repeating a block of code a fixed number of times.",
         "lessonId": "6672ebc8b1e5bf8c86de6cf1"
     },
     {

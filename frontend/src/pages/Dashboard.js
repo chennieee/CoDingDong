@@ -7,11 +7,13 @@ import './Dashboard.css';
 const Dashboard = () => {
     const { user } = useAuthContext();
     const userId = user ? user._id : null;
+
     console.log('AuthContext state:', user); // Log to check the user object
     console.log('Dashboard userId:', userId); // Log to check userId
 
     const navigate = useNavigate();
     const { displayLessons } = useDashboard(userId);
+
     console.log('Rendering displayLessons:', displayLessons); // Debug log
 
     function navigateToProfile() {

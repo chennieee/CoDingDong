@@ -8,7 +8,7 @@
             "C. myList[len(myList)]"
         ],
         "answer": "B",
-        "explanation": "last element's index is -1, second last element is -2 etc.",
+        "explanation": "Last element's index is -1, second last element is -2 etc.",
         "lessonId": "6672ebc8b1e5bf8c86de6cf2"
     },
     {
