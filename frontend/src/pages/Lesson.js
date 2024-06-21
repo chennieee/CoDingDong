@@ -5,11 +5,11 @@ import { useAuthContext } from '../hooks/useAuthContext';
 
 const Lesson = () => {
     const { id: lessonId } = useParams(); //get lessonId from URL parameters
-    
+
     const { user } = useAuthContext(); //access user from AuthContext
     const userId = user ? user._id : null; //extract userId
 
-    const { lesson, questions, answers, handleAnswerChange, submitted, results, handleSubmit } 
+    const { lesson, questions, answers, handleAnswerChange, submitted, results, handleSubmit }
         = useLesson(lessonId, userId);
 
     if (!lesson) {
