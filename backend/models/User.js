@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    lastLessonDate: {
+    lastLessonDate: { //ONLY for newLessons. Already completed lessons will not be taken into account
         type: Date,
         default: null // NOT SURE IF THIS IS ALLOWED 
         // but we need it to be null bc when user signs up it doesnt mean he completes a lesson
@@ -35,10 +35,17 @@ const userSchema = new mongoose.Schema({
     completedLessons: [{ //array to keep track of completed lessons
         lessonId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Lesson'
+            ref: 'Lesson',
+            required: true
         },
-        completionDate: Date,
-        score: { type: Number }
+        completionDate: {
+            type: Date,
+            required: true
+        },
+        score: { 
+            type: Number,
+            required: true
+        }
     }]
 });
 
@@ -103,6 +110,7 @@ userSchema.statics.login = async function (username, password) {
 
 
 // static method to get lesson progress for a specific user
+// used to determine lesson display in dashboard page
 userSchema.statics.getLessonProgress = async function(userId) {
     if (!mongoose.Types.ObjectId.isValid(userId)) {
         throw new Error('Invalid user ID');

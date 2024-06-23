@@ -1,40 +1,55 @@
+/* Container for the lesson */
 .lesson-container {
-    font-family: 'Poppins', sans-serif;
+    max-width: 800px; /* Optional: Set a maximum width for better readability */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px;
+    font-family: 'Poppins', sans-serif; /* Apply the Poppins font to the entire container */
 }
 
-.lesson-container h1,
-.lesson-container p,
-.lesson-container label,
-.lesson-container button {
-    font-family: 'Poppins', sans-serif;
+/* Ensure all questions are aligned to the left */
+.question {
+    text-align: left; /* Align text to the left */
+    margin-bottom: 20px; /* Space between questions */
 }
 
-.lesson-container h1 {
-    font-weight: 600;
-    margin-bottom: 20px;
+/* Style for each question's text */
+.question-text {
+    font-size: 18px; /* Adjust font size as needed */
+    margin-bottom: 10px; /* Space between question text and options */
 }
 
-.lesson-container p {
-    font-weight: 400;
-    margin: 10px 0;
+/* Style the options list */
+.options {
+    list-style-type: none; /* Remove default list style */
+    padding-left: 0; /* Remove default padding */
 }
 
-.lesson-container label {
-    display: block;
-    font-weight: 400;
-    margin-bottom: 10px;
+/* Style each option */
+.option {
+    display: flex; /* Use flexbox to align items horizontally */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 10px; /* Space between options */
 }
 
-.lesson-container button {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
+/* Style for radio buttons */
+.option input[type="radio"] {
+    margin-right: 10px; /* Space between radio button and text */
+}
+
+/* Submit button styling */
+.submit-button {
     padding: 10px 20px;
-    margin-top: 20px;
+    font-size: 16px;
     cursor: pointer;
+    background-color: #1aac83; /* Primary color */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
 }
 
-/* styling for radio buttons */
-.lesson-container input[type="radio"] {
-    margin-right: 10px;
-    /* spacing between radio button and text */
+/* Optional: Improve accessibility by increasing focus visibility */
+.option input[type="radio"]:focus {
+    outline: 2px solid #1aac83; /* Custom focus outline */
+    outline-offset: 2px;
 }

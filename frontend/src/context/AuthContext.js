@@ -1,14 +1,25 @@
 //AuthContext checks if users are successfully logged in
-import { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useReducer, useEffect } from 'react';
 
 export const AuthContext = createContext();
 
 export const authReducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN':
-      return { user: action.payload }
+      return { user: action.payload };
+
     case 'LOGOUT':
-      return { user: null }
+      return { user: null };
+
+    case 'SUBMIT_LESSON': //update user stats
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ...action.payload
+        }
+      };
+
     default:
       return state;
   }
@@ -27,6 +38,14 @@ export const AuthContextProvider = ({ children }) => {
       dispatch({ type: 'LOGIN', payload: user }); 
     }
   }, []);
+
+  useEffect(() => {
+    if (state.user) {
+      localStorage.setItem('user', JSON.stringify(state.user));
+    } else {
+      localStorage.removeItem('user');
+    }
+  }, [state.user]);
 
   console.log('AuthContext state:', state); //debugging
   

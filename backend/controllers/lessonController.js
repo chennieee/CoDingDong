@@ -1,5 +1,4 @@
 const Lesson = require('../models/Lesson');
-const Question = require('../models/Question');
 const User = require('../models/User');
 const mongoose = require('mongoose');
     
@@ -25,11 +24,13 @@ const getLessonById = async (req, res) => {
 };
 
 
-// POST - submit answers for lesson & calculate score (specific user)
-//** should this be implemented in the user backend instead of lesson?? since it is specific to a user */
-const submitLesson = async (req, res) => {
+// POST - submit lesson answers & update user stats
+// Calculate score & give explanation for wrong answers
+// UPDATE XP, streak, lastLessonDate & completedLessons {lessonId, completionDate, score} for specific user
+const submitLessonForUser = async (req, res) => {
     const { id } = req.params; // lesson ID
     const { answers, userId } = req.body; // user's answers (eg. {'A', 'B', 'C', 'D', 'A'})
+    const xpEarned = 5; // xp awarded for completing lesson
 
     // Check if lesson ID is valid
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -56,27 +57,56 @@ const submitLesson = async (req, res) => {
             lesson.lessonId.toString() === id
         );
 
-        if (completedLessonIndex !== -1) {
+        if (completedLessonIndex !== -1) { //already completed
             // Update already completed lessons with new score and completion date
             user.completedLessons[completedLessonIndex].score = result.score;
             user.completedLessons[completedLessonIndex].completionDate = new Date();
         
-        } else {
+        } else { //1st time completed
             // Add new completed lesson entry
             user.completedLessons.push({
-                id,
+                lessonId: id,
                 completionDate: new Date(),
                 score: result.score
             });
+
+            // Add xp
+            user.xp += xpEarned;
+
+            // Update streak
+            const now = new Date();
+            const yesterday = new Date(now);
+            yesterday.setDate(yesterday.getDate() - 1);
+
+            if (user.lastLessonDate) {
+                const lastLessonDate = new Date(user.lastLessonDate);
+    
+                if (isSameDay(now, lastLessonDate)) {
+                    // lastLessonDate is today --> no change to streak
+                } else if (isSameDay(yesterday, lastLessonDate)) {
+                    // lastLessonDate is yesterday --> increment streak
+                    user.streak += 1;
+                } else {
+                    // lastLessonDate is more than 1 day ago --> begin streak
+                    user.streak = 1;
+                }
+    
+            } else {
+                // user has not completed any lessons --> begin streak
+                user.streak = 1;
+            }
+
+            // update lastLessonDate to now
+            user.lastLessonDate = now;
         }
 
         await user.save();
 
         // Send response (Score & Explanation for wrong answers)
-        res.status(200).json(result);
+        res.status(200).json({ user, result });
     
     } catch (error) {
-        console.log(error);
+        console.log('Error submitting lesson and updating user stats:', error);
         res.status(400).json({ error: error.message });
     }
 };
@@ -86,5 +116,5 @@ const submitLesson = async (req, res) => {
 // Export lessonController functions
 module.exports = {
     getLessonById,
-    submitLesson
+    submitLessonForUser
 };

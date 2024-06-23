@@ -1,9 +1,8 @@
 const express = require('express');
 
-const { 
-    getLessons,
+const {
     getLessonById,
-    submitLesson
+    submitLessonForUser
 } = require('../controllers/lessonController');
 
 const router = express.Router();
@@ -12,7 +11,7 @@ const router = express.Router();
 router.get('/:id', getLessonById);
 
 // POST - submit answers for lesson & calculate score (useLesson.js)
-router.post('/:id/submit', submitLesson);
+router.post('/:id/submit', submitLessonForUser);
 
 // Export router
 module.exports = router;

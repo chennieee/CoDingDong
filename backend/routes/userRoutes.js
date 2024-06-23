@@ -6,9 +6,8 @@ const {
     getUserProfile,
     getUserFriends,
     getUserLessonProgress,
-    completeLesson,
     resetStreakDaily,
-    addFriend,
+    addFriend
 } = require('../controllers/userController');
 
 const router = express.Router();
@@ -28,9 +27,6 @@ router.get('/friends/:id', getUserFriends);
 
 // GET User lesson progress (useDashboard.js)
 router.get('/lessons/:id', getUserLessonProgress);
-
-// UPDATE XP, streak and lastLessonDate after completing lesson (useLesson.js)
-router.patch('/completeLesson/:id', completeLesson);
 
 // Reset streak if missed
 router.patch('/resetStreak/:id', resetStreakDaily);

@@ -1,9 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useProfile } from '../hooks/useProfile';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const Profile = ({ userId }) => {
-    const { user } = useProfile(userId);
+    const { user: contextUser } = useAuthContext(); //get user from context
+    const { user: profileUser } = useProfile(userId || contextUser?._id); //use profile hook to fetch data
     const navigate = useNavigate();
 
     function navigateToDashboard() {
@@ -14,6 +16,11 @@ const Profile = ({ userId }) => {
         navigate('/friends');
     }
 
+    //decide which user data to use
+    const user = userId ? profileUser : contextUser;
+    if (!user) {
+        return <p>Loading user data...</p>;
+    }
 
     return (
         <div className="profile">

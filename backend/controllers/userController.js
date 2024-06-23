@@ -33,8 +33,12 @@ const signupUser = async (req, res) => {
         //send response
         res.status(200).json({ 
             _id: user._id,
-            username,
-            token 
+            username: user.username,
+            xp: user.xp,
+            streak: user.streak,
+            lastLessonDate: user.lastLessonDate,
+            completedLessons: user.completedLessons,
+            token
         });
 
     } catch (error) {
@@ -58,7 +62,11 @@ const loginUser = async (req, res) => {
         //send response
         res.status(200).json({ 
             _id: user._id,
-            username,
+            username: user.username,
+            xp: user.xp,
+            streak: user.streak,
+            lastLessonDate: user.lastLessonDate,
+            completedLessons: user.completedLessons,
             token
         });
 
@@ -78,7 +86,7 @@ const getUserProfile = async (req, res) => {
     }
 
     //find user
-    const user = await User.findById(id).populate('friends');
+    const user = await User.findById(id).populate('friends'); //tbc - i think this will populate with ALL friends???
 
     //send response
     if (!user) {
@@ -119,62 +127,6 @@ const getUserLessonProgress = async (req, res) => {
         res.status(200).json({ completedLessons, nextLesson, lockedLessons });
     } catch (error) {
         console.error('Error fetching user lesson progress:', error);
-        res.status(400).json({ error: error.message });
-    }
-};
-
-
-// UPDATE XP, streak, lastLessonDate and completedLessons after completing lesson
-// --> called after a lesson is completed
-const completeLesson = async (req, res) => {
-    const { id } = req.params; //user ID
-    const xpEarned = 5; //xp awarded for completing lesson
-
-    try {
-        const user = await User.findById(id);
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-
-        // update xp
-        user.xp += xpEarned;
-
-        // update streak
-        const now = new Date();
-        const yesterday = new Date(now);
-        yesterday.setDate(yesterday.getDate() - 1);
-
-        if (user.lastLessonDate) {
-            const lastLessonDate = new Date(user.lastLessonDate);
-
-            if (isSameDay(now, lastLessonDate)) {
-                // lastLessonDate is today --> no change to streak
-            } else if (isSameDay(yesterday, lastLessonDate)) {
-                // lastLessonDate is yesterday --> increment streak
-                user.streak += 1;
-            } else {
-                // lastLessonDate is more than 1 day ago --> begin streak
-                user.streak = 1;
-            }
-
-        } else {
-            // user has not completed any lessons --> begin streak
-            user.streak = 1;
-        }
-
-        // update lastLessonDate to now
-        user.lastLessonDate = now;
-
-        // update completedLessons
-        user.completedLessons.push({ lessonId, completionDate: now });
-
-        // save the updated user document
-        await user.save();
-
-        // send response (updated user document)
-        res.status(200).json(user);
-    
-    } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
@@ -242,6 +194,5 @@ module.exports = {
     getUserFriends,
     getUserLessonProgress,
     addFriend,
-    completeLesson,
     resetStreakDaily
 };
