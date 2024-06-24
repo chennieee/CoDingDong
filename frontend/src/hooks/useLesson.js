@@ -25,6 +25,7 @@ export const useLesson = (lessonId, userId) => {
                 const initialAnswers = {};
                 questionResponse.data.forEach((question) => {
                     initialAnswers[question.questionNo] = '';
+                    console.log(question.answer);
                 });
                 setAnswers(initialAnswers);
             

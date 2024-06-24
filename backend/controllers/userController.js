@@ -85,15 +85,22 @@ const getUserProfile = async (req, res) => {
         return res.status(404).json({ error: 'User not found'});
     }
 
-    //find user
-    const user = await User.findById(id).populate('friends'); //tbc - i think this will populate with ALL friends???
+    try {
+        console.log('Fetching user profile for ID:', req.params.id); //debugging
+        //find user
+        const user = await User.findById(id);
 
-    //send response
-    if (!user) {
-        //return error if no user is found
-        return res.status(404).json({ error: 'User not found'});
+        //send response
+        if (!user) {
+            //return error if no user is found
+            return res.status(404).json({ error: 'User not found'});
+        }
+        res.status(200).json(user); //else return the found user profile
+    
+    } catch (error) {
+        console.error('Error fetching user profile:', error);
+        res.status(400).send(error);
     }
-    res.status(200).json(user); //else return the found user profile
 };
 
 

@@ -8,24 +8,25 @@ export const useProfile = (userId) => {
     const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
-        //if there is userId provided or no contextUser, fetchUserData
+        const fetchUserData = async () => {
+            const userIdToFetch = userId || contextUser?._id;
+
+            if (!userIdToFetch) {
+                console.error('User ID is undefined.');
+                return;
+            }
+
+            try {
+                const response = await axios.get(`${apiUrl}/users/profile/${userIdToFetch}`);
+                setUser(response.data);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+            console.log('Fetching user data for userId:', userIdToFetch); //debugging - log after userIdToFetch is defined
+        };
+        
+        //Fetch user data if there is a specific userId provided or no context user
         if (userId || !contextUser) {
-            const fetchUserData = async () => {
-                const userIdToFetch = userId || contextUser?._id;
-
-                if (!userIdToFetch) {
-                    console.error('User ID is undefined.');
-                    return;
-                }
-
-                try {
-                    const response = await axios.get(`${apiUrl}/users/profile/${userId}`);
-                    setUser(response.data);
-                } catch (error) {
-                    console.error('Error fetching user data:', error);
-                }
-            };
-
             fetchUserData();
         }
     }, [userId, contextUser, apiUrl]);

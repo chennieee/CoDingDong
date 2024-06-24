@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useLesson } from '../hooks/useLesson';
 import { useAuthContext } from '../hooks/useAuthContext';
+import './Lesson.css';
 
 const Lesson = () => {
     const { id: lessonId } = useParams(); //get lessonId from URL parameters
@@ -26,7 +27,7 @@ const Lesson = () => {
                         <h3>Incorrect Answers:</h3>
                         {results.wrongAnswers.map((question, index) => (
                             <div key={index}>
-                                <p>Question {question.questionNo}: {question.questionBody}</p>
+                                <p>Question {question.questionNo}: {question.question}</p>
                                 <p>Your answer: {answers[question.questionNo]}</p>
                                 <p>Correct answer: {question.answer}</p>
                                 <p>Explanation: {question.explanation}</p>

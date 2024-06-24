@@ -101,6 +101,8 @@ const submitLessonForUser = async (req, res) => {
         }
 
         await user.save();
+        console.log(user.xp); //debugging
+        console.log(user.streak); //debugging
 
         // Send response (Score & Explanation for wrong answers)
         res.status(200).json({ user, result });

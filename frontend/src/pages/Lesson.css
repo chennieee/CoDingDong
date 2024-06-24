@@ -22,6 +22,7 @@
 .options {
     list-style-type: none; /* Remove default list style */
     padding-left: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
 }
 
 /* Style each option */
@@ -29,11 +30,17 @@
     display: flex; /* Use flexbox to align items horizontally */
     align-items: center; /* Center items vertically */
     margin-bottom: 10px; /* Space between options */
+    text-align: left; /* Ensure the text is aligned to the left */
 }
 
 /* Style for radio buttons */
 .option input[type="radio"] {
-    margin-right: 10px; /* Space between radio button and text */
+    margin-right: 0px; /* Space between radio button and text */
+}
+
+/* Ensure labels are aligned with the radio buttons */
+.option label {
+    display: inline-block; /* Ensure label aligns correctly with input */
 }
 
 /* Submit button styling */
@@ -46,10 +53,4 @@
     border: none;
     border-radius: 5px;
     margin-top: 20px;
-}
-
-/* Optional: Improve accessibility by increasing focus visibility */
-.option input[type="radio"]:focus {
-    outline: 2px solid #1aac83; /* Custom focus outline */
-    outline-offset: 2px;
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useProfile } from '../hooks/useProfile';
 import { useAuthContext } from '../hooks/useAuthContext';
+import './Profile.css';
 
 const Profile = ({ userId }) => {
     const { user: contextUser } = useAuthContext(); //get user from context
