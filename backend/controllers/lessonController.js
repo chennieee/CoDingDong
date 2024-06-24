@@ -1,8 +1,17 @@
 const Lesson = require('../models/Lesson');
 const User = require('../models/User');
 const mongoose = require('mongoose');
-    
 
+//helper function to check if 2 timings are on the same date
+// --> completeLesson, resetStreakDaily
+const isSameDay = (d1, d2) => {
+    return d1.getFullYear() === d2.getFullYear() &&
+           d1.getMonth() === d2.getMonth() &&
+           d1.getDate() === d2.getDate();
+};
+
+
+//API requests
 // GET a single lesson by ID with questions
 const getLessonById = async (req, res) => {
     //grab id from req parameter
@@ -44,7 +53,7 @@ const submitLessonForUser = async (req, res) => {
 
     try {
         // Calculate user's score using static method
-        const result = await Lesson.submitAnswers(id, answers);
+        const result = await Lesson.submitAnswers(id, answers); // result is { score, wrongAnswers }
 
         // Store the score in user's database
         const user = await User.findById(userId);
@@ -101,8 +110,6 @@ const submitLessonForUser = async (req, res) => {
         }
 
         await user.save();
-        console.log(user.xp); //debugging
-        console.log(user.streak); //debugging
 
         // Send response (Score & Explanation for wrong answers)
         res.status(200).json({ user, result });

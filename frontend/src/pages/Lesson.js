@@ -6,13 +6,22 @@ import './Lesson.css';
 
 const Lesson = () => {
     const { id: lessonId } = useParams(); //get lessonId from URL parameters
-    console.log('Lesson ID:', lessonId); //debug lessonId
+    console.log('Display Lesson ID:', lessonId); //debug lessonId
 
     const { user } = useAuthContext(); //access user from AuthContext
     const userId = user ? user._id : null; //extract userId
 
-    const { lesson, questions, answers, handleAnswerChange, submitted, results, handleSubmit }
+    const { lesson, questions, answers, handleAnswerChange, submitted, results, handleSubmit, error }
         = useLesson(lessonId, userId);
+
+    // Show loading state if lesson not yet available
+    if (!lesson) {
+        return <div>Loading...</div>;
+    }
+
+    console.log('Lesson data:', lesson); //debugging
+    console.log('Lesson number:', lesson.lessonNo); //debugging
+    console.log('Questions data:', questions); //debugging
 
     if (!lesson) {
         return <div>Loading...</div>;
@@ -28,8 +37,8 @@ const Lesson = () => {
                         {results.wrongAnswers.map((question, index) => (
                             <div key={index}>
                                 <p>Question {question.questionNo}: {question.question}</p>
-                                <p>Your answer: {answers[question.questionNo]}</p>
-                                <p>Correct answer: {question.answer}</p>
+                                <p>Your answer: {question.userAnswer}</p>
+                                <p>Correct answer: {question.correctAnswer}</p>
                                 <p>Explanation: {question.explanation}</p>
                             </div>
                         ))}
@@ -64,6 +73,7 @@ const Lesson = () => {
                     </ul>
                 </div>
             ))}
+            {error && <div className="error">{error}</div>}
             <button className="submit-button" onClick={handleSubmit}>Submit</button>
         </div>
     );

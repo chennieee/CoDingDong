@@ -29,13 +29,14 @@
 .option {
     display: flex; /* Use flexbox to align items horizontally */
     align-items: center; /* Center items vertically */
+    justify-content: flex-start; /* Align items to the start of the flex container */
     margin-bottom: 10px; /* Space between options */
     text-align: left; /* Ensure the text is aligned to the left */
 }
 
 /* Style for radio buttons */
 .option input[type="radio"] {
-    margin-right: 0px; /* Space between radio button and text */
+    margin-right: 10px; /* Space between radio button and text */
 }
 
 /* Ensure labels are aligned with the radio buttons */

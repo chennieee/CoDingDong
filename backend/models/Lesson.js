@@ -39,7 +39,7 @@ lessonSchema.statics.submitAnswers = async function(lessonId, answers) {
     let wrongAnswers = [];
 
     questions.forEach(question => {
-        const userAnswer = answers[question.questionNo].split('. ')[0];
+        const userAnswer = answers[question.questionNo];
 
         if (userAnswer === question.answer) {
             // +1 score for correct ans 
