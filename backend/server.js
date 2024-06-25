@@ -5,6 +5,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const cron = require('node-cron');
 
 // express app
 const app = express();
@@ -15,17 +16,27 @@ app.use(express.json());
 // Enable CORS for all origins 
 app.use(cors({ origin: '*' }));
 
-// import routes/model
+// import routes/model/utils
 const userRoutes = require('./routes/userRoutes');
 const questionRoutes = require('./routes/questionRoutes');
 const lessonRoutes = require('./routes/lessonRoutes');
+const resetStreakDaily = require('./utils/resetStreak');
 
 // routes
 app.use('/api/users', userRoutes);
 app.use('/api/questions', questionRoutes);
 app.use('/api/lessons', lessonRoutes);
 
-//connect to database and listen for requests
+// set up cron job to reset streak daily at midnight
+cron.schedule('0 0 * * *', async () => {
+    console.log('Running daily streak reset task...');
+    await resetStreakDaily();
+}, {
+    scheduled: true,
+    timezone: "Asia/Singapore"
+});
+
+// connect to database and listen for requests
 mongoose.connect(process.env.MONG_URI)
     .then(() => {
         app.listen(process.env.PORT, () => {

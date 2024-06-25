@@ -139,43 +139,6 @@ const getUserLessonProgress = async (req, res) => {
 };
 
 
-// Reset streak if missed
-// --> called at the start of every day
-const resetStreakDaily = async (req, res) => {
-    const { id } = req.params; //user ID
-
-    try {
-        const user = await User.findById(id);
-
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-
-        const now = new Date();
-        const yesterday = new Date(now);
-        yesterday.setDate(yesterday.getDate() - 1);
-
-        if (user.lastLessonDate) {
-            const lastLessonDate = new Date(user.lastLessonDate);
-
-            if (!isSameDay(yesterday, lastLessonDate) && !isSameDay(now, lastLessonDate)) {
-                // user has not completed a lesson yesterday and today --> reset streak
-                user.streak = 0;
-
-                // save the updated user document
-                await user.save();
-            }
-        }
-
-        // send response (user data)
-        res.status(200).json(user);
-
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-};
-
-
 // DELETE User Profile (""not sure if need)
 
 
@@ -200,6 +163,5 @@ module.exports = {
     getUserProfile,
     getUserFriends,
     getUserLessonProgress,
-    addFriend,
-    resetStreakDaily
+    addFriend
 };

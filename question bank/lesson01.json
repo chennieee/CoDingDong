@@ -7,7 +7,7 @@
             "B. //",
             "C. #"
         ],
-        "answer": "C",
+        "answer": "C. #",
         "explanation": "In Python, comments are created using the hash symbol (#).",
         "lessonId": "6672ebc8b1e5bf8c86de6cee"
     },
@@ -19,7 +19,7 @@
             "B. def",
             "C. function"
         ],
-        "answer": "B",
+        "answer": "B. def",
         "explanation": "In Python, functions are defined using the 'def' keyword.",
         "lessonId": "6672ebc8b1e5bf8c86de6cee"
     },
@@ -31,7 +31,7 @@
             "B. x == 2.8",
             "C. float(x) = 2.8"
         ],
-        "answer": "A",
+        "answer": "A. x = 2.8",
         "explanation": "In Python, you create a variable by using the assignment operator '='.",
         "lessonId": "6672ebc8b1e5bf8c86de6cee"
     },
@@ -43,7 +43,7 @@
             "B. Integer",
             "C. String"
         ],
-        "answer": "A",
+        "answer": "A. Boolean",
         "explanation": "In Python, the Boolean data type is used to store true or false values.",
         "lessonId": "6672ebc8b1e5bf8c86de6cee"
     },
@@ -55,7 +55,7 @@
             "B. <class 'int'>",
             "C. <class 'bool'>"
         ],
-        "answer": "A",
+        "answer": "A. <class 'str'>",
         "explanation": "The type() function reveals that 'Hello, World!' is a string (str).",
         "lessonId": "6672ebc8b1e5bf8c86de6cee"
     }

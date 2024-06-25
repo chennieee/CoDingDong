@@ -6,7 +6,6 @@ const {
     getUserProfile,
     getUserFriends,
     getUserLessonProgress,
-    resetStreakDaily,
     addFriend
 } = require('../controllers/userController');
 
@@ -27,9 +26,6 @@ router.get('/friends/:id', getUserFriends);
 
 // GET User lesson progress (useDashboard.js)
 router.get('/lessons/:id', getUserLessonProgress);
-
-// Reset streak if missed
-router.patch('/resetStreak/:id', resetStreakDaily);
 
 // DELETE User Profile **(not sure if need)
 

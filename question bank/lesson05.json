@@ -7,9 +7,10 @@
             "B. myList[-1]",
             "C. myList[len(myList)]"
         ],
-        "answer": "B",
+        "answer": "B. myList[-1]",
         "explanation": "Last element's index is -1, second last element is -2 etc.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf2"
+        "lessonId": "6672ebc8b1e5bf8c86de6cf2",
+        "lessonNo": 5
     },
     {
         "questionNo": 2,
@@ -19,9 +20,10 @@
             "B. list1.append(list2)",
             "C. list1.add(list2)"
         ],
-        "answer": "A",
+        "answer": "A. list1.append(list2)",
         "explanation": "E.g. list1 = [1,2,3], list2 = [4,5,6] \nlist1.extend(list2) will give [1,2,3,4,5,6] when list1 is printed; \nlist1.append(list2) will give [1,2,3,[4,5,6]] when list1 is printed;\nLastly, list objects have no 'add' function.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf2"
+        "lessonId": "6672ebc8b1e5bf8c86de6cf2",
+        "lessonNo": 5
     },
     {
         "questionNo": 3,
@@ -31,9 +33,10 @@
             "B. reverses myList",
             "C. removes last element from myList"
         ],
-        "answer": "B",
+        "answer": "B. reverses myList",
         "explanation": "Slicing myList[::-1] reverses the list.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf2"
+        "lessonId": "6672ebc8b1e5bf8c86de6cf2",
+        "lessonNo": 5
     },
     {
         "questionNo": 4,
@@ -43,9 +46,10 @@
             "B. [1,2,3]",
             "C. [1,1,3]"
         ],
-        "answer": "A",
+        "answer": "A. [1,4,3]",
         "explanation": "Lists are mutable, so changing the element at index 1 to 4 will result in the list [1, 4, 3].",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf2"
+        "lessonId": "6672ebc8b1e5bf8c86de6cf2",
+        "lessonNo": 5
     },
     {
         "questionNo": 5,
@@ -55,8 +59,9 @@
             "B. 2",
             "C. 3"
         ],
-        "answer": "B",
+        "answer": "B. 2",
         "explanation": "Indexing in tuples starts from 0, so myTuple[1] will output 2.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf2"
+        "lessonId": "6672ebc8b1e5bf8c86de6cf2",
+        "lessonNo": 5
     }
 ]

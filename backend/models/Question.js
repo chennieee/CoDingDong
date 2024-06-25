@@ -26,6 +26,10 @@ const questionSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Lesson',
         required: true
+    },
+    lessonNo: { //for reference
+        type: Number,
+        required: true
     }
 });
 

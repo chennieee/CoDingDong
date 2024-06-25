@@ -7,9 +7,10 @@
             "B. to check a condition",
             "C. to repeat a block a fixed number of times"
         ],
-        "answer": "C",
+        "answer": "C. to repeat a block a fixed number of times",
         "explanation": "For loops are used to iterate over a sequence or other iterable objects, repeating a block of code a fixed number of times.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf1"
+        "lessonId": "6672ebc8b1e5bf8c86de6cf1",
+        "lessonNo": 4
     },
     {
         "questionNo": 2,
@@ -19,9 +20,10 @@
             "B. stop",
             "C. terminate"
         ],
-        "answer": "A",
+        "answer": "A. break",
         "explanation": "'break' statement terminates the current loop.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf1"
+        "lessonId": "6672ebc8b1e5bf8c86de6cf1",
+        "lessonNo": 4
     },
     {
         "questionNo": 3,
@@ -31,9 +33,10 @@
             "B. exits the program",
             "C. skips current iteration"
         ],
-        "answer": "C",
+        "answer": "C. skips current iteration",
         "explanation": "The continue statement skips the rest of the code inside a loop for the current iteration.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf1"
+        "lessonId": "6672ebc8b1e5bf8c86de6cf1",
+        "lessonNo": 4
     },
     {
         "questionNo": 4,
@@ -43,20 +46,22 @@
             "B. loop doesn't start",
             "C. syntax error"
         ],
-        "answer": "B",
+        "answer": "B. loop doesn't start",
         "explanation": "An infinite loop happens and the program seems to hang.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf1"
+        "lessonId": "6672ebc8b1e5bf8c86de6cf1",
+        "lessonNo": 4
     },
     {
         "questionNo": 5,
         "question": "What is the difference between a for loop and a while loop?",
         "options": [
             "A. while is faster than for",
-            "B. for is used for fixed number of iterations",
+            "B. for is used for a fixed number of iterations",
             "C. no difference"
         ],
-        "answer": "B",
+        "answer": "B. for is used for a fixed number of iterations",
         "explanation": "A for loop is used for iterating over a sequence, while a while loop is used when you want to repeat code as long as a condition is true.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf1"
+        "lessonId": "6672ebc8b1e5bf8c86de6cf1",
+        "lessonNo": 4
     }
 ]

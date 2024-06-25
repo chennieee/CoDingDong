@@ -28,9 +28,14 @@ const Lesson = () => {
     }
 
     if (submitted) {
+        const total = questions.length;
+        const score = results.score;
+        const allCorrect = score === total;
+
         return (
             <div>
                 <h2>Your score: {results.score}</h2>
+                {allCorrect && <h2>Congratulations!</h2>}
                 {results.wrongAnswers && results.wrongAnswers.length > 0 && (
                     <>
                         <h3>Incorrect Answers:</h3>

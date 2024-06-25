@@ -7,9 +7,10 @@
             "B. Python Yay",
             "C. PythonYay"
         ],
-        "answer": "A",
+        "answer": "A. Python-Yay",
         "explanation": "The sep='-' parameter will separate the words 'Python' and 'Yay' with a hyphen.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf0"
+        "lessonId": "6672ebc8b1e5bf8c86de6cf0",
+        "lessonNo": 3
     },
     {
         "questionNo": 2,
@@ -19,9 +20,10 @@
             "B. to execute a block conditionally",
             "C. to handle exceptions"
         ],
-        "answer": "B",
+        "answer": "B. to execute a block conditionally",
         "explanation": "E.g. if x < 5: print(x), the value of x is only printed if it is less than 5.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf0"
+        "lessonId": "6672ebc8b1e5bf8c86de6cf0",
+        "lessonNo": 3
     },
     {
         "questionNo": 3,
@@ -31,9 +33,10 @@
             "B. elif",
             "C. or"
         ],
-        "answer": "B",
+        "answer": "B. elif",
         "explanation": "The elif block is used to check additional conditions after an if statement or other elif statements fail.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf0"
+        "lessonId": "6672ebc8b1e5bf8c86de6cf0",
+        "lessonNo": 3
     },
     {
         "questionNo": 4,
@@ -43,9 +46,10 @@
             "B. the program will stop",
             "C. an error will be raised"
         ],
-        "answer": "A",
+        "answer": "A. else block will be executed (if it exists)",
         "explanation": "Assuming code block is 'if…else…', else block will execute if 'if' condition is False",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf0"
+        "lessonId": "6672ebc8b1e5bf8c86de6cf0",
+        "lessonNo": 3
     },
     {
         "questionNo": 5,
@@ -55,8 +59,9 @@
             "B. if a == 5:",
             "C. if (a = 5):"
         ],
-        "answer": "B",
+        "answer": "B. if a == 5:",
         "explanation": "'=' is used for assignment while '==' evaluates an equality.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf0"
+        "lessonId": "6672ebc8b1e5bf8c86de6cf0",
+        "lessonNo": 3
     }
 ]
