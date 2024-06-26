@@ -1,47 +1,68 @@
 /* Container for the lesson */
 .lesson-container {
-    max-width: 800px; /* Optional: Set a maximum width for better readability */
-    margin: 0 auto; /* Center the container horizontally */
+    max-width: 800px;
+    /* Optional: Set a maximum width for better readability */
+    margin: 0 auto;
+    /* Center the container horizontally */
     padding: 20px;
-    font-family: 'Poppins', sans-serif; /* Apply the Poppins font to the entire container */
+    font-family: 'Poppins', sans-serif;
+    /* Apply the Poppins font to the entire container */
 }
 
 /* Ensure all questions are aligned to the left */
 .question {
-    text-align: left; /* Align text to the left */
-    margin-bottom: 20px; /* Space between questions */
+    text-align: left;
+    /* Align text to the left */
+    margin-bottom: 20px;
+    /* Space between questions */
 }
 
 /* Style for each question's text */
 .question-text {
-    font-size: 18px; /* Adjust font size as needed */
-    margin-bottom: 10px; /* Space between question text and options */
+    font-size: 18px;
+    /* Adjust font size as needed */
+    margin-bottom: 10px;
+    /* Space between question text and options */
 }
 
 /* Style the options list */
 .options {
-    list-style-type: none; /* Remove default list style */
-    padding-left: 0; /* Remove default padding */
-    margin: 0; /* Remove default margin */
+    list-style-type: none;
+    /* Remove default list style */
+    padding-left: 0;
+    /* Remove default padding */
+    margin: 0;
+    /* Remove default margin */
+    width: 100%;
+    /* Ensure full width for alignment */
 }
 
 /* Style each option */
 .option {
-    display: flex; /* Use flexbox to align items horizontally */
-    align-items: center; /* Center items vertically */
-    justify-content: flex-start; /* Align items to the start of the flex container */
-    margin-bottom: 10px; /* Space between options */
-    text-align: left; /* Ensure the text is aligned to the left */
+    display: flex;
+    /* Use flexbox to align items horizontally */
+    align-items: center;
+    /* Center items vertically */
+    justify-content: flex-start;
+    /* Align items to the start of the flex container */
+    margin-bottom: 10px;
+    /* Space between options */
+    text-align: left;
+    /* Ensure the text is aligned to the left */
+    width: 100%;
+    /* Ensure full width for alignment */
 }
 
 /* Style for radio buttons */
 .option input[type="radio"] {
-    margin-right: 10px; /* Space between radio button and text */
+    margin-right: 10px;
+    /* Space between radio button and text */
 }
 
 /* Ensure labels are aligned with the radio buttons */
 .option label {
-    display: inline-block; /* Ensure label aligns correctly with input */
+    display: inline-block;
+    /* Ensure label aligns correctly with input */
 }
 
 /* Submit button styling */
@@ -49,9 +70,23 @@
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #1aac83; /* Primary color */
-    color: #fff; /* White text */
+    background-color: #1aac83;
+    /* Primary color */
+    color: #fff;
+    /* White text */
     border: none;
     border-radius: 5px;
     margin-top: 20px;
+}
+
+/* Incorrect answers section styling */
+.incorrect-answers {
+    text-align: left;
+    /* Align text to the left */
+}
+
+/* Explanation spacing */
+.incorrect-answers p.explanation {
+    margin-bottom: 20px;
+    /* Add space after each explanation */
 }

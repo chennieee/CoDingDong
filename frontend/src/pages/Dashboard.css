@@ -5,10 +5,10 @@
     padding: 20px;
 }
 
-.sidebar {
+.sidebar-buttons {
     display: flex;
     flex-direction: column;
-    /* Stack buttons vertically */
+    /* Stack buttons vertically DOES THIS WORK NOW*/
     align-items: flex-start;
     /* Align buttons to the left */
     margin-right: 20px;
@@ -23,7 +23,6 @@
     cursor: pointer;
     width: 150px;
     font-family: 'Poppins', sans-serif;
-    /* idk why need to indicate font everywhr...app.css doesnt work?? */
     text-align: center;
 }
 

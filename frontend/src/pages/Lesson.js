@@ -33,21 +33,21 @@ const Lesson = () => {
         const allCorrect = score === total;
 
         return (
-            <div>
+            <div className="lesson-container">
                 <h2>Your score: {results.score}</h2>
                 {allCorrect && <h2>Congratulations!</h2>}
                 {results.wrongAnswers && results.wrongAnswers.length > 0 && (
-                    <>
+                    <div className="incorrect-answers">
                         <h3>Incorrect Answers:</h3>
                         {results.wrongAnswers.map((question, index) => (
                             <div key={index}>
                                 <p>Question {question.questionNo}: {question.question}</p>
                                 <p>Your answer: {question.userAnswer}</p>
                                 <p>Correct answer: {question.correctAnswer}</p>
-                                <p>Explanation: {question.explanation}</p>
+                                <p className="explanation">Explanation: {question.explanation}</p>
                             </div>
                         ))}
-                    </>
+                    </div>
                 )}
             </div>
         );

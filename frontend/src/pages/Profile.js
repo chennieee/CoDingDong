@@ -25,8 +25,8 @@ const Profile = ({ userId }) => {
 
     return (
         <div className="profile">
-            <button onClick={() => navigateToDashboard()}>Home</button>
-            <div>
+            <div className="profile-buttons">
+                <button onClick={() => navigateToDashboard()}>Home</button>
                 <button onClick={() => navigateToFriends()}>My Friends</button>
             </div>
             <div>
