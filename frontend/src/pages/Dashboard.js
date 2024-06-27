@@ -35,6 +35,7 @@ const Dashboard = () => {
                 <div className="sidebar-buttons">
                     <button onClick={() => navigateToProfile()}>Profile</button>
                     <button>Leaderboard</button>
+                    <button>Forum</button>
                 </div>
             </div>
             <div className="lessons">
