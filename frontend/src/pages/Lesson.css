@@ -87,6 +87,6 @@
 
 /* Explanation spacing */
 .incorrect-answers p.explanation {
-    margin-bottom: 20px;
+    margin-bottom: 60px;
     /* Add space after each explanation */
 }
