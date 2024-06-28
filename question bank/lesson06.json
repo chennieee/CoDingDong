@@ -1,0 +1,67 @@
+[
+    {
+        "questionNo": 1,
+        "question": "In the statement x = a + 5 - b, a and b are",
+        "options": [
+            "A. operators",
+            "B. operands",
+            "C. operations"
+        ],
+        "answer": "B. operands",
+        "explanation": "The objects that operators (e.g. +/-) act on are called operands.",
+        "lessonId": "CHANGE THIS",
+        "lessonNo": 6
+    },
+    {
+        "questionNo": 2,
+        "question": "In the statement x = a + 5 - b, a + 5 - b is an",
+        "options": [
+            "A. operation",
+            "B. equation",
+            "C. expression"
+        ],
+        "answer": "C. expression",
+        "explanation": "An expression involving operators and operands, without an equality sign.",
+        "lessonId": "CHANGE THIS",
+        "lessonNo": 6
+    },
+    {
+        "questionNo": 3,
+        "question": "What is the value of the expression 100 / 25",
+        "options": [
+            "A. 4",
+            "B. 4.0",
+            "C. 4.00"
+        ],
+        "answer": "B. 4.0",
+        "explanation": "The result of standard division is always float. The value of 100 // 25 (integer division) is 4.",
+        "lessonId": "CHANGE THIS",
+        "lessonNo": 6
+    },
+    {
+        "questionNo": 4,
+        "question": "What is the output of 1.1 + 2.2 == 3.3?",
+        "options": [
+            "A. True",
+            "B. False",
+            "C. None of the above"
+        ],
+        "answer": "B. False",
+        "explanation": "Internal representation of float objects is not precise, so == cannot be used to determine whether objects of type 'float' are equal.",
+        "lessonId": "CHANGE THIS",
+        "lessonNo": 6
+    },
+    {
+        "questionNo": 5,
+        "question": "What is the value of y in the following code:\nx = 10.0\ny = (x < 100.0) and isinstance(x, float)",
+        "options": [
+            "A. True",
+            "B. False",
+            "C. None of the above"
+        ],
+        "answer": "A. True",
+        "explanation": "The two terms of the expression, (x < 100.0) and isinstance(x, float), are both equal to the Python value True. The expression is therefore also True.",
+        "lessonId": "CHANGE THIS",
+        "lessonNo": 6
+    }
+]
