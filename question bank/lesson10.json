@@ -9,7 +9,7 @@
         ],
         "answer": "A. a blueprint",
         "explanation": "As a blueprint, a class just provides structure, showing how something should be defined, but it does not provide any real content itself.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667ead45fa284dc1d85f15de",
         "lessonNo": 10
     },
     {
@@ -22,7 +22,7 @@
         ],
         "answer": "A. Dog('Ben', 3)",
         "explanation": "In this case, you need to instantiate the class with instance attributes.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667ead45fa284dc1d85f15de",
         "lessonNo": 10
     },
     {
@@ -35,7 +35,7 @@
         ],
         "answer": "B. dot",
         "explanation": "E.g. if `buddy = Dog('Buddy', 9)` is executed, buddy.name and buddy.age will return its name and age respectively.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667ead45fa284dc1d85f15de",
         "lessonNo": 10
     },
     {
@@ -48,7 +48,7 @@
         ],
         "answer": "C. method",
         "explanation": "Instance methods are functions defined inside of a class. They only exist within the context of the object itself and cannot be called without referencing the object.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667ead45fa284dc1d85f15de",
         "lessonNo": 10
     },
     {
@@ -61,7 +61,7 @@
         ],
         "answer": "A. Overrides the basic behavior of operators or certain functions",
         "explanation": "Dunder methods are special instance methods. The name dunder comes from double underscores, as you can see in .__str__(). This dunder method overrides the normal behavior of the print() function.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667ead45fa284dc1d85f15de",
         "lessonNo": 10
     }
 ]

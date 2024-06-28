@@ -9,7 +9,7 @@
         ],
         "answer": "A. ('foo', 'bar')",
         "explanation": "An object of an immutable type is hashable, and can serve as a dictionary key.\n['foo', 'bar'] is a list and dict(foo=1, bar=2) is a dictionary. These are both unhashable, mutable container types, so they cannot be dictionary keys.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667ead03fa284dc1d85f15dc",
         "lessonNo": 9
     },
     {
@@ -22,7 +22,7 @@
         ],
         "answer": "B. False",
         "explanation": "The 'in' operator tests whether a particular object exists as a key in a dictionary. In this case, x[2] is indeed a dictionary, but 'z' is not a key in x[2], so False.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667ead03fa284dc1d85f15dc",
         "lessonNo": 9
     },
     {
@@ -35,7 +35,7 @@
         ],
         "answer": "A. d2 = d1",
         "explanation": "For d2 = d1, d2 will point to an object equal to d1 but the same object, not a copy.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667ead03fa284dc1d85f15dc",
         "lessonNo": 9
     },
     {
@@ -48,7 +48,7 @@
         ],
         "answer": "B. {1:'r', 2:6, 3:'y'}",
         "explanation": "1:5 overwrites 1:'r', which means the value now attached to the key 1 is 5 instead of 'r'.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667ead03fa284dc1d85f15dc",
         "lessonNo": 9
     },
     {
@@ -61,7 +61,7 @@
         ],
         "answer": "A. KeyError",
         "explanation": "Dictionaries are accessed using keys, and 0 is not a key in dic.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667ead03fa284dc1d85f15dc",
         "lessonNo": 9
     }
 ]

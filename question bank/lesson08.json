@@ -9,7 +9,7 @@
         ],
         "answer": "C. A dictionary contains key-value pairs",
         "explanation": "A dictionary can contain any type of Python object, including another dictionary.\nDictionary elements are accessed by key. Unlike with list indexing, the order of the items in a dictionary plays no role in how the items are accessed.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667eacdafa284dc1d85f15da",
         "lessonNo": 8
     },
     {
@@ -22,7 +22,7 @@
         ],
         "answer": "A. Dictionaries can be nested to any depth",
         "explanation": "Dictionaries can be nested to any arbitrary depth (constrained only by available memory).\nThe keys in a given dictionary do not need to be the same type as one another, nor do the values.\nEvery key in a dictionary must be unique.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667eacdafa284dc1d85f15da",
         "lessonNo": 8
     },
     {
@@ -35,7 +35,7 @@
         ],
         "answer": "A. d = {('foo', 100), ('bar', 200), ('baz', 300)}",
         "explanation": " type(d) => <class 'set'>. Option A actually creates a Python data type called a set, not a dictionary.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667eacdafa284dc1d85f15da",
         "lessonNo": 8
     },
     {
@@ -48,7 +48,7 @@
         ],
         "answer": "C. del d['baz']",
         "explanation": "The del statement is used to remove an entry from a dictionary.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667eacdafa284dc1d85f15da",
         "lessonNo": 8
     },
     {
@@ -61,7 +61,7 @@
         ],
         "answer": "A. It throws an exception",
         "explanation": "Dictionaries are accessed by key, not index. Cannot slice a dictionary.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667eacdafa284dc1d85f15da",
         "lessonNo": 8
     }
 ]
