@@ -46,12 +46,16 @@ const userSchema = new mongoose.Schema({
             type: Number,
             required: true
         }
-    }]
+    }],
+    isTest: { //for testing
+        type: Boolean,
+        default: false
+    }
 });
 
 
 // static signup method
-userSchema.statics.signup = async function (username, password) {
+userSchema.statics.signup = async function (username, password, isTest) {
     // check if username and password are filled
     if (!username || !password) {
         throw Error('All fields must be filled');
@@ -79,7 +83,7 @@ userSchema.statics.signup = async function (username, password) {
     const hash = await bcrypt.hash(password, salt);
 
     //create new user account AND SAVES IT TO DATABASE 
-    const user = await this.create({ username, password: hash });
+    const user = await this.create({ username, password: hash, isTest });
     // IM ASSUMING STREAK, XP, DATE ARE AUTOFILLED WITH DEFAULT VALUES
     return user;
 }

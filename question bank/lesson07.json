@@ -9,7 +9,7 @@
         ],
         "answer": "A. 'None'",
         "explanation": "Any non-empty string (e.g. 'None'), non-zero numeric value (e.g. 0.001, 3), non-empty list (e.g. [5]) is truthy.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667e829bfa284dc1d85f15cd",
         "lessonNo": 7
     },
     {
@@ -22,7 +22,7 @@
         ],
         "answer": "B. {}",
         "explanation": "Any empty dictionary, list, tuple, string etc. and 0 is falsy.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667e829bfa284dc1d85f15cd",
         "lessonNo": 7
     },
     {
@@ -35,7 +35,7 @@
         ],
         "answer": "B. No",
         "explanation": "x > 0 is False. The expression is already known to be falsy at that point. Due to short-circuit evaluation, sqrt(x) (which would raise an exception) is not evaluated.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667e829bfa284dc1d85f15cd",
         "lessonNo": 7
     },
     {
@@ -48,7 +48,7 @@
         ],
         "answer": "C. and",
         "explanation": "E.g. 5 % 2 and 3 ** 3 => 3 and 27 => 27. 'and' operator is evaluated last.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667e829bfa284dc1d85f15cd",
         "lessonNo": 7
     },
     {
@@ -61,7 +61,7 @@
         ],
         "answer": "A. 33",
         "explanation": "Precendence of operators: **, *, +. So 1 + ((2 ** 3) * 4) = 33.",
-        "lessonId": "CHANGE THIS",
+        "lessonId": "667e829bfa284dc1d85f15cd",
         "lessonNo": 7
     }
 ]

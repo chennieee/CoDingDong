@@ -13,8 +13,8 @@ afterAll(async () => {
 });
 
 beforeEach(async () => {
-    await Question.deleteMany({});
-    await Lesson.deleteMany({});
+    await Question.deleteMany({ isTest: true });
+    await Lesson.deleteMany({ isTest: true });
 });
 
 describe('Question Controller', () => {
@@ -22,7 +22,7 @@ describe('Question Controller', () => {
 
     beforeEach(async () => {
         // Create a test lesson with lessonNo
-        const lesson = new Lesson({ lessonNo: 1 });
+        const lesson = new Lesson({ lessonNo: 1, isTest: true });
         await lesson.save();
         lessonId = lesson._id;
 
@@ -34,7 +34,8 @@ describe('Question Controller', () => {
             answer: '4',
             explanation: '2+2 equals 4',
             lessonId,
-            lessonNo: 1
+            lessonNo: 1,
+            isTest: true
         });
 
         await question.save();
@@ -50,11 +51,7 @@ describe('Question Controller', () => {
     });
 
     afterEach(async () => {
-        if (questionId) {
-            await Question.deleteOne({ _id: questionId });
-        }
-        if (lessonId) {
-            await Lesson.deleteOne({ _id: lessonId });
-        }
+        await Question.deleteMany({ isTest: true });
+        await Lesson.deleteMany({ isTest: true });
     });
 });

@@ -20,12 +20,14 @@ const isSameDay = (d1, d2) => {
 //API requests
 // Signup User
 const signupUser = async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, isTest } = req.body;
 
     try {
         //if successful, signup user + update database
-        //else throw error 
-        const user = await User.signup(username, password);
+        //else throw error
+        console.log('Signup request received:', { username, password, isTest }); 
+        const user = await User.signup(username, password, isTest);
+        console.log('User created:', user);
 
         //create a token
         const token = createToken(user._id);
@@ -42,6 +44,7 @@ const signupUser = async (req, res) => {
         });
 
     } catch (error) {
+        console.error('Signup error:', error.message);
         res.status(400).json({ error: error.message });
     }
 };
@@ -93,6 +96,7 @@ const getUserProfile = async (req, res) => {
         //send response
         if (!user) {
             //return error if no user is found
+            console.log('User not found for ID:', id);
             return res.status(404).json({ error: 'User not found'});
         }
         res.status(200).json(user); //else return the found user profile

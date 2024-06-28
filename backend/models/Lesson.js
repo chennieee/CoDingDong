@@ -7,8 +7,11 @@ const lessonSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    // removed questions array as it is now redundant
-    // each question is has a lessonId attribute assigning it to a lesson
+    // each question has a lessonId attribute assigning it to a lesson
+    isTest: {
+        type: Boolean,
+        default: false
+    }
 });
 
 

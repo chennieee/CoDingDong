@@ -30,6 +30,10 @@ const questionSchema = new mongoose.Schema({
     lessonNo: { //for reference
         type: Number,
         required: true
+    },
+    isTest: { //for unit tests
+        type: Boolean,
+        default: false
     }
 });
 

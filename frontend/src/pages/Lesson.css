@@ -23,6 +23,7 @@
     /* Adjust font size as needed */
     margin-bottom: 10px;
     /* Space between question text and options */
+    white-space: pre-line;
 }
 
 /* Style the options list */
@@ -49,7 +50,7 @@
     /* Ensure the text is aligned to the left */
     width: 100%;
     /* Ensure full width for alignment */
-    background-color: #1aac83;
+    /*background-color: #1aac83;*/
 }
 
 /* Style for radio buttons */
@@ -88,4 +89,5 @@
 .incorrect-answers p.explanation {
     margin-bottom: 50px;
     /* Add space after each explanation */
+    white-space: pre-line;
 }
