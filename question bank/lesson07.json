@@ -1,0 +1,67 @@
+[
+    {
+        "questionNo": 1,
+        "question": "Which of the following values are truthy?",
+        "options": [
+            "A. 'None'",
+            "B. 0",
+            "C. []"
+        ],
+        "answer": "A. 'None'",
+        "explanation": "Any non-empty string (e.g. 'None'), non-zero numeric value (e.g. 0.001, 3), non-empty list (e.g. [5]) is truthy.",
+        "lessonId": "CHANGE THIS",
+        "lessonNo": 7
+    },
+    {
+        "questionNo": 2,
+        "question": "Which of the following values are falsy?",
+        "options": [
+            "A. 0.0001",
+            "B. {}",
+            "C. 'Hey'"
+        ],
+        "answer": "B. {}",
+        "explanation": "Any empty dictionary, list, tuple, string etc. and 0 is falsy.",
+        "lessonId": "CHANGE THIS",
+        "lessonNo": 7
+    },
+    {
+        "questionNo": 3,
+        "question": "Will this code raise an exception?\nx = -100\nfrom math import sqrt\nx > 0 and sqrt(x)",
+        "options": [
+            "A. Yes",
+            "B. No",
+            "C. None of the above"
+        ],
+        "answer": "B. No",
+        "explanation": "x > 0 is False. The expression is already known to be falsy at that point. Due to short-circuit evaluation, sqrt(x) (which would raise an exception) is not evaluated.",
+        "lessonId": "CHANGE THIS",
+        "lessonNo": 7
+    },
+    {
+        "questionNo": 4,
+        "question": "Which of the following operators has the lowest precedence?",
+        "options": [
+            "A. %",
+            "B. **",
+            "C. and"
+        ],
+        "answer": "C. and",
+        "explanation": "E.g. 5 % 2 and 3 ** 3 => 3 and 27 => 27. 'and' operator is evaluated last.",
+        "lessonId": "CHANGE THIS",
+        "lessonNo": 7
+    },
+    {
+        "questionNo": 5,
+        "question": "What is the value of the expression 1 + 2 ** 3 * 4?",
+        "options": [
+            "A. 33",
+            "B. 108",
+            "C. 36"
+        ],
+        "answer": "A. 33",
+        "explanation": "Precendence of operators: **, *, +. So 1 + ((2 ** 3) * 4) = 33.",
+        "lessonId": "CHANGE THIS",
+        "lessonNo": 7
+    }
+]
