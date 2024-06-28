@@ -14,32 +14,55 @@ afterAll(async () => {
 });
 
 beforeEach(async () => {
-    await User.deleteMany({});
-    await Lesson.deleteMany({});
+    console.log('Cleaning up test database...');
+    await User.deleteMany({ isTest: true });
+    await Lesson.deleteMany({ isTest: true });
+    await Question.deleteMany({ isTest: true });
+
+    const users = await User.find({ isTest: true });
+    console.log('Users in DB after cleanup:', users);
+});
+
+afterEach(async () => {
+    console.log('Cleaning up test database after each test...');
+    await Question.deleteMany({ isTest: true });
+    await Lesson.deleteMany({ isTest: true });
+    await User.deleteMany({ isTest: true });
+
+    const users = await User.find({ isTest: true });
+    console.log('Users in DB after cleanup:', users);
 });
 
 describe('Lesson Controller', () => {
     let lessonId, userId, token;
 
     beforeEach(async () => {
+        const uniqueUsername = 'testuser_' + new Date().getTime();
+
         // Create a test user
         const userResponse = await request(app).post('/api/users/signup').send({
-            username: 'testuser',
-            password: 'Test1234!'
+            username: uniqueUsername,
+            password: 'Test1234!',
+            isTest: true
         });
+
+        console.log('Signup Response:', userResponse.body);
 
         userId = userResponse.body._id;
 
         // Login the user to get token
         const loginResponse = await request(app).post('/api/users/login').send({
-            username: 'testuser',
-            password: 'Test1234!'
+            username: uniqueUsername,
+            password: 'Test1234!',
+            isTest: true
         });
+
+        console.log('Login Response:', loginResponse.body);
 
         token = loginResponse.body.token;
 
         // Create a test lesson
-        const lesson = new Lesson({ lessonNo: 1 });
+        const lesson = new Lesson({ lessonNo: 1, isTest: true });
         await lesson.save();
         lessonId = lesson._id;
 
@@ -52,7 +75,8 @@ describe('Lesson Controller', () => {
                 answer: '4',
                 explanation: '2+2 equals 4',
                 lessonNo: 1,
-                lessonId
+                lessonId,
+                isTest: true
             },
             {
                 questionNo: 2,
@@ -61,7 +85,8 @@ describe('Lesson Controller', () => {
                 answer: '6',
                 explanation: '3+3 equals 6',
                 lessonNo: 1,
-                lessonId
+                lessonId,
+                isTest: true
             }
         ];
 
@@ -70,6 +95,8 @@ describe('Lesson Controller', () => {
 
     test('should get a lesson by ID', async () => {
         const response = await request(app).get(`/api/lessons/${lessonId}`).set('Authorization', `Bearer ${token}`);
+
+        console.log('Get Lesson Response:', response.body);
 
         expect(response.status).toBe(200);
         expect(response.body).toHaveProperty('lesson');
@@ -82,14 +109,16 @@ describe('Lesson Controller', () => {
             answers: { 1: 'A', 2: '6' }
         }).set('Authorization', `Bearer ${token}`);
 
+        console.log('Submit Lesson Response:', response.body);
+
         expect(response.status).toBe(200);
         expect(response.body).toHaveProperty('user');
         expect(response.body).toHaveProperty('result');
     });
 
     afterEach(async () => {
-        await Question.deleteMany({});
-        await Lesson.deleteMany({});
-        await User.deleteMany({});
+        await Question.deleteMany({ isTest: true });
+        await Lesson.deleteMany({ isTest: true });
+        await User.deleteMany({ isTest: true });
     });
 });

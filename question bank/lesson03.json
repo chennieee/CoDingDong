@@ -9,7 +9,7 @@
         ],
         "answer": "A. Python-Yay",
         "explanation": "The sep='-' parameter will separate the words 'Python' and 'Yay' with a hyphen.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf0",
+        "lessonId": "667e7e3cfa284dc1d85f159e",
         "lessonNo": 3
     },
     {
@@ -22,7 +22,7 @@
         ],
         "answer": "B. to execute a block conditionally",
         "explanation": "E.g. if x < 5: print(x), the value of x is only printed if it is less than 5.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf0",
+        "lessonId": "667e7e3cfa284dc1d85f159e",
         "lessonNo": 3
     },
     {
@@ -35,7 +35,7 @@
         ],
         "answer": "B. elif",
         "explanation": "The elif block is used to check additional conditions after an if statement or other elif statements fail.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf0",
+        "lessonId": "667e7e3cfa284dc1d85f159e",
         "lessonNo": 3
     },
     {
@@ -48,7 +48,7 @@
         ],
         "answer": "A. else block will be executed (if it exists)",
         "explanation": "Assuming code block is 'if…else…', else block will execute if 'if' condition is False",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf0",
+        "lessonId": "667e7e3cfa284dc1d85f159e",
         "lessonNo": 3
     },
     {
@@ -61,7 +61,7 @@
         ],
         "answer": "B. if a == 5:",
         "explanation": "'=' is used for assignment while '==' evaluates an equality.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cf0",
+        "lessonId": "667e7e3cfa284dc1d85f159e",
         "lessonNo": 3
     }
 ]

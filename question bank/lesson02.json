@@ -9,7 +9,8 @@
         ],
         "answer": "B. float",
         "explanation": "x is dynamically typed as float when 3.5 is assigned to it.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cef"
+        "lessonId": "667e7dfcfa284dc1d85f159c",
+        "lessonNo": 2
     },
     {
         "questionNo": 2,
@@ -21,7 +22,8 @@
         ],
         "answer": "A. tuple",
         "explanation": "Once a tuple is created, its contents cannot be changed.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cef"
+        "lessonId": "667e7dfcfa284dc1d85f159c",
+        "lessonNo": 2
     },
     {
         "questionNo": 3,
@@ -33,7 +35,8 @@
         ],
         "answer": "C. print()",
         "explanation": "The print() function prints the specified message to the screen.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cef"
+        "lessonId": "667e7dfcfa284dc1d85f159c",
+        "lessonNo": 2
     },
     {
         "questionNo": 4,
@@ -45,7 +48,8 @@
         ],
         "answer": "C. Tuples are immutable",
         "explanation": "Attempting to change an element of a tuple results in an error.",
-        "lessonId": "6672ebc8b1e5bf8c86de6cef"
+        "lessonId": "667e7dfcfa284dc1d85f159c",
+        "lessonNo": 2
     },
     {
         "questionNo": 5,
@@ -57,6 +61,7 @@
         ],
         "answer": "A. input()",
         "explanation": "E.g. x = input('Enter your name:'); print('Hello, ' + x); Output: Hello [name]",
-        "lessonId": "6672ebc8b1e5bf8c86de6cef"
+        "lessonId": "667e7dfcfa284dc1d85f159c",
+        "lessonNo": 2
     }
 ]
