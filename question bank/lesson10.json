@@ -1,0 +1,67 @@
+[
+    {
+        "questionNo": 1,
+        "question": "(Object Oriented Programming) In Python, what is the significance of a class to a concrete object?",
+        "options": [
+            "A. a blueprint",
+            "B. an instance",
+            "C. a method"
+        ],
+        "answer": "A. a blueprint",
+        "explanation": "As a blueprint, a class just provides structure, showing how something should be defined, but it does not provide any real content itself.",
+        "lessonId": "CHANGE THIS",
+        "lessonNo": 10
+    },
+    {
+        "questionNo": 2,
+        "question": "Given a class Dog whose constructor is `def __init__(self, name, age):`, what is the correct way to instantiate this Dog class?",
+        "options": [
+            "A. Dog('Ben', 3)",
+            "B. Dog.create('Ben', 3)",
+            "C. Dog.__init__('Ben', 3)"
+        ],
+        "answer": "A. Dog('Ben', 3)",
+        "explanation": "In this case, you need to instantiate the class with instance attributes.",
+        "lessonId": "CHANGE THIS",
+        "lessonNo": 10
+    },
+    {
+        "questionNo": 3,
+        "question": "Which notation is used to access object or class attributes?",
+        "options": [
+            "A. scientific",
+            "B. dot",
+            "C. object"
+        ],
+        "answer": "B. dot",
+        "explanation": "E.g. if `buddy = Dog('Buddy', 9)` is executed, buddy.name and buddy.age will return its name and age respectively.",
+        "lessonId": "CHANGE THIS",
+        "lessonNo": 10
+    },
+    {
+        "questionNo": 4,
+        "question": "A function within a class definition is called:",
+        "options": [
+            "A. function",
+            "B. callable",
+            "C. method"
+        ],
+        "answer": "C. method",
+        "explanation": "Instance methods are functions defined inside of a class. They only exist within the context of the object itself and cannot be called without referencing the object.",
+        "lessonId": "CHANGE THIS",
+        "lessonNo": 10
+    },
+    {
+        "questionNo": 5,
+        "question": "What does a dunder method do?",
+        "options": [
+            "A. Overrides the basic behavior of operators or certain functions",
+            "B. Underscores the most important class or instance attribute",
+            "C. Creates a new instance of a class"
+        ],
+        "answer": "A. Overrides the basic behavior of operators or certain functions",
+        "explanation": "Dunder methods are special instance methods. The name dunder comes from double underscores, as you can see in .__str__(). This dunder method overrides the normal behavior of the print() function.",
+        "lessonId": "CHANGE THIS",
+        "lessonNo": 10
+    }
+]
