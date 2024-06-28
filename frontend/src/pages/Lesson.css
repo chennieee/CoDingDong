@@ -49,6 +49,7 @@
     /* Ensure the text is aligned to the left */
     width: 100%;
     /* Ensure full width for alignment */
+    background-color: #1aac83;
 }
 
 /* Style for radio buttons */
