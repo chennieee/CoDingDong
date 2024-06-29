@@ -29,7 +29,7 @@ const Login = () => {
       />
 
       <button disabled={isLoading}>Log in</button>
-      {error && <div className="error" dangerouslySetInnerHTML={{ __html: error }} />}
+      {error && <div className="error">{error}</div>}
     </form>
   );
 };
@@ -37,4 +37,5 @@ const Login = () => {
 export default Login;
 
 // original line 32: {error && <div className="error">{error}</div>}
+// line 32: {error && <div className="error" dangerouslySetInnerHTML={{ __html: error }} />}
 // keeping this here jic this new one doesnt work 

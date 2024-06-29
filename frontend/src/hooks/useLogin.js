@@ -5,23 +5,28 @@ import { useNavigate } from 'react-router-dom';
 export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
-  const [isSuccess, setIsSuccess] = useState(false);
   const { dispatch } = useAuthContext();
   const navigate = useNavigate();
   
   const apiUrl = process.env.REACT_APP_API_URL;
 
+  // Navigate to dashboard only if login is successful
   useEffect(() => {
-    // Navigate to dashboard only if login is successful
-    if (isSuccess) {
+    if (!isLoading && error === null && localStorage.getItem('user')) {
       navigate('/dashboard');
     }
-  }, [isSuccess, navigate]);
+  }, [isLoading, error, navigate]);
+
+  // Debugging log -- Display error
+  useEffect(() => {
+    if (error) {
+      console.log('Login error:', error); // Debug log
+    }
+  }, [error]);
 
   const login = async (username, password) => {
     setIsLoading(true);
     setError(null);
-    setIsSuccess(false);
 
     try {
       const response = await fetch(`${apiUrl}/users/login`, {
@@ -43,11 +48,10 @@ export const useLogin = () => {
       localStorage.setItem('user', JSON.stringify(json)); //save user to localStorage
       dispatch({ type: 'LOGIN', payload: json }); //update AuthContext
       setIsLoading(false);
-      setIsSuccess(true);
     
     } catch (error) {
       setIsLoading(false);
-      setIsSuccess(error.message);
+      setError(error.message);
     }
   };
 
