@@ -40,12 +40,8 @@
 
 /* Style each option */
 .option {
-    align-items: center;
-    /* Center items vertically */
-    justify-content: flex-start;
-    /* Align items to the start of the flex container */
-    margin-bottom: 10px;
-    /* Space between options */
+    display: inline-block;
+    margin-right: 5px;
     text-align: left;
     /* Ensure the text is aligned to the left */
     width: 100%;
