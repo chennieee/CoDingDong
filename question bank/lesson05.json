@@ -20,7 +20,7 @@
             "B. list1.append(list2)",
             "C. list1.add(list2)"
         ],
-        "answer": "A. list1.append(list2)",
+        "answer": "A. list1.extend(list2)",
         "explanation": "E.g. list1 = [1,2,3], list2 = [4,5,6] \nlist1.extend(list2) will give [1,2,3,4,5,6] when list1 is printed; \nlist1.append(list2) will give [1,2,3,[4,5,6]] when list1 is printed;\nLastly, list objects have no 'add' function.",
         "lessonId": "667e7ea5fa284dc1d85f15a2",
         "lessonNo": 5

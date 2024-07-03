@@ -46,7 +46,7 @@
             "B. loop doesn't start",
             "C. syntax error"
         ],
-        "answer": "B. loop doesn't start",
+        "answer": "A. loop continues forever",
         "explanation": "An infinite loop happens and the program seems to hang.",
         "lessonId": "667e7e70fa284dc1d85f15a0",
         "lessonNo": 4
