@@ -13,7 +13,7 @@ Features
 
 Tech Stack
 - Backend: Express.js, Node.js
-- Frontend: React
+- Frontend: React.js
 - Database: MongoDB
 
 
