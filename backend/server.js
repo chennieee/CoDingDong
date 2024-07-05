@@ -41,7 +41,7 @@ let server;
 
 const startServer = async () => {
     try {
-        await mongoose.connect(process.env.MONG_URI, {
+        await mongoose.connect(process.env.MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
