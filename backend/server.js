@@ -41,10 +41,7 @@ let server;
 
 const startServer = async () => {
     try {
-        await mongoose.connect(process.env.MONGODB_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
+        await mongoose.connect(process.env.MONGODB_URI);
         server = app.listen(process.env.PORT, () => {
             console.log('connected to database and listening on port', process.env.PORT);
         });
