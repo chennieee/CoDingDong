@@ -6,7 +6,7 @@
     },
     "scripts": {
         "start": "node backend/server.js",
-        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false cd frontend && npm install --prefix frontend && npm run build --prefix frontend"
     },
     "dependencies": {
         "bcrypt": "^5.1.1",
