@@ -109,27 +109,6 @@ const getUserProfile = async (req, res) => {
 };
 
 
-// GET user friends
-const getUserFriends = async (req, res) => {
-    const { id } = req.params; //userId
-
-    //check if id is valid
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'User not found'});
-    }
-
-    //find user
-    const user = await User.findById(id).populate('friends', 'username');
-
-    //send response
-    if (!user) {
-        //return error if no user is found
-        return res.status(404).json({ error: 'User not found'});
-    }
-    res.status(200).json(user.friends); //else return the found user profile
-};
-
-
 // GET user lesson progress
 const getUserLessonProgress = async (req, res) => {
     const { id } = req.params; //userId
@@ -147,26 +126,10 @@ const getUserLessonProgress = async (req, res) => {
 // DELETE User Profile (""not sure if need)
 
 
-// Add friend? (**not sure, needed if we have friends as User attribute)
-const addFriend = async (req, res) => {
-    const user = await User.findById(req.params.id);
-    const friend = await User.findById(req.body.friendId);
-
-    if (user && friend) {
-        user.friends.push(friend._id);
-        await user.save();
-        res.json(user);
-    } else {
-        res.status(404).json({ error: 'User not found' });
-    }
-};
-
 // Export userController functions
 module.exports = {
     signupUser,
     loginUser,
     getUserProfile,
-    getUserFriends,
-    getUserLessonProgress,
-    addFriend
+    getUserLessonProgress
 };

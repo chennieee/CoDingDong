@@ -4,7 +4,7 @@ import { useAuthContext } from './useAuthContext';
 
 export const useProfile = (userId) => {
     const { user: contextUser } = useAuthContext(); //get current user from context
-    const [user, setUser] = useState(contextUser); //initialise with contextUser
+    const [user, setUser] = useState(null); //initialise with null to ensure fetching
     const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {

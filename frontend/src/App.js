@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Lesson from './pages/Lesson';
 import Friends from './pages/Friends';
+import Leaderboard from './pages/Leaderboard';
 import { AuthContextProvider } from './context/AuthContext';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/lesson/:id" element={<Lesson />} />
               <Route path="/friends" element={<Friends />} />
+              <Route path="/leaderboard" element={<Leaderboard />} />
             </Routes>
           </div>
         </BrowserRouter>

@@ -4,9 +4,7 @@ const {
     signupUser,
     loginUser,
     getUserProfile,
-    getUserFriends,
-    getUserLessonProgress,
-    addFriend
+    getUserLessonProgress
 } = require('../controllers/userController');
 
 const router = express.Router();
@@ -21,17 +19,11 @@ router.post('/login', loginUser);
 // GET User Profile (useProfile.js)
 router.get('/profile/:id', getUserProfile);
 
-// GET User Friends (useFriends.js)
-router.get('/friends/:id', getUserFriends);
-
 // GET User lesson progress (useDashboard.js)
 router.get('/lessons/:id', getUserLessonProgress);
 
 // DELETE User Profile **(not sure if need)
 
-
-// Add friend?
-router.post('/friend/:id', addFriend);
 
 // Export router
 module.exports = router;

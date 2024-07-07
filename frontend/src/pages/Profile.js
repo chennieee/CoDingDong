@@ -18,6 +18,7 @@ const Profile = ({ userId }) => {
     }
 
     //decide which user data to use
+    //**should we display weekly xp below xp?
     const user = userId ? profileUser : contextUser;
     if (!user) {
         return <p>Loading user data...</p>;
@@ -32,6 +33,7 @@ const Profile = ({ userId }) => {
             <div>
                 <p>Streak: {user.streak || 0} days</p>
                 <p>XP: {user.xp || 0}</p>
+                <p>+{user.weeklyXP || 0} XP this week</p>
                 <p>Friends: {user.friends?.length || 0}</p>
             </div>
         </div>

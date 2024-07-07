@@ -20,17 +20,31 @@ app.use(cors({ origin: '*' }));
 const userRoutes = require('./routes/userRoutes');
 const questionRoutes = require('./routes/questionRoutes');
 const lessonRoutes = require('./routes/lessonRoutes');
-const resetStreakDaily = require('./utils/resetStreak');
+const leaderboardRoutes = require('./routes/leaderboardRoutes');
+const friendRoutes = require('./routes/friendRoutes');
 
 // routes
 app.use('/api/users', userRoutes);
 app.use('/api/questions', questionRoutes);
 app.use('/api/lessons', lessonRoutes);
+app.use('/api/leaderboard', leaderboardRoutes);
+app.use('/api/friends', friendRoutes);
 
 // set up cron job to reset streak daily at midnight
+const resetStreakDaily = require('./utils/resetStreak');
 const streakResetCron = cron.schedule('0 0 * * *', async () => {
     console.log('Running daily streak reset task...');
     await resetStreakDaily();
+}, {
+    scheduled: true,
+    timezone: "Asia/Singapore"
+});
+
+// set up cron job to reset weekly XP at the start of every week
+const resetWeeklyXP = require('./utils/resetWeeklyXP');
+const weeklyXPResetCron = cron.schedule('0 0 * * 1', async () => {
+    console.log('Running weekly XP reset task...');
+    await resetWeeklyXP();
 }, {
     scheduled: true,
     timezone: "Asia/Singapore"
@@ -41,7 +55,10 @@ let server;
 
 const startServer = async () => {
     try {
-        await mongoose.connect(process.env.MONGODB_URI);
+        await mongoose.connect(process.env.MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
         server = app.listen(process.env.PORT, () => {
             console.log('connected to database and listening on port', process.env.PORT);
         });
@@ -49,6 +66,7 @@ const startServer = async () => {
         console.log(error);
     }
     streakResetCron.start(); // Start the cron job
+    weeklyXPResetCron.start();
 };
 
 const closeServer = async () => {

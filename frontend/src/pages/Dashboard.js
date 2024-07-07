@@ -20,6 +20,10 @@ const Dashboard = () => {
         navigate('/profile');
     }
 
+    function navigateToLeaderboard() {
+        navigate('/leaderboard');
+    }
+
     function navigateToLesson(id) {
         navigate(`/lesson/${id}`);
     }
@@ -34,7 +38,7 @@ const Dashboard = () => {
             <div className="sidebar">
                 <div className="sidebar-buttons">
                     <button onClick={() => navigateToProfile()}>Profile</button>
-                    <button>Leaderboard</button>
+                    <button onClick={() => navigateToLeaderboard()}>Leaderboard</button>
                     <button>Forum</button>
                 </div>
             </div>

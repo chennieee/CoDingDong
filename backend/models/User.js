@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    weeklyXP: {
+        type: Number,
+        default: 0
+    },
     lastLessonDate: { //ONLY for newLessons. Already completed lessons will not be taken into account
         type: Date,
         default: null // NOT SURE IF THIS IS ALLOWED 
@@ -31,6 +35,12 @@ const userSchema = new mongoose.Schema({
     friends: [{ //array to store friends
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User' 
+    }],
+    friendRequests: [{ //array of friend requests
+        sender: { 
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
     }],
     completedLessons: [{ //array to keep track of completed lessons
         lessonId: {
