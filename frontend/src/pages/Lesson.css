@@ -65,6 +65,7 @@
 .submit-button {
     padding: 10px 20px;
     font-size: 16px;
+    font-family: 'Poppins', sans-serif;
     cursor: pointer;
     background-color: #1aac83;
     /* Primary color */
