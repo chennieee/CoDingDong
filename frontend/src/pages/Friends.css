@@ -1,0 +1,101 @@
+.friends {
+    font-family: 'Poppins', sans-serif;
+    padding: 20px;
+    text-align: center;
+}
+
+button {
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+}
+
+button.back {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+}
+
+input {
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    display: block;
+    margin: 0 auto;
+}
+
+.user-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.user-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid gray;
+}
+
+.user-item+.user-item {
+    border-top: none;
+    /* Remove the top border for subsequent items to make it look like a table */
+}
+
+button.accept {
+    color: white;
+    background-color: #008b8b;
+}
+
+button.accept:hover {
+    background-color: #006b6b;
+}
+
+button.delete {
+    color: white;
+    background-color: #b22222;
+    margin-left: 5px;
+}
+
+button.delete:hover {
+    background-color: #8b0000;
+}
+
+button.addFriend {
+    color: white;
+    background-color: #00008b;
+    display: flex;
+    align-items: center;
+}
+
+button.addFriend:hover {
+    background-color: #00006b;
+}
+
+button.remove {
+    color: white;
+    background-color: #696969;
+}
+
+button.remove:hover {
+    background-color: #4b4b4b;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1em;
+    color: #666;
+}
