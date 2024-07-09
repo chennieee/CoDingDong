@@ -48,6 +48,11 @@ export const useFriends = (userId) => {
             await axios.post(`${apiUrl}/friends/sendRequest`, 
                 { userId: contextUser._id, friendUsername }
             );
+            setSearchResults((prevResults) =>
+                prevResults.map(user =>
+                    user.username === friendUsername ? { ...user, requested: true } : user
+                )
+            );
             alert('Friend request sent');
         } catch (error) {
             console.error('Error sending friend request:', error);

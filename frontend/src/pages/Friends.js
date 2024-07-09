@@ -23,8 +23,8 @@ const Friends = () => {
         searchUsers(username);
     };
 
-    const handleSendRequest = (friendUsername) => {
-        sendFriendRequest(friendUsername);
+    const handleSendRequest = async (friendUsername) => {
+        await sendFriendRequest(friendUsername);
     };
 
     const handleAcceptRequest = (senderId) => {
@@ -64,10 +64,14 @@ const Friends = () => {
                 {searchResults
                     .filter(result => result.username !== user.username) // filter out the current user
                     .map((result) => (
-                        <li key={result._id} className="user-item">
-                            <span>{result.username}</span>
-                            <button className="addFriend" onClick={() => handleSendRequest(result.username)}>
-                                Add Friend
+                        <li key={result.username} className="user-item">
+                            {result.username}
+                            <button className="addFriend" 
+                                onClick={() => handleSendRequest(result.username)}
+                                disabled={result.requested}
+                                style={{ backgroundColor: result.requested ? 'green' : 'blue' }}
+                            >
+                                {result.requested ? 'Requested' : 'Add Friend'}
                             </button>
                         </li>
                     ))}
