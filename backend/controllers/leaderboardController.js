@@ -6,11 +6,11 @@ const getWeeklyLeaderboard = async (req, res) => {
 
     try {
         // Get top 20 users by weeklyXP
-        const topUsers = await User.find().sort({ weeklyXP: -1 }).limit(20).select('username weeklyXP').lean();
+        const topUsers = await User.find().sort({ weeklyXP: -1 }).limit(5).select('username weeklyXP').lean();
 
         // Get rank of current user
         const user = await User.findById(userId).select('username weeklyXP').lean();
-        const userRank = await User.countDocuments({ weeklyXP: {$gt: user.weeklyXP } }) +  1;
+        const userRank = await User.countDocuments({ weeklyXP: { $gt: user.weeklyXP } }) + 1;
 
         res.status(200).json({ topUsers, userRank });
 
@@ -19,6 +19,6 @@ const getWeeklyLeaderboard = async (req, res) => {
     }
 };
 
-module.exports = { 
-    getWeeklyLeaderboard 
+module.exports = {
+    getWeeklyLeaderboard
 };

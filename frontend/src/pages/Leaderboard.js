@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLeaderboard } from '../hooks/useLeaderboard';
+import './Leaderboard.css';
 
 const Leaderboard = () => {
     const { leaderboard, userRank, loading, error } = useLeaderboard();
@@ -7,7 +8,7 @@ const Leaderboard = () => {
     if (loading) {
         return <div>Loading...</div>;
     }
-    
+
     if (error) {
         return <div>{error}</div>;
     }
@@ -21,7 +22,8 @@ const Leaderboard = () => {
             <ul>
                 {leaderboard.map((user, index) => (
                     <li key={index}>
-                        {index + 1}. {user.username} +{user.weeklyXP} XP
+                        <span>{index + 1}. {user.username}</span>
+                        <span className="xp">+{user.weeklyXP} XP</span>
                     </li>
                 ))}
             </ul>

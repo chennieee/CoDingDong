@@ -12,6 +12,8 @@ button {
     padding: 8px 12px;
     margin-left: 10px;
     transition: background-color 0.3s ease;
+    font-size: 0.8em;
+    /* Reduced font size for buttons */
 }
 
 button.back {
@@ -43,7 +45,14 @@ input {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    border: 1px solid gray;
+    border: 1px solid #ddd;
+    /* Lighter border color */
+    border-radius: 10px;
+    /* Rounded corners */
+    margin-bottom: 10px;
+    /* Space between items */
+    font-size: 0.9em;
+    /* Reduced font size for usernames */
 }
 
 .user-item+.user-item {

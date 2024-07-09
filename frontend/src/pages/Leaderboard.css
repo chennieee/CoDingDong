@@ -1,0 +1,41 @@
+.leaderboard {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    width: 40%;
+    margin: 0 auto;
+}
+
+.leaderboard h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.leaderboard ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.leaderboard li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.leaderboard li span {
+    font-size: 0.9em;
+}
+
+.leaderboard li .xp {
+    font-weight: bold;
+}
+
+.leaderboard p {
+    font-size: 1.2em;
+    margin-top: 20px;
+    color: #666;
+}
