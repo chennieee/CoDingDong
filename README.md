@@ -3,6 +3,9 @@ Orbital 2024, Gemini (Team 6038)
 - Chen Xin @chennieee
 - Shanice Chin @Shanicey98
 
+Use this link to try out CoDingDong! 
+https://codingdong-frontend-e76c896ee5e4.herokuapp.com/
+
 Features
 - XP Counter: +5 XP for every completed lesson
 - Daily Streak Counter
