@@ -23,6 +23,11 @@ const lessonRoutes = require('./routes/lessonRoutes');
 const leaderboardRoutes = require('./routes/leaderboardRoutes');
 const friendRoutes = require('./routes/friendRoutes');
 
+// Root route
+app.get('/', (req, res) => {
+    res.send('Hello, this is the backend!');
+});
+
 // routes
 app.use('/api/users', userRoutes);
 app.use('/api/questions', questionRoutes);
