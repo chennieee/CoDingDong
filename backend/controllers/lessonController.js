@@ -81,6 +81,7 @@ const submitLessonForUser = async (req, res) => {
 
             // Add xp
             user.xp += xpEarned;
+            user.weeklyXP += xpEarned;
 
             // Update streak
             const now = new Date();
