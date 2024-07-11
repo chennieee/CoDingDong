@@ -11,6 +11,7 @@ const Friends = () => {
         friends,
         searchResults,
         friendRequests,
+        requestStatus,
         searchUsers,
         sendFriendRequest,
         acceptFriendRequest,
@@ -68,10 +69,10 @@ const Friends = () => {
                             {result.username}
                             <button className="addFriend" 
                                 onClick={() => handleSendRequest(result.username)}
-                                disabled={result.requested}
-                                style={{ backgroundColor: result.requested ? 'green' : 'blue' }}
+                                disabled={requestStatus[result.username] === 'requested'}
+                                style={{ backgroundColor: requestStatus[result.username] === 'requested' ? 'green' : 'blue' }}
                             >
-                                {result.requested ? 'Requested' : 'Add Friend'}
+                                {requestStatus[result.username] === 'requested' ? 'Requested' : 'Add Friend'}
                             </button>
                         </li>
                     ))}
@@ -114,65 +115,5 @@ const Friends = () => {
         </div>
     );
 }
-
-/*
-    return (
-        <div className="friends">
-            <button onClick={() => navigateToProfile()}>Back to Profile</button>
-            <h2>Find Friends</h2>
-            <input
-                type="text"
-                placeholder="Search by username"
-                onChange={(e) => handleSearch(e.target.value)}
-            />
-            <ul>
-                {searchResults
-                    .filter(result => result.username !== user.username) //filter out the current user
-                    .map((result) => (
-                        <li key={result._id}>
-                            {result.username}{' '}
-                            <button onClick={() => handleSendRequest(result.username)}>
-                                Add Friend
-                            </button>
-                        </li>
-                    ))}
-            </ul>
-            <h2>Friend Requests</h2>
-            {friendRequests.length === 0 ? (
-                <p>You have no friend requests at the moment</p>
-            ) : (
-                <ul>
-                    {friendRequests.map((request) => (
-                        <li key={request.sender._id}>
-                            {request.sender.username}{' '}
-                            <button onClick={() => handleAcceptRequest(request.sender._id)}>
-                                Accept
-                            </button>
-                            <button onClick={() => handleDeleteRequest(request.sender._id)}>
-                                Delete
-                            </button>
-                        </li>
-                    ))}
-                </ul>
-            )}
-            <h2>My Friends</h2>
-            {friends.length === 0 ? (
-                <p>You have no friends at the moment</p>
-            ) : (
-                <ul>
-                    {friends.map((friend) => (
-                        <li key={friend._id}>
-                            {friend.username} - XP: {friend.xp}, Streak: {friend.streak}
-                            <button onClick={() => handleRemoveFriend(friend._id)}>
-                                Remove
-                            </button>
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </div>
-    );
-};
-*/
 
 export default Friends;

@@ -42,16 +42,26 @@ const getUserFriends = async (req, res) => {
 
 // GET a user by searching their username
 const searchUsers = async (req, res) => {
-    const { username } = req.query;
+    const { username, currentUserId } = req.query;
     console.log(`Search query received: ${username}`); //debugging
 
     try {
         console.log(`Searching for username: ${username}`); //debugging
         const users = await User.find({ username: new RegExp(username, 'i') }).select('username');
         console.log(`Found users: ${JSON.stringify(users)}`); //debugging
+
         if (users.length === 0) {
             return res.status(404).json({ error: 'User not found' });
         }
+
+        // Add request status to users
+        const usersWithStatus = await Promise.all(users.map(async user => {
+            const requested = await User.exists({ _id: currentUserId, 'friendRequests.sender': user._id });
+            return {
+                ...user.toObject(),
+                requested: !!requested
+            };
+        }));
 
         res.status(200).json(users);
 
@@ -71,6 +81,18 @@ const sendFriendRequest = async (req, res) => {
         const friend = await User.findOne({ username: friendUsername });
         if (!friend) {
             return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Check if a friend request is already sent
+        const existingRequest = friend.friendRequests.some(request => request.sender.toString() === userId);
+        if (existingRequest) {
+            return res.status(400).json({ error: 'Friend request already sent' });
+        }
+
+        // Check if they are already friends
+        const alreadyFriends = friend.friends.some(friendId => friendId.toString() === userId);
+        if (alreadyFriends) {
+            return res.status(400).json({ error: 'Already friends' });
         }
 
         // Send friendRequest to the found user
