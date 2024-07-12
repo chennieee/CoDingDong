@@ -7,7 +7,6 @@ export const useFriends = (userId) => {
     const [friends, setFriends] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
     const [friendRequests, setFriendRequests] = useState([]);
-    const [requestStatus, setRequestStatus] = useState({});
     const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
@@ -24,14 +23,6 @@ export const useFriends = (userId) => {
                 setFriends(response.data.friends);
                 setFriendRequests(response.data.friendRequests);
 
-                // Update the request status based on the fetched friend requests
-                const status = {};
-                response.data.friendRequests.forEach(request => {
-                    status[request.sender.username] = 'requested';
-                });
-                setRequestStatus(status);
-                console.log('Fetched request status:', status); //debugging
-
             } catch (error) {
                 console.error('Error fetching friends and friend requests:', error);
             }
@@ -46,8 +37,30 @@ export const useFriends = (userId) => {
     const searchUsers = async (username) => {
         try {
             const response = await axios.get(`${apiUrl}/friends/search?username=${username}&currentUserId=${contextUser._id}`);
-            setSearchResults(response.data);
-            console.log('Search results with status:', response.data); //debugging
+            let results = response.data;
+
+            // Filter out current friends from search results
+            results = results.filter(
+                result => !friends.some(friend => friend.username === result.username)
+            );
+            
+            // Show request status of search results
+            const resultsWithStatus = results.map(result => {
+                const isRequested = friendRequests.some(
+                    request => request.sender.toString() === contextUser._id && request.recipient.toString() === result._id
+                );
+                const isPending = friendRequests.some(
+                    request => request.sender.toString() === result._id && request.recipient.toString() === contextUser._id
+                );
+
+                return {
+                    ...result,
+                    status: isRequested ? 'requested' : isPending ? 'pending' : 'add'
+                };
+            });
+
+            setSearchResults(resultsWithStatus);
+            console.log('Search results with status:', resultsWithStatus); //debugging
 
         } catch (error) {
             console.error('Error searching users:', error);
@@ -61,13 +74,10 @@ export const useFriends = (userId) => {
                 { userId: contextUser._id, friendUsername }
             );
 
-            // Update request status to reflect that a request has been sent
-            setRequestStatus(prev => ({ ...prev, [friendUsername]: 'requested' }));
-
             // Update search results to show that a request has been sent
             setSearchResults((prevResults) =>
                 prevResults.map(user =>
-                    user.username === friendUsername ? { ...user, requested: true } : user
+                    user.username === friendUsername ? { ...user, status: 'requested' } : user
                 )
             );
             console.log('Friend request sent to:', friendUsername); //debugging
@@ -75,7 +85,6 @@ export const useFriends = (userId) => {
 
         } catch (error) {
             if (error.response && error.response.data) {
-                setRequestStatus(prev => ({ ...prev, [friendUsername]: 'error' }));
                 alert(error.response.data.error);
             } else {
                 console.error('Error sending friend request:', error);
@@ -139,7 +148,6 @@ export const useFriends = (userId) => {
         friends, 
         searchResults, 
         friendRequests,
-        requestStatus, 
         searchUsers,
         sendFriendRequest,
         acceptFriendRequest,

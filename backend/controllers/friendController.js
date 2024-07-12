@@ -74,34 +74,60 @@ const searchUsers = async (req, res) => {
 
 // POST - Send friend request to a user
 const sendFriendRequest = async (req, res) => {
+    console.log('sendFriendRequest called'); //debugging
     const { userId, friendUsername } = req.body;
 
     try {
-        // Find friend by username
-        const friend = await User.findOne({ username: friendUsername });
-        if (!friend) {
-            return res.status(404).json({ error: 'User not found' });
+        // Find sender by ID
+        const sender = await User.findById(userId);
+        if (!sender) {
+            console.log('Sender not found');
+            return res.status(404).json({ error: 'Sender not found' })
+        }
+
+        // Find friend (recipient) by username
+        const recipient = await User.findOne({ username: friendUsername });
+        if (!recipient) {
+            console.log('Recipient not found');
+            return res.status(404).json({ error: 'Recipient not found' });
         }
 
         // Check if a friend request is already sent
-        const existingRequest = friend.friendRequests.some(request => request.sender.toString() === userId);
+        const existingRequest = recipient.friendRequests.some(
+            request => request.sender.equals(sender._id)
+        );
         if (existingRequest) {
+            console.log('Friend request already sent');
             return res.status(400).json({ error: 'Friend request already sent' });
         }
 
         // Check if they are already friends
-        const alreadyFriends = friend.friends.some(friendId => friendId.toString() === userId);
+        const alreadyFriends = recipient.friends.some(friendId => friendId.equals(sender._id));
         if (alreadyFriends) {
-            return res.status(400).json({ error: 'Already friends' });
+            console.log('You are already friends');
+            return res.status(400).json({ error: 'You are already friends' });
         }
 
-        // Send friendRequest to the found user
-        await User.findByIdAndUpdate(friend._id, {
-            $push: { friendRequests: { sender: userId } }
+        // Send friendRequest -- Update both sender and recipient friendRequests
+        recipient.friendRequests.push({
+            sender: sender._id,
+            recipient: recipient._id
         });
+        sender.friendRequests.push({
+            sender: sender._id,
+            recipient: recipient._id
+        });
+
+        console.log('Updating sender:', sender); // debugging
+        console.log('Updating recipient:', recipient); // debugging
+
+        await sender.save();
+        await recipient.save();
+
         res.status(200).json({ message: 'Friend request sent' });
 
     } catch (error) {
+        console.log('Error:', error.message);
         res.status(400).json({ error: error.message });
     }
 };
@@ -135,9 +161,12 @@ const acceptFriendRequest = async (req, res) => {
         user.friends.push(senderId);
         sender.friends.push(userId);
 
-        //remove friend request
+        //remove the specific friend request
         user.friendRequests = user.friendRequests.filter(
-            request => !request.sender.equals(senderId)
+            request => !(request.sender.equals(senderId) && request.recipient.equals(userId))
+        );
+        sender.friendRequests = sender.friendRequests.filter(
+            request => !(request.sender.equals(senderId) && request.recipient.equals(userId))
         );
 
         await user.save();
@@ -174,8 +203,15 @@ const deleteFriendRequest = async (req, res) => {
         }
 
         //delete friendRequest
-        user.friendRequests = user.friendRequests.filter(request => !request.sender.equals(senderId));
+        user.friendRequests = user.friendRequests.filter(
+            request => !(request.sender.equals(senderId) && request.recipient.equals(userId))
+        );
+        sender.friendRequests = sender.friendRequests.filter(
+            request => !(request.sender.equals(senderId) && request.recipient.equals(userId))
+        );
+
         await user.save();
+        await sender.save();
 
         //send response
         res.status(200).json({ message: 'Friend request deleted' });

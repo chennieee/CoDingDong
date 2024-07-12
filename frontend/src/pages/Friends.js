@@ -11,7 +11,6 @@ const Friends = () => {
         friends,
         searchResults,
         friendRequests,
-        requestStatus,
         searchUsers,
         sendFriendRequest,
         acceptFriendRequest,
@@ -69,10 +68,11 @@ const Friends = () => {
                             {result.username}
                             <button className="addFriend" 
                                 onClick={() => handleSendRequest(result.username)}
-                                disabled={requestStatus[result.username] === 'requested'}
-                                style={{ backgroundColor: requestStatus[result.username] === 'requested' ? 'green' : 'blue' }}
+                                disabled={result.status === 'requested' || result.status === 'pending'}
+                                style={{ backgroundColor: result.status === 'requested' ? 'green' : result.status === 'pending' ? 'yellow' : 'blue' }}
                             >
-                                {requestStatus[result.username] === 'requested' ? 'Requested' : 'Add Friend'}
+                                {result.status === 'requested' ? 'Requested' : 
+                                result.status === 'pending' ? 'Pending' : 'Add Friend'}
                             </button>
                         </li>
                     ))}
