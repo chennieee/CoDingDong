@@ -5,17 +5,6 @@ const validator = require('validator');
 
 const Lesson = require('./Lesson');
 
-const friendRequestSchema = new mongoose.Schema({
-    sender: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    recipient: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }
-});
-
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -47,9 +36,14 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User' 
     }],
-    friendRequests: [ //array of friend requests
-        friendRequestSchema
-    ],
+    sentFriendRequests: [{ //array of sent friend requests
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    receivedFriendRequests: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
     completedLessons: [{ //array to keep track of completed lessons
         lessonId: {
             type: mongoose.Schema.Types.ObjectId,

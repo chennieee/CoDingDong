@@ -8,9 +8,9 @@ const Friends = () => {
     const { user } = useAuthContext();
     const userId = user ? user._id : null;
     const {
-        friends,
-        searchResults,
-        friendRequests,
+        friends = [],
+        searchResults = [],
+        receivedFriendRequests = [],
         searchUsers,
         sendFriendRequest,
         acceptFriendRequest,
@@ -61,35 +61,39 @@ const Friends = () => {
                 onChange={(e) => handleSearch(e.target.value)}
             />
             <ul className="user-list">
-                {searchResults
-                    .filter(result => result.username !== user.username) // filter out the current user
-                    .map((result) => (
-                        <li key={result.username} className="user-item">
-                            {result.username}
-                            <button className="addFriend" 
-                                onClick={() => handleSendRequest(result.username)}
-                                disabled={result.status === 'requested' || result.status === 'pending'}
-                                style={{ backgroundColor: result.status === 'requested' ? 'green' : result.status === 'pending' ? 'yellow' : 'blue' }}
-                            >
-                                {result.status === 'requested' ? 'Requested' : 
-                                result.status === 'pending' ? 'Pending' : 'Add Friend'}
-                            </button>
-                        </li>
-                    ))}
+                {searchResults.length > 0 ? (
+                    searchResults
+                        .filter(result => result.username !== user.username) // filter out the current user
+                        .map((result) => (
+                            <li key={result.username} className="user-item">
+                                {result.username}
+                                <button className="addFriend" 
+                                    onClick={() => handleSendRequest(result.username)}
+                                    disabled={result.status === 'requested' || result.status === 'pending'}
+                                    style={{ backgroundColor: result.status === 'requested' ? 'green' : result.status === 'pending' ? 'yellow' : 'blue' }}
+                                >
+                                    {result.status === 'requested' ? 'Requested' : 
+                                    result.status === 'pending' ? 'Pending' : 'Add Friend'}
+                                </button>
+                            </li>
+                        ))
+                ) : (
+                    <p>No search results</p>
+                )}
             </ul>
             <h2>Friend Requests</h2>
-            {friendRequests.length === 0 ? (
+            {receivedFriendRequests.length === 0 ? (
                 <p>You have no friend requests at the moment</p>
             ) : (
                 <ul className="user-list">
-                    {friendRequests.map((request) => (
-                        <li key={request.sender._id} className="user-item">
-                            <span>{request.sender.username}</span>
+                    {receivedFriendRequests.map((request) => (
+                        <li key={request._id} className="user-item">
+                            <span>{request.username}</span>
                             <div>
-                                <button className="accept" onClick={() => handleAcceptRequest(request.sender._id)}>
+                                <button className="accept" onClick={() => handleAcceptRequest(request._id)}>
                                     Accept
                                 </button>
-                                <button className="delete" onClick={() => handleDeleteRequest(request.sender._id)}>
+                                <button className="delete" onClick={() => handleDeleteRequest(request._id)}>
                                     Delete
                                 </button>
                             </div>
