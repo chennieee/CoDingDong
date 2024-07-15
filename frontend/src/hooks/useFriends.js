@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useAuthContext } from './useAuthContext';
 
 export const useFriends = (userId) => {
-    const { user: contextUser } = useAuthContext();
+    const { user: contextUser, dispatch } = useAuthContext();
     const [friends, setFriends] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
     const [receivedFriendRequests, setReceivedFriendRequests] = useState([]);
@@ -42,9 +42,9 @@ export const useFriends = (userId) => {
             let results = response.data;
 
             // Filter out current friends from search results
-            results = results.filter(
+            /*results = results.filter(
                 result => !friends.some(friend => friend.username === result.username)
-            );
+            );*/
             
             // Show request status of search results
             const resultsWithStatus = results.map(result => {
@@ -76,8 +76,11 @@ export const useFriends = (userId) => {
             );
 
             // Update context user's sentFriendRequests
-            contextUser.sentFriendRequests = contextUser.sentFriendRequests || []; //initialise sentFriendRequests
-            contextUser.sentFriendRequests.push(response.data.recipientId);
+            const updatedUser = {
+                ...contextUser,
+                sentFriendRequests: [...(contextUser.sentFriendRequests || []), response.data.recipientId]
+            };
+            dispatch({ type: 'UPDATE_USER', payload: updatedUser });
 
             // Update search results to show that a request has been sent
             setSearchResults((prevResults) =>
@@ -109,6 +112,14 @@ export const useFriends = (userId) => {
             // Refresh friends and friend requests
             fetchFriendsAndRequests();
 
+            // Update context user's friends list
+            const updatedUser = {
+                ...contextUser,
+                friends: [...(contextUser.friends || []), senderId],
+                receivedFriendRequests: contextUser.receivedFriendRequests.filter(id => id !== senderId)
+            };
+            dispatch({ type: 'UPDATE_USER', payload: updatedUser });
+
         } catch (error) {
             console.error('Error accepting friend request:', error);
         }
@@ -125,6 +136,13 @@ export const useFriends = (userId) => {
             // Refresh friend requests
             fetchFriendsAndRequests();
 
+            // Update context user's receivedFriendRequests list
+            const updatedUser = {
+                ...contextUser,
+                receivedFriendRequests: contextUser.receivedFriendRequests.filter(id => id !== senderId)
+            };
+            dispatch({ type: 'UPDATE_USER', payload: updatedUser });
+
         } catch (error) {
             console.error('Error deleting friend request:', error);
         }
@@ -140,6 +158,13 @@ export const useFriends = (userId) => {
 
             // Refresh friends
             fetchFriendsAndRequests();
+
+            // Update context user's friends list
+            const updatedUser = {
+                ...contextUser,
+                friends: contextUser.friends.filter(id => id !== friendId)
+            };
+            dispatch({ type: 'UPDATE_USER', payload: updatedUser });
         
         } catch (error) {
             console.error('Error removing friend:', error);

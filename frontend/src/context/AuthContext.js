@@ -11,7 +11,7 @@ export const authReducer = (state, action) => {
     case 'LOGOUT':
       return { user: null };
 
-    case 'SUBMIT_LESSON': //update user stats
+    case 'UPDATE_USER': //update user stats
       return {
         ...state,
         user: {

@@ -74,7 +74,7 @@ export const useLesson = (lessonId, userId) => {
             });
             
             // Update user context with the new user stats
-            dispatch({ type: 'SUBMIT_LESSON', payload: response.data.user });
+            dispatch({ type: 'UPDATE_USER', payload: response.data.user });
 
             setResults(response.data.result); // result is { score, wrongAnswers }
             setSubmitted(true);
