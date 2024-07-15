@@ -49,16 +49,20 @@ const searchUsers = async (req, res) => {
             return res.status(404).json({ error: 'User not found' });
         }
 
+        const currentUser = await User.findById(currentUserId).select('sentFriendRequests receivedFriendRequests');
+
         // Add request status to users
         const usersWithStatus = await Promise.all(users.map(async user => {
-            const requested = await User.exists({ _id: currentUserId, 'friendRequests.sender': user._id });
+            const sentRequest = currentUser.sentFriendRequests.includes(user._id);
+            const receivedRequest = currentUser.receivedFriendRequests.includes(user._id);
+            const status = sentRequest ? 'requested' : receivedRequest ? 'pending' : 'add';
             return {
                 ...user.toObject(),
-                requested: !!requested
+                status
             };
         }));
 
-        res.status(200).json(users);
+        res.status(200).json(usersWithStatus);
 
     } catch (error) {
         console.error(`Error searching users: ${error.message}`); //debugging
@@ -71,6 +75,7 @@ const searchUsers = async (req, res) => {
 const sendFriendRequest = async (req, res) => {
     console.log('sendFriendRequest called'); //debugging
     const { userId, friendUsername } = req.body;
+    console.log(`Request body: userId=${userId}, friendUsername=${friendUsername}`); // debugging
 
     try {
         // Find user by ID
@@ -105,9 +110,9 @@ const sendFriendRequest = async (req, res) => {
             return res.status(400).json({ error: 'You are already friends' });
         }
 
-        // Send friendRequest -- Update both sender and recipient friendRequests
+        // Send friendRequest -- Update both user and recipient friendRequests
         user.sentFriendRequests.push(recipient._id);
-        recipient.receivedFriendRequests.push(sender._id);
+        recipient.receivedFriendRequests.push(user._id);
 
         console.log('Updating user:', user); // debugging
         console.log('Updating recipient:', recipient); // debugging
@@ -183,15 +188,19 @@ const deleteFriendRequest = async (req, res) => {
     }
 
     try {
-        //find user
+        //find user and sender
         const user = await User.findById(userId);
+        const sender = await User.findById(senderId);
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
+        if (!sender) {
+            return res.status(404).json({ error: 'Sender not found' });
+        }
 
         //delete friendRequest
-        user.receivedFriendRequests = user.friendRequests.filter(id => !id.equals(senderId));
-        sender.friendRequests = sender.friendRequests.filter(id => !id.equals(userId));
+        user.receivedFriendRequests = user.receivedFriendRequests.filter(id => !id.equals(senderId));
+        sender.sentFriendRequests = sender.sentFriendRequests.filter(id => !id.equals(userId));
 
         await user.save();
         await sender.save();

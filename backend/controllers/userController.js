@@ -40,6 +40,9 @@ const signupUser = async (req, res) => {
             streak: user.streak,
             lastLessonDate: user.lastLessonDate,
             completedLessons: user.completedLessons,
+            friends: user.friends,
+            sentFriendRequests: user.sentFriendRequests,
+            receivedFriendRequests: user.receivedFriendRequests,
             token
         });
 
@@ -70,6 +73,9 @@ const loginUser = async (req, res) => {
             streak: user.streak,
             lastLessonDate: user.lastLessonDate,
             completedLessons: user.completedLessons,
+            friends: user.friends,
+            sentFriendRequests: user.sentFriendRequests,
+            receivedFriendRequests: user.receivedFriendRequests,
             token
         });
 

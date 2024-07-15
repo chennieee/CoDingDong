@@ -36,7 +36,9 @@ export const useFriends = (userId) => {
 
     const searchUsers = async (username) => {
         try {
-            const response = await axios.get(`${apiUrl}/friends/search?username=${username}&currentUserId=${contextUser._id}`);
+            const response = await axios.get(`${apiUrl}/friends/search`, {
+                params: { username, currentUserId: contextUser._id }
+            });
             let results = response.data;
 
             // Filter out current friends from search results
@@ -46,8 +48,8 @@ export const useFriends = (userId) => {
             
             // Show request status of search results
             const resultsWithStatus = results.map(result => {
-                const isRequested = contextUser.sentFriendRequests.includes(result._id);
-                const isPending = receivedFriendRequests.some(
+                const isRequested = contextUser.sentFriendRequests && contextUser.sentFriendRequests.includes(result._id);
+                const isPending = receivedFriendRequests && receivedFriendRequests.some(
                     request => request._id.toString() === result._id.toString()
                 );
 
@@ -68,10 +70,13 @@ export const useFriends = (userId) => {
 
     const sendFriendRequest = async (friendUsername) => {
         try {
+            console.log(`Sending friend request: userId=${contextUser._id}, friendUsername=${friendUsername}`); // debugging
             const response = await axios.post(`${apiUrl}/friends/sendRequest`, 
                 { userId: contextUser._id, friendUsername }
             );
 
+            // Update context user's sentFriendRequests
+            contextUser.sentFriendRequests = contextUser.sentFriendRequests || []; //initialise sentFriendRequests
             contextUser.sentFriendRequests.push(response.data.recipientId);
 
             // Update search results to show that a request has been sent
@@ -80,6 +85,7 @@ export const useFriends = (userId) => {
                     user.username === friendUsername ? { ...user, status: 'requested' } : user
                 )
             );
+
             console.log('Friend request sent to:', friendUsername); //debugging
             alert('Friend request sent');
 

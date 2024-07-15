@@ -32,18 +32,21 @@ const userSchema = new mongoose.Schema({
         default: null // NOT SURE IF THIS IS ALLOWED 
         // but we need it to be null bc when user signs up it doesnt mean he completes a lesson
     },
-    friends: [{ //array to store friends
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'User' 
-    }],
-    sentFriendRequests: [{ //array of sent friend requests
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }],
-    receivedFriendRequests: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }],
+    friends: { //array to store friends
+        type: [mongoose.Schema.Types.ObjectId], 
+        ref: 'User',
+        default: [] 
+    },
+    sentFriendRequests: { //array of sent friend requests
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'User',
+        default: []
+    },
+    receivedFriendRequests: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'User',
+        default: []
+    },
     completedLessons: [{ //array to keep track of completed lessons
         lessonId: {
             type: mongoose.Schema.Types.ObjectId,
