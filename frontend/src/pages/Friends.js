@@ -67,13 +67,13 @@ const Friends = () => {
                         .map((result) => (
                             <li key={result.username} className="user-item">
                                 {result.username}
-                                <button className="addFriend" 
+                                <button className="addFriend"
                                     onClick={() => handleSendRequest(result.username)}
                                     disabled={result.status === 'requested' || result.status === 'pending'}
-                                    style={{ backgroundColor: result.status === 'requested' ? 'green' : result.status === 'pending' ? 'yellow' : 'blue' }}
+                                    style={{ backgroundColor: result.status === 'requested' ? 'green' : result.status === 'pending' ? 'grey' : 'blue' }}
                                 >
-                                    {result.status === 'requested' ? 'Requested' : 
-                                    result.status === 'pending' ? 'Pending' : 'Add Friend'}
+                                    {result.status === 'requested' ? 'Requested' :
+                                        result.status === 'pending' ? 'Pending' : 'Add Friend'}
                                 </button>
                             </li>
                         ))
