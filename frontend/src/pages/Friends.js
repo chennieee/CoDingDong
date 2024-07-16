@@ -8,9 +8,9 @@ const Friends = () => {
     const { user } = useAuthContext();
     const userId = user ? user._id : null;
     const {
-        friends = [],
-        searchResults = [],
-        receivedFriendRequests = [],
+        friends,
+        searchResults,
+        receivedFriendRequests,
         searchUsers,
         sendFriendRequest,
         acceptFriendRequest,
@@ -64,19 +64,27 @@ const Friends = () => {
                 {searchResults.length > 0 ? (
                     searchResults
                         .filter(result => result.username !== user.username) // filter out the current user
-                        .map((result) => (
-                            <li key={result.username} className="user-item">
-                                {result.username}
-                                <button className="addFriend"
-                                    onClick={() => handleSendRequest(result.username)}
-                                    disabled={result.status === 'requested' || result.status === 'pending'}
-                                    style={{ backgroundColor: result.status === 'requested' ? 'green' : result.status === 'pending' ? 'grey' : 'blue' }}
-                                >
-                                    {result.status === 'requested' ? 'Requested' :
-                                        result.status === 'pending' ? 'Pending' : 'Add Friend'}
-                                </button>
-                            </li>
-                        ))
+                        .map((result) => {
+                            const isFriend = friends.some(friend => friend._id === result._id);
+                            return (
+                                <li key={result.username} className="user-item">
+                                    {result.username}
+                                    <button className="addFriend"
+                                        onClick={() => handleSendRequest(result.username)}
+                                        disabled={isFriend || result.status === 'requested' || result.status === 'pending'}
+                                        style={{ 
+                                            backgroundColor: isFriend ? 'grey' :
+                                                result.status === 'requested' ? 'green' :
+                                                    result.status === 'pending' ? 'green' : 'blue' 
+                                        }}
+                                    >
+                                        {isFriend ? 'Added' :
+                                            result.status === 'requested' ? 'Requested' :
+                                                result.status === 'pending' ? 'Pending' : 'Add Friend'}
+                                    </button>
+                                </li>
+                            )
+                        })
                 ) : (
                     <p>No search results</p>
                 )}
