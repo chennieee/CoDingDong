@@ -11,6 +11,9 @@ import Profile from './pages/Profile';
 import Lesson from './pages/Lesson';
 import Friends from './pages/Friends';
 import Leaderboard from './pages/Leaderboard';
+import Forum from './pages/Forum';
+import AddPost from './pages/AddPost';
+import ViewPost from './pages/ViewPost';
 import { AuthContextProvider } from './context/AuthContext';
 
 function App() {
@@ -29,6 +32,9 @@ function App() {
               <Route path="/lesson/:id" element={<Lesson />} />
               <Route path="/friends" element={<Friends />} />
               <Route path="/leaderboard" element={<Leaderboard />} />
+              <Route path="/forum" element={<Forum />} />
+              <Route path="/forum/add" element={<AddPost />} />
+              <Route path="/forum/:id" element={<ViewPost />} />
             </Routes>
           </div>
         </BrowserRouter>

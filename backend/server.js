@@ -22,6 +22,7 @@ const questionRoutes = require('./routes/questionRoutes');
 const lessonRoutes = require('./routes/lessonRoutes');
 const leaderboardRoutes = require('./routes/leaderboardRoutes');
 const friendRoutes = require('./routes/friendRoutes');
+const postRoutes = require('./routes/postRoutes');
 
 // Root route
 app.get('/', (req, res) => {
@@ -34,6 +35,7 @@ app.use('/api/questions', questionRoutes);
 app.use('/api/lessons', lessonRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
 app.use('/api/friends', friendRoutes);
+app.use('/api/posts', postRoutes);
 
 // set up cron job to reset streak daily at midnight
 const resetStreakDaily = require('./utils/resetStreak');
