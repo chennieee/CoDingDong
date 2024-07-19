@@ -30,11 +30,13 @@ const AddPost = () => {
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                placeholder="Enter title"
             />
             <label>Text:</label>
             <textarea>
                 value={text}
                 onChange={(e) => setText(e.target.value)}
+                placeholder="Enter content"
             </textarea>
             <button type="submit">Post</button>
             {error && <div className="error">{error}</div>}
