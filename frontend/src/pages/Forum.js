@@ -7,11 +7,11 @@ const Forum = () => {
     const navigate = useNavigate();
 
     const handleAddPost = () => {
-        navigate('forum/add');
+        navigate('/forum/add');
     };
 
     const handleViewPost = (id) => {
-        navigate(`forum/${id}`);
+        navigate(`/forum/${id}`);
     };
 
     if (loading) {
