@@ -6,13 +6,13 @@ const Forum = () => {
     const { posts, loading, error } = useForum();
     const navigate = useNavigate();
 
-    const handleAddPost = () => {
+    function navigateToAddPost() {
         navigate('/forum/add');
-    };
+    }
 
-    const handleViewPost = (id) => {
+    function navigateToViewPost(id) {
         navigate(`/forum/${id}`);
-    };
+    }
 
     if (loading) {
         return <div>Loading...</div>;
@@ -30,11 +30,11 @@ const Forum = () => {
                     placeholder="Search"
                     className="search-input"
                 />
-                <button onClick={handleAddPost}>Add Post</button>
+                <button onClick={() => navigateToAddPost()}>Add Post</button>
             </div>
             <div className="posts">
                 {posts.map(post => (
-                    <div key={post._id} className="post" onClick={() => handleViewPost(post._id)}>
+                    <div key={post._id} className="post" onClick={() => navigateToViewPost(post._id)}>
                         <h3>{post.title}</h3>
                         <p>{post.text}</p>
                         <p>Comments: {post.comments.length}</p>
