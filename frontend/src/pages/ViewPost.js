@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { usePost } from '../hooks/usePost';
 import axios from 'axios';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const ViewPost = () => {
     const { id } = useParams();
+    const { user } = useAuthContext();
     const { post, loading, error } = usePost(id);
     const [commentText, setCommentText] = useState('');
     const [commentError, setCommentError] = useState(null);
@@ -14,7 +16,7 @@ const ViewPost = () => {
     const handleAddComment = async () => {
         try {
             await axios.post(`${apiUrl}/posts/comment/${id}`,
-                { text: commentText, username: 'currentUser' }
+                { text: commentText, userId: user._id }
             );
             setCommentText('');
         } catch (error) {
@@ -30,15 +32,20 @@ const ViewPost = () => {
         return <div>{error}</div>;
     }
 
+    if (!post) {
+        return <div>Post not found</div>;
+    }
+
     return (
         <div className="view-post">
             <h3>{post.title}</h3>
             <p>{post.text}</p>
+            <p>Posted by: {post.userId.username}</p>
             <h4>Comments</h4>
             <u1>
                 {post.comments.map((comment, index) => (
                     <li key={index}>
-                        <strong>{comment.username}:</strong> {comment.text}
+                        <strong>{comment.userId.username}:</strong> {comment.text}
                     </li>
                 ))}
             </u1>

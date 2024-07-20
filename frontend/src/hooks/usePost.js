@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const usePost = (postId) => {
     const [post, setPost] = useState(null);
-    const [loading, setLoading] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const apiUrl = process.env.REACT_APP_API_URL;
 

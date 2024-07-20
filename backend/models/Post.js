@@ -22,6 +22,11 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    userId: { //user who created the post
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
     comments: [ //array of comments
         commentSchema
     ]

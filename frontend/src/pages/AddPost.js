@@ -2,12 +2,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../hooks/useAuthContext';
 import './AddPost.css';
 
 const AddPost = () => {
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
     const [error, setError] = useState(null);
+    const { user } = useAuthContext();
     const navigate = useNavigate();
     const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -15,7 +17,7 @@ const AddPost = () => {
         e.preventDefault();
         try {
             await axios.post(`${apiUrl}/posts/create`,
-                { title, text }
+                { title, text, userId: user._id }
             );
             navigate('/forum');
         } catch (error) {
@@ -34,11 +36,11 @@ const AddPost = () => {
                 placeholder="Enter title"
             />
             <label>Text:</label>
-            <textarea>
+            <textarea
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                placeholder="Enter content"
-            </textarea>
+                placeholder="Enter text"
+            />
             <button type="submit">Post</button>
             {error && <div className="error">{error}</div>}
         </form>
