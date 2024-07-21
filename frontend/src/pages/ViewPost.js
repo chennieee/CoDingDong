@@ -1,6 +1,6 @@
 //ViewPost page
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { usePost } from '../hooks/usePost';
 import axios from 'axios';
 import { useAuthContext } from '../hooks/useAuthContext';
@@ -11,6 +11,7 @@ const ViewPost = () => {
     const { post, loading, error } = usePost(id);
     const [commentText, setCommentText] = useState('');
     const [commentError, setCommentError] = useState(null);
+    const navigate = useNavigate();
     const apiUrl = process.env.REACT_APP_API_URL;
 
     const handleAddComment = async () => {
@@ -23,6 +24,10 @@ const ViewPost = () => {
             setCommentError(error.message);
         }
     };
+
+    function navigateToForum() {
+        navigate('/forum');
+    }
 
     if (loading) {
         return <div>Loading...</div>;
@@ -38,17 +43,18 @@ const ViewPost = () => {
 
     return (
         <div className="view-post">
+            <button onClick={() => navigateToForum()}>Back To Forum</button>
             <h3>{post.title}</h3>
             <p>{post.text}</p>
-            <p>Posted by: {post.userId.username}</p>
+            <p>Posted by: {post.user ? post.user.username : 'Unknown'}</p>
             <h4>Comments</h4>
-            <u1>
+            <ul>
                 {post.comments.map((comment, index) => (
                     <li key={index}>
-                        <strong>{comment.userId.username}:</strong> {comment.text}
+                        <strong>{comment.user ? comment.user.username : 'Unknown'}:</strong> {comment.text}
                     </li>
                 ))}
-            </u1>
+            </ul>
             <div className="add-comment">
                 <input 
                     type="text"

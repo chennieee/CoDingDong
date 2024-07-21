@@ -6,7 +6,16 @@ const User = require('../models/User');
 const createPost = async (req, res) => {
     const { title, text, userId } = req.body;
 
+    if (!userId) {
+        return res.status(400).json({ error: 'User ID is required' });
+    }
+
     try {
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
         const post = await Post.create({ title, text, userId });
         res.status(200).json(post);
     } catch (error) {
@@ -29,6 +38,7 @@ const getOnePost = async (req, res) => {
     const { id } = req.params;
 
     try {
+        // Fetch post
         const post = await Post.findById(id);
         if (!post) {
             return res.status(404).json({ error: 'Post not found' });
@@ -46,10 +56,9 @@ const getOnePost = async (req, res) => {
             const user = await User.findById(comment.userId);
             return {
                 ...comment.toObject(),
-                user: user ? {_id: user._id, username: user.username } : null
+                user: user ? { _id: user._id, username: user.username } : null
             };
         }));
-
 
         const postWithUserDetails = {
             ...postWithAuthor,

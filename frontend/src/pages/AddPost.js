@@ -15,7 +15,18 @@ const AddPost = () => {
 
     const handleCreatePost = async (e) => {
         e.preventDefault();
+        if (!user) {
+            setError('User must be logged in to create a post.');
+            return;
+        }
+
+        if (!title || !text) {
+            setError('Both title and text must be filled in.');
+            return;
+        }
+
         try {
+            console.log('Creating post with userId:', user._id); //debugging
             await axios.post(`${apiUrl}/posts/create`,
                 { title, text, userId: user._id }
             );

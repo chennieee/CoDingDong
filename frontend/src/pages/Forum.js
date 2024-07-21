@@ -25,11 +25,6 @@ const Forum = () => {
     return (
         <div className="forum">
             <div className="forum-header">
-                <input
-                    type="text"
-                    placeholder="Search"
-                    className="search-input"
-                />
                 <button onClick={() => navigateToAddPost()}>Add Post</button>
             </div>
             <div className="posts">
@@ -46,3 +41,12 @@ const Forum = () => {
 };
 
 export default Forum;
+
+//Search bar (below forum-header, above Add Post button)
+/*
+<input
+    type="text"
+    placeholder="Search"
+    className="search-input"
+/>
+*/
