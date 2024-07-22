@@ -17,6 +17,7 @@
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     margin-bottom: 20px;
+    font-size: 13px;
 }
 
 .view-post button:hover {
@@ -81,6 +82,7 @@
     border-radius: 4px;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
+    font-size: 13px;
 }
 
 .view-post .add-comment button:hover {
