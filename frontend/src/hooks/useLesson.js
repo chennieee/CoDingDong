@@ -9,6 +9,8 @@ export const useLesson = (lessonId, userId) => {
     const [submitted, setSubmitted] = useState(false);
     const [results, setResults] = useState(null);
     const [error, setError] = useState(null);
+    const [nextLessonId, setNextLessonId] = useState(null);
+    const [noMoreLessons, setNoMoreLessons] = useState(false);
 
     const { dispatch } = useAuthContext();
     const apiUrl = process.env.REACT_APP_API_URL;
@@ -37,6 +39,7 @@ export const useLesson = (lessonId, userId) => {
             
             } catch (error) {
                 console.error('Error fetching lesson with questions:', error);
+                setError('Error fetching lesson with questions.');
             }
         };
 
@@ -76,9 +79,18 @@ export const useLesson = (lessonId, userId) => {
             // Update user context with the new user stats
             dispatch({ type: 'UPDATE_USER', payload: response.data.user });
 
-            setResults(response.data.result); // result is { score, wrongAnswers }
+            setResults(response.data.result);
             setSubmitted(true);
             setError(null);
+
+            // Fetch next lesson ID after successful submission
+            const nextLessonResponse = await axios.get(`${apiUrl}/lessons/nextLesson/${lessonId}`);
+            const nextLessonId = nextLessonResponse.data.nextLessonId;
+            setNextLessonId(nextLessonId);
+            setNoMoreLessons(!nextLessonId); // Set noMoreLessons to true if nextLessonId is null
+
+            console.log('Next Lesson ID:', nextLessonId); //debugging
+            console.log('No More Lessons:', noMoreLessons); //debugging
             
         } catch (error) {
             console.error('Error submitting answers or completing lesson:', error);
@@ -98,6 +110,8 @@ export const useLesson = (lessonId, userId) => {
         submitted,
         results,
         handleSubmit,
-        error
+        error,
+        nextLessonId,
+        noMoreLessons
     };
 };

@@ -3,7 +3,6 @@ const User = require('../models/User');
 const mongoose = require('mongoose');
 
 //helper function to check if 2 timings are on the same date
-// --> completeLesson, resetStreakDaily
 const isSameDay = (d1, d2) => {
     return d1.getFullYear() === d2.getFullYear() &&
            d1.getMonth() === d2.getMonth() &&
@@ -36,6 +35,7 @@ const getLessonById = async (req, res) => {
 // POST - submit lesson answers & update user stats
 // Calculate score & give explanation for wrong answers
 // UPDATE XP, streak, lastLessonDate & completedLessons {lessonId, completionDate, score} for specific user
+// Fetch the nextLesson for user
 const submitLessonForUser = async (req, res) => {
     const { id } = req.params; // lesson ID
     const { answers, userId } = req.body; // user's answers (eg. {'A', 'B', 'C', 'D', 'A'})
@@ -112,7 +112,7 @@ const submitLessonForUser = async (req, res) => {
 
         await user.save();
 
-        // Send response (Score & Explanation for wrong answers)
+        // Send response (Score + Explanation for wrong answers + nextLessonId)
         res.status(200).json({ user, result });
     
     } catch (error) {
@@ -121,10 +121,45 @@ const submitLessonForUser = async (req, res) => {
     }
 };
 
-//**any more API requests?
+
+// GET next lesson for user
+const getNextLesson = async (req, res) => {
+    const { id } = req.params; //lessonId
+
+    // Check if lessonId is valid
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'Invalid lesson ID' });
+    }
+
+    try {
+        // Find the current lesson
+        const currentLesson = await Lesson.findById(id);
+        if (!currentLesson) {
+            console.log('No such lesson with ID:', lessonId); //debugging
+            return res.status(404).json({ error: 'No such lesson' });
+        }
+
+        console.log('Current lesson:', currentLesson); //debugging
+
+        // Find the next lesson
+        const nextLesson = await Lesson.findOne({ lessonNo: { $gt: currentLesson.lessonNo } }).sort({ lessonNo: 1 });
+        if (!nextLesson) {
+            console.log('No next lesson found after lessonNo:', currentLesson.lessonNo); //debugging
+            return res.status(404).json({ error: 'No next lesson found' });
+        }
+
+        console.log('Next lesson:', nextLesson); //debugging
+        res.status(200).json({ nextLessonId: nextLesson ? nextLesson._id : null });
+    } catch (error) {
+        console.error('Error fetching next lesson:', error);
+        res.status(400).json({ error: 'Server error' });
+    }
+};
+
 
 // Export lessonController functions
 module.exports = {
     getLessonById,
-    submitLessonForUser
+    submitLessonForUser,
+    getNextLesson
 };
