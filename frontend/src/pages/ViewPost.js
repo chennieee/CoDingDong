@@ -66,7 +66,7 @@ const ViewPost = () => {
                     onChange={(e) => setCommentText(e.target.value)}
                     placeholder="Add a comment"
                 />
-                <button onClick={handleAddComment}>Post</button>
+                <button onClick={handleAddComment}>Comment</button>
                 {commentError && <div className="error">{commentError}</div>}
             </div>
         </div>
