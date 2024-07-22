@@ -1,0 +1,69 @@
+/* Forum.css */
+.forum {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.forum-header {
+    margin-bottom: 20px;
+}
+
+.forum-header button {
+    padding: 10px 20px;
+    background-color: #30C6C0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+.forum-header button:hover {
+    background-color: #28a5a3;
+}
+
+.posts {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post {
+    width: 60%;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.post h3 {
+    margin-top: 0;
+}
+
+.post p {
+    margin: 10px 0;
+}
+
+.post .view-comments {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #30C6C0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+.post .view-comments:hover {
+    background-color: #28a5a3;
+}
+
+.post .divider {
+    margin: 20px 0;
+    height: 1px;
+    background-color: #ccc;
+}

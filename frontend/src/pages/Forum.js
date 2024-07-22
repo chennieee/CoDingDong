@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForum } from '../hooks/useForum';
 import { useNavigate } from 'react-router-dom';
+import './Forum.css';
 
 const Forum = () => {
     const { posts, loading, error } = useForum();
@@ -32,7 +33,8 @@ const Forum = () => {
                     <div key={post._id} className="post" onClick={() => navigateToViewPost(post._id)}>
                         <h3>{post.title}</h3>
                         <p>{post.text}</p>
-                        <p>Comments: {post.comments.length}</p>
+                        <div className="divider"></div>
+                        <button className="view-comments">View Comments: {post.comments.length}</button>
                     </div>
                 ))}
             </div>
@@ -41,6 +43,7 @@ const Forum = () => {
 };
 
 export default Forum;
+
 
 //Search bar (below forum-header, above Add Post button)
 /*
