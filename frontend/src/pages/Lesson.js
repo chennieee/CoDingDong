@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useLesson } from '../hooks/useLesson';
 import { useAuthContext } from '../hooks/useAuthContext';
 import './Lesson.css';
@@ -11,8 +11,20 @@ const Lesson = () => {
     const { user } = useAuthContext(); //access user from AuthContext
     const userId = user ? user._id : null; //extract userId
 
-    const { lesson, questions, answers, handleAnswerChange, submitted, results, handleSubmit, error }
-        = useLesson(lessonId, userId);
+    const { 
+        lesson,
+        questions,
+        answers,
+        handleAnswerChange,
+        submitted,
+        results,
+        handleSubmit,
+        error,
+        nextLessonId,
+        noMoreLessons
+    } = useLesson(lessonId, userId);
+
+    const navigate = useNavigate(); //for navigation
 
     // Show loading state if lesson not yet available
     if (!lesson) {
@@ -32,6 +44,12 @@ const Lesson = () => {
         const score = results.score;
         const allCorrect = score === total;
 
+        function navigateToNextLesson() {
+            if (nextLessonId) {
+                navigate(`/lesson/${nextLessonId}`)
+            }
+        };
+
         return (
             <div className="lesson-container">
                 <h2>Your score: {results.score}</h2>
@@ -48,6 +66,13 @@ const Lesson = () => {
                             </div>
                         ))}
                     </div>
+                )}
+                {noMoreLessons ? (
+                    <div className="no-more-lessons">
+                        <h3>Congratulations! You have completed all the lessons. More lessons will be coming up soon.</h3>
+                    </div>
+                ) : (
+                    <button className="next-lesson-button" onClick={() => navigateToNextLesson()}>Next Lesson</button>
                 )}
             </div>
         );
