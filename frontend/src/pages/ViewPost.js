@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { usePost } from '../hooks/usePost';
 import axios from 'axios';
 import { useAuthContext } from '../hooks/useAuthContext';
+import './ViewPost.css';
 
 const ViewPost = () => {
     const { id } = useParams();
@@ -44,9 +45,12 @@ const ViewPost = () => {
     return (
         <div className="view-post">
             <button onClick={() => navigateToForum()}>Back To Forum</button>
+            <div className="post-info">
+                <p>Posted by: {post.user ? post.user.username : 'Unknown'}</p>
+            </div>
             <h3>{post.title}</h3>
             <p>{post.text}</p>
-            <p>Posted by: {post.user ? post.user.username : 'Unknown'}</p>
+            <div className="divider"></div>
             <h4>Comments</h4>
             <ul>
                 {post.comments.map((comment, index) => (
@@ -56,7 +60,7 @@ const ViewPost = () => {
                 ))}
             </ul>
             <div className="add-comment">
-                <input 
+                <input
                     type="text"
                     value={commentText}
                     onChange={(e) => setCommentText(e.target.value)}
