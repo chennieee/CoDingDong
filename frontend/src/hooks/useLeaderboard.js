@@ -8,29 +8,28 @@ export const useLeaderboard = () => {
 
     const [leaderboard, setLeaderboard] = useState([]);
     const [userRank, setUserRank] = useState(null);
-    const [loading, setLoading] = useState(null);
+    const [initialLoad, setInitialLoad] = useState(true);
     const [error, setError] = useState(null);
     const apiUrl = process.env.REACT_APP_API_URL;
 
     const fetchLeaderboard = useCallback(async () => {
         if (!userId) {
-            setLoading(false);
             setError('User not authenticated');
             return;
         }
 
         try {
-            setLoading(true);
+            if (initialLoad) setInitialLoad(true);
             const response = await axios.get(`${apiUrl}/leaderboard/${userId}`);
+            console.log(response.data); //debugging
             setLeaderboard(response.data.topUsers);
             setUserRank(response.data.userRank);
-            setLoading(false);
+            setInitialLoad(false);
         
         } catch (error) {
-            setLoading(false);
             setError('Error fetching leaderboard data');
         }
-    }, [userId, apiUrl]);
+    }, [userId, apiUrl, initialLoad]);
 
     useEffect(() => {
         fetchLeaderboard();
@@ -38,5 +37,5 @@ export const useLeaderboard = () => {
         return () => clearInterval(intervalId); //cleanup on unmount
     }, [fetchLeaderboard]);
 
-    return { leaderboard, userRank, loading, error };
+    return { leaderboard, userRank, initialLoad, error };
 };

@@ -3,9 +3,9 @@ import { useLeaderboard } from '../hooks/useLeaderboard';
 import './Leaderboard.css';
 
 const Leaderboard = () => {
-    const { leaderboard, userRank, loading, error } = useLeaderboard();
+    const { leaderboard, userRank, initialLoad, error } = useLeaderboard();
 
-    if (loading) {
+    if (initialLoad) {
         return <div>Loading...</div>;
     }
 
