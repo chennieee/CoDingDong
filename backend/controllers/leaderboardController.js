@@ -13,12 +13,8 @@ const getWeeklyLeaderboard = async (req, res) => {
             .lean();
 
         // Get rank of current user
-        /*
         const user = await User.findById(userId).select('username weeklyXP').lean();
         const userRank = await User.countDocuments({ weeklyXP: { $gt: user.weeklyXP } }) + 1;
-        */
-        const allUsers = await User.find().sort({ weeklyXP: -1 }).select('_id');
-        const userRank = allUsers.findIndex(user => user._id.toString() === userId) + 1;
 
         res.status(200).json({ topUsers, userRank });
 

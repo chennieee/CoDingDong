@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const useSignup = () => {
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const { dispatch } = useAuthContext();
   const navigate = useNavigate();
@@ -51,5 +51,5 @@ export const useSignup = () => {
     }
   };
 
-  return { signup, isLoading, error };
+  return { signup, isLoading, error, setIsLoading, setError };
 };

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { dispatch } = useAuthContext();
   const navigate = useNavigate();
   
@@ -45,9 +45,10 @@ export const useLogin = () => {
       console.log('Login response:', json);
 
       // successful login
-      localStorage.setItem('user', JSON.stringify(json)); //save user to localStorage
+      localStorage.setItem('user', JSON.stringify(json)); //save user to local storage
       dispatch({ type: 'LOGIN', payload: json }); //update AuthContext
       setIsLoading(false);
+      navigate('/dashboard');
     
     } catch (error) {
       setIsLoading(false);
@@ -55,5 +56,5 @@ export const useLogin = () => {
     }
   };
 
-  return { login, isLoading, error };
+  return { login, isLoading, error, setIsLoading, setError };
 };
