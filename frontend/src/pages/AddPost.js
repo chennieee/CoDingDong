@@ -36,8 +36,13 @@ const AddPost = () => {
         }
     };
 
+    function navigateToForum() {
+        navigate('/forum');
+    }
+
     return (
         <form className="create-post" onSubmit={handleCreatePost}>
+            <button onClick={() => navigateToForum()}>Back To Forum</button>
             <h3>Add a New Post</h3>
             <label>Title:</label>
             <input
