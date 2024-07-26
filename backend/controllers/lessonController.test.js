@@ -94,7 +94,8 @@ describe('Lesson Controller', () => {
     });
 
     test('should get a lesson by ID', async () => {
-        const response = await request(app).get(`/api/lessons/${lessonId}`).set('Authorization', `Bearer ${token}`);
+        const response = await request(app).get(`/api/lessons/${lessonId}`)
+                                           .set('Authorization', `Bearer ${token}`);
 
         console.log('Get Lesson Response:', response.body);
 

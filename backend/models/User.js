@@ -97,9 +97,8 @@ userSchema.statics.signup = async function (username, password, isTest) {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
-    //create new user account AND SAVES IT TO DATABASE 
+    //create new user account and save it to database 
     const user = await this.create({ username, password: hash, isTest });
-    // IM ASSUMING STREAK, XP, DATE ARE AUTOFILLED WITH DEFAULT VALUES
     return user;
 }
 

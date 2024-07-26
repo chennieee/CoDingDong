@@ -89,7 +89,8 @@ describe('User Controller', () => {
 
         const token = loginResponse.body.token;
 
-        const response = await request(app).get(`/api/users/profile/${userId}`).set('Authorization', `Bearer ${token}`);
+        const response = await request(app).get(`/api/users/profile/${userId}`)
+                                           .set('Authorization', `Bearer ${token}`);
 
         console.log('Get Profile Response:', response.body);
 

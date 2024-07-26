@@ -39,7 +39,6 @@ const getLessonById = async (req, res) => {
 const submitLessonForUser = async (req, res) => {
     const { id } = req.params; // lesson ID
     const { answers, userId } = req.body; // user's answers (eg. {'A', 'B', 'C', 'D', 'A'})
-    const xpEarned = 5; // xp awarded for completing lesson
 
     // Check if lesson ID is valid
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -79,9 +78,9 @@ const submitLessonForUser = async (req, res) => {
                 score: result.score
             });
 
-            // Add xp
-            user.xp += xpEarned;
-            user.weeklyXP += xpEarned;
+            // Add xp equal to the score obtained
+            user.xp += result.score;
+            user.weeklyXP += result.score;
 
             // Update streak
             const now = new Date();
