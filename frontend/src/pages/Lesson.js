@@ -24,7 +24,7 @@ const Lesson = () => {
         noMoreLessons
     } = useLesson(lessonId, userId);
 
-    const navigate = useNavigate(); //for navigation
+    const navigate = useNavigate();
 
     // Show loading state if lesson not yet available
     if (!lesson) {

@@ -84,13 +84,19 @@ export const useLesson = (lessonId, userId) => {
             setError(null);
 
             // Fetch next lesson ID after successful submission
-            const nextLessonResponse = await axios.get(`${apiUrl}/lessons/nextLesson/${lessonId}`);
-            const nextLessonId = nextLessonResponse.data.nextLessonId;
-            setNextLessonId(nextLessonId);
-            setNoMoreLessons(!nextLessonId); // Set noMoreLessons to true if nextLessonId is null
+            try {
+                const nextLessonResponse = await axios.get(`${apiUrl}/lessons/nextLesson/${lessonId}`);
+                const nextLessonId = nextLessonResponse.data.nextLessonId;
+                setNextLessonId(nextLessonId);
+                setNoMoreLessons(!nextLessonId); // Set noMoreLessons to true if nextLessonId is null
 
-            console.log('Next Lesson ID:', nextLessonId); //debugging
-            console.log('No More Lessons:', noMoreLessons); //debugging
+                console.log('Next Lesson ID:', nextLessonId); //debugging
+                console.log('No More Lessons:', noMoreLessons); //debugging
+            
+            } catch (error) {
+                setNoMoreLessons(true); //set noMoreLessons to true when no more lessons available
+            }
+            
             
         } catch (error) {
             console.error('Error submitting answers or completing lesson:', error);

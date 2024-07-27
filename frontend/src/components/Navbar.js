@@ -11,6 +11,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
+    navigate('/'); //redirect to home page after logout
   };
 
   const handleLogoClick = () => {
