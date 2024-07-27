@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLesson } from '../hooks/useLesson';
 import { useAuthContext } from '../hooks/useAuthContext';
@@ -10,6 +10,9 @@ const Lesson = () => {
 
     const { user } = useAuthContext(); //access user from AuthContext
     const userId = user ? user._id : null; //extract userId
+    
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
     const { 
         lesson,
@@ -24,12 +27,40 @@ const Lesson = () => {
         noMoreLessons
     } = useLesson(lessonId, userId);
 
-    const navigate = useNavigate();
+    useEffect(() => {
+        if (lessonId === 'undefined' || !lessonId) {
+            setLoading(false);
+        }
+    }, [lessonId]);
 
-    // Show loading state if lesson not yet available
-    if (!lesson) {
+    useEffect(() => {
+        if (lesson) {
+            setLoading(false);
+        }
+    }, [lesson]);
+
+    // Show congratulations message if there are no more lessons
+    if (!lessonId || lessonId === 'undefined') {
+        return (
+            <div className="lesson-container">
+                <p className="question-text">
+                    Congratulations!<br />
+                    You have completed all the lessons.<br />
+                    More lessons will be coming up soon.
+                </p>
+            </div>
+        );
+    }
+
+    // Show loading state if still loading
+    if (loading) {
         return <div>Loading...</div>;
     }
+
+    // Show no lesson found message if no lesson is founc
+    if (!lesson) {
+        return <div>No lesson found.</div>;
+    }    
 
     console.log('Lesson data:', lesson); //debugging
     console.log('Lesson number:', lesson.lessonNo); //debugging
@@ -69,7 +100,11 @@ const Lesson = () => {
                 )}
                 {noMoreLessons ? (
                     <div className="no-more-lessons">
-                        <h3>Congratulations! You have completed all the lessons. More lessons will be coming up soon.</h3>
+                        <p className="question-text">
+                            Congratulations! <br />
+                            You have completed all the lessons. <br />
+                            More lessons will be coming up soon.
+                        </p>
                     </div>
                 ) : (
                     <button className="next-lesson-button" onClick={() => navigateToNextLesson()}>Next Lesson</button>
