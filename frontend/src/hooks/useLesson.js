@@ -32,11 +32,18 @@ export const useLesson = (lessonId, userId) => {
                 });
                 setAnswers(initialAnswers);
                 
-                // Reset state for next lesson
-                setSubmitted(false);
-                setResults(null);
-                setError(null);
-            
+                // Reset state for completion and next lesson
+                const completed = JSON.parse(localStorage.getItem(`lesson_${lessonId}_completed`));
+                if (completed) {
+                    setSubmitted(true);
+                    setResults(completed.results);
+                    setNoMoreLessons(completed.noMoreLessons);
+                    setNextLessonId(completed.nextLessonId);
+                } else {
+                    setSubmitted(false);
+                    setResults(null);
+                    setError(null);
+                }
             } catch (error) {
                 console.error('Error fetching lesson with questions:', error);
                 setError('Error fetching lesson with questions.');
@@ -89,9 +96,15 @@ export const useLesson = (lessonId, userId) => {
                 const nextLessonId = nextLessonResponse.data.nextLessonId;
                 setNextLessonId(nextLessonId);
                 setNoMoreLessons(!nextLessonId); // Set noMoreLessons to true if nextLessonId is null
-
                 console.log('Next Lesson ID:', nextLessonId); //debugging
                 console.log('No More Lessons:', noMoreLessons); //debugging
+
+                // Save completion state to local storage
+                localStorage.setItem(`lesson_${lessonId}_completed`, JSON.stringify({
+                    results: response.data.result,
+                    noMoreLessons: !nextLessonId,
+                    nextLessonId: nextLessonId
+                }));
             
             } catch (error) {
                 setNoMoreLessons(true); //set noMoreLessons to true when no more lessons available

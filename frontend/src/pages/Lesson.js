@@ -39,6 +39,16 @@ const Lesson = () => {
         }
     }, [lesson]);
 
+    // Settle line breaks
+    const renderWithLineBreaks = (text) => {
+        return text.split('\\n').map((part, index) => (
+            <React.Fragment key={index}>
+                {part}
+                <br />
+            </React.Fragment>
+        ));
+    };
+
     // Show congratulations message if there are no more lessons
     if (!lessonId || lessonId === 'undefined') {
         return (
@@ -93,7 +103,7 @@ const Lesson = () => {
                                 <p>Question {question.questionNo}: {question.question}</p>
                                 <p>Your answer: {question.userAnswer}</p>
                                 <p>Correct answer: {question.correctAnswer}</p>
-                                <p className="explanation">Explanation: {question.explanation}</p>
+                                <p className="explanation">Explanation: {renderWithLineBreaks(question.explanation)}</p>
                             </div>
                         ))}
                     </div>
