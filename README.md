@@ -10,8 +10,8 @@ Features
 - XP Counter: +XP for every completed lesson
 - Daily Streak Counter
 - Lessons: Each contains 5 multiple-choice questions
-- Leaderboard: Sorted by XP
-- Friends: Add or remove friends
+- Leaderboard: Sorted by weekly XP
+- Friends: View, add or remove friends
 - Forum: Post, comment, and view posts to share insights
 
 Tech Stack
